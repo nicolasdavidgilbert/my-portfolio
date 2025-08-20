@@ -1,0 +1,39 @@
+---
+// src/components/RepoHeader.astro
+interface Props {
+    repoUrl: string;
+}
+const { repoUrl } = Astro.props;
+---
+
+<section class="mt-6 card overflow-hidden">
+    <div
+        class="flex items-center justify-between gap-3 px-4 py-3 bg-[#0a142b] border-b border-border"
+    >
+        <h1 class="m-0 text-[18px]">nico/portfolio</h1>
+        <div class="flex gap-2 flex-wrap">
+            <span class="badge"
+                >origin · <a href={repoUrl} target="_blank" rel="noreferrer"
+                    >{repoUrl.replace("https://", "")}</a
+                ></span
+            >
+            <span class="badge">default branch: main</span>
+            <span class="badge"
+                >last update: {new Date().toISOString().slice(0, 10)}</span
+            >
+        </div>
+    </div>
+    <div class="p-4">
+        <div class="flex flex-wrap gap-3 text-[12px] text-[#c9dcff] font-mono">
+            <div><strong>Autor:</strong> Nico</div>
+            <div>
+                <strong>Rol:</strong> Desarrollador de Aplicaciones Multiplataforma
+            </div>
+            <div>
+                <strong>Stack:</strong> Kotlin · Flutter · React Native · Next/Astro
+                · Django/FastAPI
+            </div>
+            <div><strong>Ubicación:</strong> Las Palmas, ES</div>
+        </div>
+    </div>
+</section>

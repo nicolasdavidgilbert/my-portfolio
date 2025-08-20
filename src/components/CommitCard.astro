@@ -1,0 +1,76 @@
+---
+interface DiffLine {
+    type: "add" | "del" | "ctx";
+    text: string;
+}
+interface Props {
+    hash: string;
+    date: string;
+    title: string;
+    chips: string[];
+    repo?: string;
+    demo?: string;
+    diff?: DiffLine[];
+}
+const { hash, date, title, chips = [], repo, demo, diff = [] } = Astro.props;
+
+// Prepara el texto del diff
+const diffText = diff
+    .map((l) =>
+        l.type === "add"
+            ? `+ ${l.text}`
+            : l.type === "del"
+              ? `- ${l.text}`
+              : `  ${l.text}`,
+    )
+    .join("\n");
+---
+
+<article class="relative card">
+    <div class="text-[12px] text-[#b3c7ee] font-mono flex items-center gap-2">
+        <span class="font-bold tracking-wide">{hash}</span>
+        <span>·</span>
+        <time>{date}</time>
+        <span>·</span>
+        <span>{title}</span>
+    </div>
+    <div class="mt-1 font-semibold">
+        {title.replace(/^[^—–-]+[—–-]\\s*/, "")}
+    </div>
+    <div class="flex flex-wrap gap-2 mt-2">
+        {chips.map((c) => <span class="chip">{c}</span>)}
+    </div>
+    <div class="flex gap-2 mt-3">
+        {
+            repo && (
+                <a class="btn" href={repo}>
+                    Repo
+                </a>
+            )
+        }
+        {
+            demo && (
+                <a class="btn" href={demo}>
+                    Demo
+                </a>
+            )
+        }
+    </div>
+    {
+        diff.length > 0 && (
+            <details class="mt-3">
+                <summary class="cursor-pointer select-none btn inline-flex">
+                    Mostrar diff
+                </summary>
+                <div class="mt-2 rounded-xl border border-[#203157] overflow-hidden">
+                    <div class="px-3 py-2 bg-[#0b1327] border-b border-[#1c2a48] text-[#b9ccff] text-[12px] font-mono">
+                        diff
+                    </div>
+                    <pre class="m-0 p-3 text-[12.5px] bg-code whitespace-pre-wrap">
+                        {diffText}
+                    </pre>
+                </div>
+            </details>
+        )
+    }
+</article>

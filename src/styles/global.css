@@ -1,0 +1,78 @@
+/* src/styles/global.css */
+@import "tailwindcss";
+
+/* Define tus tokens en v4 */
+@theme {
+  --color-bg: #0a0f1d;
+  --color-elev: #0f172a;
+  --color-text: #e6f0ff;
+  --color-muted: #9fb3d8;
+  --color-border: #1e2a4a;
+  --color-accent: #3b82f6;
+  --color-accent2: #60a5fa;
+  --color-code: #0c1530;
+  --color-ok: #22c55e;
+  --color-warn: #f59e0b;
+  --color-err: #ef4444;
+
+  /* Sombra personalizada para .card */
+  --shadow-card: 0 12px 30px rgba(0,0,0,.35);
+}
+
+:root { color-scheme: dark; }
+html { @apply scroll-smooth; }
+
+body {
+  /* Ahora sí puedes usar utilidades basadas en tus tokens */
+  @apply bg-bg text-text leading-7;
+
+  /* Fondo decorativo */
+  background-image:
+    radial-gradient(1100px 600px at 90% -20%, rgba(59,130,246,.15), transparent 60%),
+    radial-gradient(900px 500px at -10% 10%, rgba(96,165,250,.12), transparent 55%);
+}
+
+/* Links */
+a { @apply text-accent2 hover:text-accent; }
+
+/* Botones */
+.btn {
+  @apply inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-border;
+  background-color: #0e1730;
+  color: var(--color-text);
+}
+.btn:hover { background-color: #0b142a; }
+
+.btn-primary {
+  @apply bg-gradient-to-b hover:brightness-105;
+  --tw-gradient-from: #2563eb;
+  --tw-gradient-to: #1d4ed8 var(--tw-gradient-to-position);
+  border-color: #1d4ed8;
+  color: var(--color-text);
+}
+
+/* Badges / Chips */
+.badge {
+  @apply px-3 py-1 rounded-full text-xs font-mono;
+  border: 1px solid #22345f;
+  background: #0f1c3a;
+  color: #cfe3ff;
+}
+.chip {
+  @apply px-2.5 py-1 rounded-full text-[11.5px] font-mono;
+  border: 1px solid #22345f;
+  background: #0f1c3a;
+  color: #cfe3ff;
+}
+
+/* Tarjetas */
+.card {
+  @apply border border-border rounded-xl p-4 transition-[transform,box-shadow] duration-200 ease-linear bg-elev;
+}
+.card:hover { @apply -translate-y-0.5 shadow-card; }
+
+/* Separador */
+.hr {
+  @apply h-px my-6;
+  background: linear-gradient(90deg, transparent, #20345f, transparent);
+}

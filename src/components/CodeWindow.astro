@@ -1,0 +1,20 @@
+---
+// src/components/CodeWindow.astro
+const { title } = Astro.props;
+---
+
+<div class="rounded-xl border border-[#223157] overflow-hidden">
+    <div
+        class="flex items-center gap-2 px-3 py-2 bg-[#0b1327] border-b border-[#1c2a48] text-[#b9ccff] text-[12px] font-mono"
+    >
+        <div class="flex gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-err"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-warn"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-ok"></span>
+        </div>
+        {title}
+    </div>
+    <div class="bg-code">
+        <slot />
+    </div>
+</div>

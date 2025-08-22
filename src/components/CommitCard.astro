@@ -1,10 +1,12 @@
 ---
+
+import { commitHash } from "../../lib/functions";
+
 interface DiffLine {
     type: "add" | "del" | "ctx";
     text: string;
 }
 interface Props {
-    hash: string;
     date: string;
     title: string;
     chips: string[];
@@ -12,7 +14,7 @@ interface Props {
     demo?: string;
     diff?: DiffLine[];
 }
-const { hash, date, title, chips = [], repo, demo, diff = [] } = Astro.props;
+const { date, title, chips = [], repo, demo, diff = [] } = Astro.props;
 
 // Prepara el texto del diff
 const diffText = diff
@@ -28,7 +30,7 @@ const diffText = diff
 
 <article class="relative card">
     <div class="text-[12px] text-[#b3c7ee] font-mono flex items-center gap-2">
-        <span class="font-bold tracking-wide">{hash}</span>
+        <span class="font-bold tracking-wide">{commitHash(date+"|"+title)}</span>
         <span>·</span>
         <time>{date}</time>
         <span>·</span>

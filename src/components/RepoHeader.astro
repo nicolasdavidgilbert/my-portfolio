@@ -1,39 +1,48 @@
 ---
 // src/components/RepoHeader.astro
 interface Props {
-    repoUrl: string;
+  repoUrl: string;
+  author?: string;
+  role?: string;
 }
-const { repoUrl } = Astro.props;
----
+const {
+  repoUrl
+} = Astro.props;
 
-<section class="mt-6 card overflow-hidden">
-    <div
-        class="flex items-center justify-between gap-3 px-4 py-3 bg-[#0a142b] border-b border-border"
-    >
-        <h1 class="m-0 text-[18px]">nico/portfolio</h1>
-        <div class="flex gap-2 flex-wrap">
-            <span class="badge"
-                >origin · <a href={repoUrl} target="_blank" rel="noreferrer"
-                    >{repoUrl.replace("https://", "")}</a
-                ></span
-            >
-            <span class="badge">default branch: main</span>
-            <span class="badge"
-                >last update: {new Date().toISOString().slice(0, 10)}</span
-            >
-        </div>
+// Deriva owner/repo a partir de la URL, fallback a nico/portfolio
+const repoPath =
+  repoUrl?.replace(/^https?:\/\/(www\.)?github\.com\//, '').replace(/\/$/, '');
+const [owner, repo] = repoPath.split('/');
+---
+<section
+  class="mt-8 rounded-2xl border border-[#1f2a44] bg-[rgba(15,23,42,0.85)] backdrop-blur
+         ring-1 ring-[rgba(96,165,250,0.12)] overflow-hidden
+         shadow-[0_20px_60px_rgba(0,0,0,.35)]"
+>
+  <!-- Barra superior con degradado y badges -->
+  <div
+    class="flex flex-col md:flex-row md:items-center md:justify-between gap-4
+           px-5 py-4 bg-gradient-to-r from-[#0b1327] to-[#0a142b]
+           border-b border-border"
+  >
+    <!-- Título grande con acento azul y subrayado -->
+    <h1 class="m-0 text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+      <span class="text-white/90">{owner}/</span>
+      <span
+        class="bg-gradient-to-r from-accent2 to-accent bg-clip-text text-transparent
+               underline decoration-accent/60 [text-decoration-thickness:4px] underline-offset-[10px]">
+        {repo || 'portfolio'}
+      </span>
+    </h1>
+
+    <div class="flex gap-2 flex-wrap">
+      <span class="badge kmono">
+        origin ·
+        <a href={repoUrl} target="_blank" rel="noreferrer">
+          {repoUrl.replace('https://', '')}
+        </a>
+      </span>
+      <span class="badge kmono">last update: {new Date().toISOString().slice(0, 10)}</span>
     </div>
-    <div class="p-4">
-        <div class="flex flex-wrap gap-3 text-[12px] text-[#c9dcff] font-mono">
-            <div><strong>Autor:</strong> Nico</div>
-            <div>
-                <strong>Rol:</strong> Desarrollador de Aplicaciones Multiplataforma
-            </div>
-            <div>
-                <strong>Stack:</strong> Kotlin · Flutter · React Native · Next/Astro
-                · Django/FastAPI
-            </div>
-            <div><strong>Ubicación:</strong> Las Palmas, ES</div>
-        </div>
-    </div>
+  </div>
 </section>

@@ -1,13 +1,11 @@
 // src/data/commits.ts
 export type DiffLine = { type: 'add' | 'del' | 'ctx'; text: string };
 export type Commit = {
-    hash: string; date: string; title: string; chips: string[]; repo?: string; demo?: string; diff?: DiffLine[];
+    date: string; title: string; chips: string[]; repo?: string; demo?: string; diff?: DiffLine[];
 };
-
 
 export const commits: Commit[] = [
     {
-        hash: '0f3a8c1',
         date: '2025-04-01',
         title: 'feat: TCG Events Manager — Panel admin en tiempo real, auth y CI/CD',
         chips: ['Flutter', 'Supabase', 'Realtime', 'CI/CD'],
@@ -21,7 +19,6 @@ export const commits: Commit[] = [
         ]
     },
     {
-        hash: 'a91e2f7',
         date: '2024-10-12',
         title: 'perf: Android Freelance — arranque 30% más rápido',
         chips: ['Kotlin', 'Room', 'Perf'],
@@ -31,48 +28,12 @@ export const commits: Commit[] = [
             { type: 'add', text: 'chore: baseline profiles' },
             { type: 'del', text: 'chore: inicialización pesada en Application' },
         ]
-    },
-    {
-        hash: '7b5d0aa',
-        date: '2024-03-20',
-        title: 'feat: Dashboard Next.js — métricas Web Vitals',
-        chips: ['Next.js', 'TypeScript', 'A11y'],
-        diff: [
-            { type: 'ctx', text: '@@' },
-            { type: 'add', text: 'feat: server components + streaming' },
-            { type: 'add', text: 'feat: lighthouse >= 95' },
-            { type: 'del', text: 'fix: CSS blocking render' },
-        ]
-    },
-    {
-        hash: '7b5d0aa',
-        date: '2024-03-20',
-        title: 'feat: Dashboard Next.js — métricas Web Vitals',
-        chips: ['Next.js', 'TypeScript', 'A11y'],
-        diff: [
-            { type: 'ctx', text: '@@' },
-            { type: 'add', text: 'feat: server components + streaming' },
-            { type: 'add', text: 'feat: lighthouse >= 95' },
-            { type: 'del', text: 'fix: CSS blocking render' },
-        ]
-    },
-    {
-        hash: '7b5d0aa',
-        date: '2024-03-20',
-        title: 'feat: Dashboard Next.js — métricas Web Vitals',
-        chips: ['Next.js', 'TypeScript', 'A11y'],
-        diff: [
-            { type: 'ctx', text: '@@' },
-            { type: 'add', text: 'feat: server components + streaming' },
-            { type: 'add', text: 'feat: lighthouse >= 95' },
-            { type: 'del', text: 'fix: CSS blocking render' },
-        ]
     }
 ];
 
 
 export const skills = [
-    'kotlin', 'flutter', 'react-native', 'typescript', 'nextjs', 'astro', 'django', 'fastapi', 'postgresql', 'redis', 'docker', 'nginx', 'traefik', 'ci-cd', 'git'
+    'kotlin', 'react', 'react-native', 'typescript', 'nextjs', 'astro', 'python', 'qt', 'tensorflow', 'flask', 'postgresql', 'mysql', 'mongo', 'docker', 'nginx', 'git'
 ];
 
 

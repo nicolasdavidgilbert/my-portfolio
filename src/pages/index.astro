@@ -6,11 +6,57 @@ import CommitCard from "../components/CommitCard.astro";
 import Tag from "../components/Tag.astro";
 import CodeWindow from "../components/CodeWindow.astro";
 import { commits, skills, readme } from "../data/commits";
+
+const repoUrl = "https://github.com/nicolasdavidgilbert";
+
+import SkillsBoard from "../components/SkillsBoard.astro";
+
+const categories = [
+	{
+		title: "Frontend",
+		items: [
+			{ label: "HTML", icon: "/icons/html5.svg" },
+			{ label: "CSS", icon: "/icons/css3.svg" },
+			{ label: "JavaScript", icon: "/icons/js.svg" },
+			{ label: "React", icon: "/icons/react.svg" },
+			{ label: "TailwindCSS", icon: "/icons/tailwind.svg" },
+		],
+	},
+	{
+		title: "Backend",
+		items: [
+			{ label: "Python", icon: "/icons/python.svg" },
+			{ label: "Node.js", icon: "/icons/nodejs.svg" },
+			{ label: "MySQL", icon: "/icons/mysql.svg" },
+			{ label: "MongoDB", icon: "/icons/mongodb.svg" },
+			{ label: "Next.js", icon: "/icons/nextjs.svg" },
+			{ label: "Nginx", icon: "/icons/nginx.svg" },
+			{ label: "Flask", icon: "/icons/flask.svg" },
+			{ label: "Docker", icon: "/icons/docker.svg" },
+		],
+	},
+	{
+		title: "Aprendiendo",
+		items: [
+			{ label: "Astro", icon: "/icons/astro.svg" },
+			{ label: "TypeScript", icon: "/icons/typescript.svg" },
+		],
+	},
+	{
+		title: "Herramientas",
+		items: [
+			{ label: "Git", icon: "/icons/git.svg" },
+			{ label: "GitHub", icon: "/icons/github.svg" },
+			{ label: "Terminal", icon: "/icons/terminal-linux.svg" },
+			{ label: "VS Code", icon: "/icons/vscode.svg" },
+			{ label: "npm", icon: "/icons/npm.svg" },
+		],
+	},
+];
 ---
 
 <Layout title="Nico — Portfolio estilo Git log">
-	<RepoHeader repoUrl="https://github.com/tuusuario" />
-
+	<RepoHeader repoUrl={repoUrl} />
 	{/* Log */}
 	<section id="log" class="mt-7">
 		<h2 class="font-mono text-[20px] text-[#cfe3ff]">
@@ -38,13 +84,15 @@ import { commits, skills, readme } from "../data/commits";
 		</div>
 	</section>
 
-	{/* Skills */}
+	<!-- {/* Skills */}
 	<section id="skills" class="mt-8">
 		<h2 class="font-mono text-[20px] text-[#cfe3ff]">git tag — skills</h2>
 		<div class="flex flex-wrap gap-2 mt-2">
 			{skills.map((s) => <Tag text={s} />)}
 		</div>
-	</section>
+	</section> -->
+	{/* Skills Board */}
+	<SkillsBoard categories={categories} />
 
 	{/* README */}
 	<section id="readme" class="mt-8">
@@ -64,17 +112,11 @@ import { commits, skills, readme } from "../data/commits";
 				class="flex items-center justify-between gap-2 px-3 py-2 bg-[#0a142b] border border-border rounded-xl text-sm"
 			>
 				<span
-					>origin <a
-						href="https://github.com/tuusuario"
-						target="_blank"
-						rel="noreferrer">https://github.com/tuusuario</a
+					>origin <a href={repoUrl} target="_blank" rel="noreferrer"
+						>{repoUrl}</a
 					> (fetch)</span
 				>
-				<a
-					class="btn"
-					href="https://github.com/tuusuario"
-					target="_blank">Abrir</a
-				>
+				<a class="btn" href={repoUrl} target="_blank">Abrir</a>
 			</div>
 			<div
 				class="flex items-center justify-between gap-2 px-3 py-2 bg-[#0a142b] border border-border rounded-xl text-sm"
@@ -90,7 +132,8 @@ import { commits, skills, readme } from "../data/commits";
 				<a
 					class="btn"
 					href="https://www.linkedin.com/in/tuusuario"
-					target="_blank">Abrir</a
+					target="_blank"
+					rel="noreferrer">Abrir</a
 				>
 			</div>
 			<div

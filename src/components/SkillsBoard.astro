@@ -1,0 +1,67 @@
+---
+/**
+ * Props esperadas:
+ * categories: Array<{
+ *   title: string,
+ *   items: Array<{ label: string; icon?: string; href?: string }>
+ * }>
+ *
+ * - icon puede ser emoji ("🟦"), texto corto ("TS") o ruta a imagen (p.ej. "/icons/react.svg").
+ * - href es opcional: si lo das, el item se renderiza como enlace.
+ */
+interface Item { label: string; icon?: string; href?: string }
+interface Category { title: string; items: Item[] }
+const { categories = [] as Category[] } = Astro.props;
+
+---
+
+<section class="max-w-5xl mx-auto px-6 py-8" aria-labelledby="skills-title">
+  <h2 id="skills-title" class="font-mono text-[20px] text-[#cfe3ff] mb-3">git tag — skills</h2>
+
+  <div class="grid gap-4 md:grid-cols-2">
+    {categories.map((cat: Category) => (
+      <article
+        class="relative rounded-2xl border border-[#1f2a44] bg-[rgba(15,23,42,0.75)]
+               backdrop-blur ring-1 ring-[rgba(96,165,250,0.10)] overflow-hidden"
+      >
+        <!-- cabecera -->
+        <header class="px-4 py-3 border-b border-[#1f2a44]
+                       bg-gradient-to-r from-[#0b1327] to-[#0a142b]">
+          <h3 class="m-0 text-[22px] md:text-[24px] font-bold tracking-tight">
+            <span class="bg-gradient-to-r from-accent2 to-accent bg-clip-text text-transparent">
+              {cat.title}
+            </span>
+          </h3>
+        </header>
+
+        <!-- items -->
+        <ul class="p-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {cat.items.map((it) => {
+            const isImg = typeof it.icon === "string" &&
+                          (it.icon.endsWith(".svg") || it.icon.endsWith(".png") || it.icon.endsWith(".webp"));
+            const Content = (
+              <div class="flex items-center gap-2.5 p-2 rounded-xl border
+                           border-[#22345f]/50 bg-[#0d1b35]/50 hover:border-accent/50
+                           transition-colors">
+                <div class="w-8 h-8 grid place-items-center rounded-md
+                            bg-[#0e1a36] border border-[#22345f] text-accent">
+                  {isImg
+                    ? <img src={it.icon!} alt={it.label} class="w-4 h-4" loading="lazy" />
+                    : <span class="text-sm">{it.icon ?? "•"}</span>}
+                </div>
+                <span class="text-[13.5px] text-[#cfe3ff]">{it.label}</span>
+              </div>
+            );
+            return (
+              <li>
+                {it.href
+                  ? <a href={it.href} target="_blank" rel="noreferrer" class="block">{Content}</a>
+                  : Content}
+              </li>
+            );
+          })}
+        </ul>
+      </article>
+    ))}
+  </div>
+</section>

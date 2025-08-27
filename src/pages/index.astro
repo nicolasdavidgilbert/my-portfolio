@@ -11,48 +11,6 @@ const repoUrl = "https://github.com/nicolasdavidgilbert";
 
 import SkillsBoard from "../components/SkillsBoard.astro";
 
-const categories = [
-	{
-		title: "Frontend",
-		items: [
-			{ label: "HTML", icon: "/icons/html5.svg" },
-			{ label: "CSS", icon: "/icons/css3.svg" },
-			{ label: "JavaScript", icon: "/icons/js.svg" },
-			{ label: "React", icon: "/icons/react.svg" },
-			{ label: "TailwindCSS", icon: "/icons/tailwind.svg" },
-		],
-	},
-	{
-		title: "Backend",
-		items: [
-			{ label: "Python", icon: "/icons/python.svg" },
-			{ label: "Node.js", icon: "/icons/nodejs.svg" },
-			{ label: "MySQL", icon: "/icons/mysql.svg" },
-			{ label: "MongoDB", icon: "/icons/mongodb.svg" },
-			{ label: "Next.js", icon: "/icons/nextjs.svg" },
-			{ label: "Nginx", icon: "/icons/nginx.svg" },
-			{ label: "Flask", icon: "/icons/flask.svg" },
-			{ label: "Docker", icon: "/icons/docker.svg" },
-		],
-	},
-	{
-		title: "Aprendiendo",
-		items: [
-			{ label: "Astro", icon: "/icons/astro.svg" },
-			{ label: "TypeScript", icon: "/icons/typescript.svg" },
-		],
-	},
-	{
-		title: "Herramientas",
-		items: [
-			{ label: "Git", icon: "/icons/git.svg" },
-			{ label: "GitHub", icon: "/icons/github.svg" },
-			{ label: "Terminal", icon: "/icons/terminal-linux.svg" },
-			{ label: "VS Code", icon: "/icons/vscode.svg" },
-			{ label: "npm", icon: "/icons/npm.svg" },
-		],
-	},
-];
 ---
 
 <Layout title="Nico — Portfolio estilo Git log">
@@ -92,7 +50,7 @@ const categories = [
 		</div>
 	</section> -->
 	{/* Skills Board */}
-	<SkillsBoard categories={categories} />
+	<SkillsBoard id="tags"/>
 
 	{/* README */}
 	<section id="readme" class="mt-8">
@@ -123,15 +81,15 @@ const categories = [
 			>
 				<span
 					>origin <a
-						href="https://www.linkedin.com/in/tuusuario"
+						href="https://www.linkedin.com/in/nicolasdavidgilbertgonzalez"
 						target="_blank"
 						rel="noreferrer"
-						>https://www.linkedin.com/in/tuusuario</a
+						>https://www.linkedin.com/in/nicolasdavidgilbertgonzalez</a
 					> (social)</span
 				>
 				<a
 					class="btn"
-					href="https://www.linkedin.com/in/tuusuario"
+					href="https://www.linkedin.com/in/nicolasdavidgilbertgonzalez"
 					target="_blank"
 					rel="noreferrer">Abrir</a
 				>
@@ -140,8 +98,8 @@ const categories = [
 				class="flex items-center justify-between gap-2 px-3 py-2 bg-[#0a142b] border border-border rounded-xl text-sm"
 			>
 				<span
-					>origin <a href="mailto:tu.email@ejemplo.com"
-						>tu.email@ejemplo.com</a
+					>origin <a href="mailto:nicolasdavidgilbertgonzalez@gmail.com"
+						>nicolasdavidgilbertgonzalez@gmail.com</a
 					> (email)</span
 				>
 			</div>

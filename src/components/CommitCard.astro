@@ -1,5 +1,4 @@
 ---
-
 import { commitHash } from "../../lib/functions";
 
 interface DiffLine {
@@ -16,7 +15,6 @@ interface Props {
 }
 const { date, title, chips = [], repo, demo, diff = [] } = Astro.props;
 
-// Prepara el texto del diff
 const diffText = diff
     .map((l) =>
         l.type === "add"
@@ -30,49 +28,93 @@ const diffText = diff
 
 <article class="relative card">
     <div class="text-[12px] text-[#b3c7ee] font-mono flex items-center gap-2">
-        <span class="font-bold tracking-wide">{commitHash(date+"|"+title)}</span>
-        <span>·</span>
-        <time>{date}</time>
-        <span>·</span>
-        <span>{title}</span>
+        <span class="font-bold tracking-wide"
+            >{commitHash(date + "|" + title)}</span
+        >
+        <span>·</span><time>{date}</time><span>·</span><span>{title}</span>
     </div>
+
     <div class="mt-1 font-semibold">
-        {title.replace(/^[^—–-]+[—–-]\\s*/, "")}
+        {title.replace(/^[^—–-]+[—–-]\s*/, "")}
     </div>
+
     <div class="flex flex-wrap gap-2 mt-2">
-        {chips.map((c) => <span class="chip">{c}</span>)}
+        {
+            chips.map((c) => {
+                const slug = String(c)
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]+/g, "-")
+                    .replace(/(^-|-$)/g, "");
+                const iconPath = `/icons/${slug}.svg`;
+                return (
+                    <span class="chip flex items-center gap-2" title={c}>
+                        <img
+                            src={iconPath}
+                            alt={c}
+                            title={c}
+                            class="w-5 h-5 object-contain"
+                            loading="lazy"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block'"
+                        />
+                        <span class="hidden">{c}</span>
+                    </span>
+                );
+            })
+        }
     </div>
-    <div class="flex gap-2 mt-3">
+
+    {/* Botones + diff en grid, sin JS */}
+    <div
+        class="mt-3 grid items-center gap-2
+      [grid-template-columns:auto_auto_auto_1fr]
+      [grid-template-areas:'repo_demo_toggle_.''diff_diff_diff_diff']"
+    >
         {
             repo && (
-                <a class="btn" href={repo}>
+                <a
+                    class="btn [grid-area:repo]"
+                    href={repo}
+                    target="_blank"
+                    rel="noreferrer"
+                >
                     Repo
                 </a>
             )
         }
         {
             demo && (
-                <a class="btn" href={demo}>
+                <a class="btn [grid-area:demo]" href={demo}>
                     Demo
                 </a>
             )
         }
-    </div>
-    {
-        diff.length > 0 && (
-            <details class="mt-3">
-                <summary class="cursor-pointer select-none btn inline-flex">
-                    Mostrar diff
-                </summary>
-                <div class="mt-2 rounded-xl border border-[#203157] overflow-hidden">
-                    <div class="px-3 py-2 bg-[#0b1327] border-b border-[#1c2a48] text-[#b9ccff] text-[12px] font-mono">
-                        diff
+
+        {
+            diff.length > 0 && (
+                <details class="group contents">
+                    <summary class="btn cursor-pointer list-none [grid-area:toggle] [&::-webkit-details-marker]:hidden">
+                        Mostrar diff
+                    </summary>
+
+                    {/* 👇 se muestra cuando <details open> gracias a group-open */}
+                    <div
+                        class="
+                            [grid-area:diff]
+                            hidden group-open:block
+                            mt-2 rounded-xl border border-[#203157] overflow-hidden
+                            transition-opacity duration-150 ease-in
+                            opacity-0 group-open:opacity-100
+                            "
+                    >
+                        <div class="px-3 py-2 bg-[#0b1327] border-b border-[#1c2a48] text-[#b9ccff] text-[12px] font-mono">
+                            diff
+                        </div>
+                        <pre class="m-0 p-3 text-[12.5px] bg-code whitespace-pre-wrap">
+                            {diffText}
+                        </pre>
                     </div>
-                    <pre class="m-0 p-3 text-[12.5px] bg-code whitespace-pre-wrap">
-                        {diffText}
-                    </pre>
-                </div>
-            </details>
-        )
-    }
+                </details>
+            )
+        }
+    </div>
 </article>

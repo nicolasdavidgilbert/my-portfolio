@@ -3,9 +3,8 @@
 import Layout from "../layouts/Layout.astro";
 import RepoHeader from "../components/RepoHeader.astro";
 import CommitCard from "../components/CommitCard.astro";
-import Tag from "../components/Tag.astro";
 import CodeWindow from "../components/CodeWindow.astro";
-import { commits, skills, readme } from "../data/commits";
+import { commits, readme } from "../data/commits";
 
 const repoUrl = "https://github.com/nicolasdavidgilbert";
 
@@ -14,6 +13,7 @@ import SkillsBoard from "../components/SkillsBoard.astro";
 ---
 
 <Layout title="Nico — Portfolio estilo Git log">
+	<div id="#"></div>
 	<RepoHeader repoUrl={repoUrl} />
 	{/* Log */}
 	<section id="log" class="mt-7">
@@ -41,22 +41,16 @@ import SkillsBoard from "../components/SkillsBoard.astro";
 			</div>
 		</div>
 	</section>
-
-	<!-- {/* Skills */}
-	<section id="skills" class="mt-8">
-		<h2 class="font-mono text-[20px] text-[#cfe3ff]">git tag — skills</h2>
-		<div class="flex flex-wrap gap-2 mt-2">
-			{skills.map((s) => <Tag text={s} />)}
-		</div>
-	</section> -->
-	{/* Skills Board */}
+	{/* Skills */}
 	<SkillsBoard id="tags"/>
 
 	{/* README */}
 	<section id="readme" class="mt-8">
 		<h2 class="font-mono text-[20px] text-[#cfe3ff]">README.md</h2>
 		<CodeWindow title="README.md">
-			<pre class="m-0 p-4 text-[13px] text-[#e2e8f0]">{readme}</pre>
+			<div class="max-h-[48vh] overflow-auto rounded-md border border-border bg-[#0C1530]">
+				<pre class="m-0 p-4 text-[13px] text-[#e2e8f0] whitespace-pre-wrap">{readme}</pre>
+			</div>
 		</CodeWindow>
 	</section>
 

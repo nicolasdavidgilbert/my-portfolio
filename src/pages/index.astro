@@ -15,6 +15,15 @@ import SkillsBoard from "../components/SkillsBoard.astro";
 <Layout title="Nico — Portfolio estilo Git log">
 	<div id="#"></div>
 	<RepoHeader repoUrl={repoUrl} />
+	{/* README */}
+	<section id="readme" class="mt-8">
+		<h2 class="font-mono text-[20px] text-[#cfe3ff]">README.md</h2>
+		<CodeWindow title="README.md">
+			<div class="max-h-[48vh] overflow-auto rounded-md border border-border bg-[#0C1530]">
+				<pre class="m-0 p-4 text-[13px] text-[#e2e8f0] whitespace-pre-wrap">{readme}</pre>
+			</div>
+		</CodeWindow>
+	</section>
 	{/* Log */}
 	<section id="log" class="mt-7">
 		<h2 class="font-mono text-[20px] text-[#cfe3ff]">
@@ -44,15 +53,6 @@ import SkillsBoard from "../components/SkillsBoard.astro";
 	{/* Skills */}
 	<SkillsBoard id="tags"/>
 
-	{/* README */}
-	<section id="readme" class="mt-8">
-		<h2 class="font-mono text-[20px] text-[#cfe3ff]">README.md</h2>
-		<CodeWindow title="README.md">
-			<div class="max-h-[48vh] overflow-auto rounded-md border border-border bg-[#0C1530]">
-				<pre class="m-0 p-4 text-[13px] text-[#e2e8f0] whitespace-pre-wrap">{readme}</pre>
-			</div>
-		</CodeWindow>
-	</section>
 
 	{/* Contacto */}
 	<section id="contacto" class="mt-8 mb-10">

@@ -14,6 +14,8 @@ const repoPath =
   repoUrl?.replace(/^https?:\/\/(www\.)?github\.com\//, '').replace(/\/$/, '');
 const [owner, repo] = repoPath.split('/');
 ---
+
+    
 <section
   class="mt-8 rounded-2xl border border-[#1f2a44] bg-[rgba(15,23,42,0.85)] backdrop-blur
          ring-1 ring-[rgba(96,165,250,0.12)] overflow-hidden
@@ -35,7 +37,25 @@ const [owner, repo] = repoPath.split('/');
       </span>
     </h1>
 
-    <div class="flex gap-2 flex-wrap">
+    <!-- Mobile: collapsible info -->
+    <details class="md:hidden w-full group">
+      <summary class="flex items-center justify-between w-full px-4 py-2 rounded-md cursor-pointer bg-[rgba(255,255,255,0.02)] group-open:bg-[rgba(255,255,255,0.03)]">
+        <span class="text-sm font-medium">Info</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-[#bcd3ff] group-open:rotate-90 transition-transform duration-150"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <div class="flex flex-col gap-2 px-4 py-3">
+        <span class="badge kmono">
+          origin ·
+          <a href={repoUrl} target="_blank" rel="noreferrer">
+            {repoUrl.replace('https://', '')}
+          </a>
+        </span>
+        <span class="badge kmono">last update: {new Date().toISOString().slice(0, 10)}</span>
+      </div>
+    </details>
+
+    <!-- Desktop: inline badges -->
+    <div class="hidden md:flex gap-2 flex-wrap">
       <span class="badge kmono">
         origin ·
         <a href={repoUrl} target="_blank" rel="noreferrer">

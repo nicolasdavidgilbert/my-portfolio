@@ -40,10 +40,27 @@ const {
                     <strong>Nico</strong>
                     <span class="text-muted">/ Dev Multiplataforma</span>
                 </div>
-                <nav class="flex gap-3 text-sm">
+                <!-- Mobile: collapsible nav -->
+                <details class="md:hidden relative group">
+                    <summary class="flex items-center gap-2 px-3 py-2 rounded-md cursor-pointer bg-[rgba(255,255,255,0.02)] group-open:bg-[rgba(255,255,255,0.03)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#bcd3ff] group-open:rotate-90 transition-transform duration-150" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </summary>
+                    <!-- absolute panel so header doesn't grow when opened -->
+                    <div class="absolute right-3 top-full mt-2 w-44 bg-[rgba(8,12,20,0.95)] border border-[#203157] rounded-md shadow-lg z-40 p-2">
+                        <div class="flex flex-col gap-2">
+                            <a class="btn w-full text-left" href="#readme">README</a>
+                            <a class="btn w-full text-left" href="#log">Commits</a>
+                            <a class="btn w-full text-left" href="#tags">Tags</a>
+                            <a class="btn btn-primary w-full text-left" href="#contacto">Contacto</a>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Desktop nav -->
+                <nav class="hidden md:flex gap-3 text-sm">
+                    <a class="btn" href="#readme">README</a>
                     <a class="btn" href="#log">Commits</a>
                     <a class="btn" href="#tags">Tags</a>
-                    <a class="btn" href="#readme">README</a>
                     <a class="btn btn-primary" href="#contacto">Contacto</a>
                 </nav>
             </div>

@@ -1,134 +1,153 @@
 ---
-interface Item {
-  label: string;
-  icon?: string;
-  href?: string;
-}
-
-interface Category {
-  title: string;
-  items: Item[];
-}
+import { techColors, categories } from '../data/skills';
 
 const { id } = Astro.props;
-
-const techColors = {
-  HTML: '#E34F26',
-  CSS: '#1572B6',
-  JavaScript: '#F7DF1E',
-  React: '#087EA4',
-  TailwindCSS: '#38BDF8',
-  Python: '#3776AB',
-  'Node.js': '#339933',
-  MySQL: '#4479A1',
-  MongoDB: '#6CAC48',
-  MariaDB: '#909090',
-  'Next.js': '#909090',
-  Nginx: '#009438',
-  Flask: '#38A8BE',
-  Docker: '#1D63ED',
-  Pushover: '#409CED',
-  Astro: '#FF5D01',
-  TypeScript: '#3178C6',
-  Git: '#F05032',
-  GitHub: '#909090',
-  Terminal: '#4D4D4D',
-  'VS Code': '#007ACC',
-  npm: '#CB3837',
-  Kotlin: '#CF5F9F',
-  flet: '#5672B0',
-} as const;
-
-const categories: Category[] = [
-  {
-    title: 'Frontend',
-    items: [
-      { label: 'HTML', icon: '/icons/html5.svg' },
-      { label: 'CSS', icon: '/icons/css3.svg' },
-      { label: 'JavaScript', icon: '/icons/js.svg' },
-      { label: 'React', icon: '/icons/react.svg' },
-      { label: 'TailwindCSS', icon: '/icons/tailwind.svg' },
-      { label: 'flet', icon: '/icons/flet.svg' },
-    ],
-  },
-  {
-    title: 'Backend',
-    items: [
-      { label: 'Python', icon: '/icons/python.svg' },
-      { label: 'Kotlin', icon: '/icons/kotlin.svg' },
-      { label: 'Node.js', icon: '/icons/nodejs.svg' },
-      { label: 'MySQL', icon: '/icons/mysql.svg' },
-      { label: 'MongoDB', icon: '/icons/mongodb.svg' },
-      { label: 'MariaDB', icon: '/icons/mariadb.svg' },
-      { label: 'Next.js', icon: '/icons/nextjs.svg' },
-      { label: 'Nginx', icon: '/icons/nginx.svg' },
-      { label: 'Flask', icon: '/icons/flask.svg' },
-      { label: 'Docker', icon: '/icons/docker.svg' },
-      { label: 'Pushover', icon: '/icons/pushover.svg' },
-    ],
-  },
-  {
-    title: 'Aprendiendo',
-    items: [
-      { label: 'Astro', icon: '/icons/astro.svg' },
-      { label: 'TypeScript', icon: '/icons/typescript.svg' },
-    ],
-  },
-  {
-    title: 'Herramientas',
-    items: [
-      { label: 'Git', icon: '/icons/git.svg' },
-      { label: 'GitHub', icon: '/icons/github.svg' },
-      { label: 'Terminal', icon: '/icons/terminal-linux.svg' },
-      { label: 'VS Code', icon: '/icons/vscode.svg' },
-      { label: 'npm', icon: '/icons/npm.svg' },
-    ],
-  },
-];
 ---
 
-<section id={id ?? 'skills'} class="scroll-mt-24">
-  <div class="flex flex-col gap-2 reveal">
-    <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">Skills</p>
-    <h2 class="text-2xl font-semibold tracking-tight text-white/90 sm:text-3xl">
-      Un sistema visual para tecnologías, no una nube de iconos.
+<section id={id ?? 'skills'} class="scroll-mt-24 py-16 overflow-hidden">
+  <div class="mb-12 max-w-2xl reveal pl-4 sm:pl-0">
+    <p class="font-mono text-sm uppercase tracking-widest text-accent-warm/80 mb-2">Ecosistema</p>
+    <h2 class="text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 sm:text-4xl">
+      Tecnologías en movimiento.
     </h2>
   </div>
 
-  <div class="mt-6 grid gap-4 lg:grid-cols-2">
-    {categories.map((category, categoryIndex) => (
-      <article class:list={['overflow-hidden rounded-2xl border border-white/10 bg-slate-950/80 shadow-[0_18px_40px_rgba(2,6,23,0.28)] backdrop-blur-xl', categoryIndex === 0 ? 'reveal reveal-delay-1' : categoryIndex === 1 ? 'reveal reveal-delay-2' : categoryIndex === 2 ? 'reveal reveal-delay-3' : 'reveal reveal-delay-4']}>
-        <header class="border-b border-white/5 bg-gradient-to-r from-slate-950 via-slate-900/90 to-slate-950 px-5 py-4">
-          <p class="font-mono text-[11px] uppercase tracking-[0.24em] text-accent-warm">Categoría</p>
-          <h3 class="mt-2 text-xl font-semibold tracking-tight text-white/90 sm:text-2xl">{category.title}</h3>
-        </header>
+  <div class="flex flex-col gap-10 w-full">
+    {categories.map((category, index) => {
+      const isReverse = index % 2 !== 0;
+      
+      return (
+        // Añadimos la clase 'marquee-parent' para controlarla con el script
+        <div class="reveal marquee-parent" style={`reveal-delay-${index + 1}`}>
+          <h3 class="text-xs font-semibold tracking-wider text-slate-500 uppercase mb-4 pl-4">
+            {category.title}
+          </h3>
 
-        <ul class="grid grid-cols-2 gap-3 p-5 sm:grid-cols-3 xl:grid-cols-4">
-          {category.items.map((item) => {
-            const itemColor = techColors[item.label as keyof typeof techColors] || '#94a3b8';
-            const isImg = typeof item.icon === 'string' && /\.(svg|png|webp)$/i.test(item.icon);
-            const tile = (
-              <span
-                class="group flex min-h-[104px] flex-col items-center justify-center gap-2 rounded-2xl border border-white/8 bg-white/[0.03] p-3 text-center transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-white/15 hover:bg-white/[0.05]"
-                style={{ '--tech-color': itemColor, '--tech-shadow': '0 16px 28px ' + itemColor + '22' }}
-              >
-                <span class="grid h-14 w-14 place-items-center rounded-2xl border border-white/10 bg-slate-900/90 transition-all duration-300 group-hover:border-[color:var(--tech-color)] group-hover:shadow-[var(--tech-shadow)]">
-                  {isImg ? (
-                    <img src={item.icon!} alt={item.label} class="h-8 w-8 object-contain" loading="lazy" />
-                  ) : (
-                    <span class="text-lg text-white/85">{item.icon ?? '•'}</span>
-                  )}
-                </span>
-                <span class="text-sm font-medium text-white/84 transition-colors duration-300 group-hover:text-[color:var(--tech-color)]">
-                  {item.label}
-                </span>
-              </span>
-            );
+          <div class="relative w-full flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_15%,white_85%,transparent)]">
+            
+            <div class:list={[
+              "marquee-inner flex gap-5 py-2 pr-5 min-w-full shrink-0 items-center justify-around select-none",
+              isReverse ? "animate-marquee-reverse" : "animate-marquee"
+            ]}>
+              {category.items.map((item) => {
+                const itemColor = techColors[item.label as keyof typeof techColors] || '#94a3b8';
+                const isImg = typeof item.icon === 'string' && /\.(svg|png|webp)$/i.test(item.icon);
+                const Element = item.href ? 'a' : 'div';
 
-            return <li>{item.href ? <a href={item.href} target="_blank" rel="noreferrer">{tile}</a> : tile}</li>;
-          })}
-        </ul>
-      </article>
-    ))}
+                return (
+                  <Element
+                    href={item.href}
+                    target={item.href ? "_blank" : undefined}
+                    rel={item.href ? "noreferrer" : undefined}
+                    class="group relative flex items-center gap-3 rounded-full border border-white/10 bg-slate-900/60 px-5 py-3 backdrop-blur-md transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[var(--tech-color)] hover:bg-slate-900"
+                    style={{ '--tech-color': itemColor }}
+                  >
+                    <div class="absolute inset-0 rounded-full bg-[var(--tech-color)] opacity-0 blur-xl transition-all duration-500 group-hover:opacity-20" />
+                    
+                    <span class="relative flex h-6 w-6 items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                      {isImg ? (
+                        <img src={item.icon!} alt={item.label} class="h-5 w-5 object-contain" loading="lazy" />
+                      ) : (
+                        <span class="text-sm font-bold" style={{ color: itemColor }}>{item.icon ?? '•'}</span>
+                      )}
+                    </span>
+                    
+                    <span class="relative text-sm font-medium tracking-wide text-slate-200 transition-colors duration-300 group-hover:text-white">
+                      {item.label}
+                    </span>
+                  </Element>
+                );
+              })}
+            </div>
+
+            <div class:list={[
+              "marquee-inner flex gap-5 py-2 pr-5 min-w-full shrink-0 items-center justify-around select-none",
+              isReverse ? "animate-marquee-reverse" : "animate-marquee"
+            ]} aria-hidden="true">
+              {category.items.map((item) => {
+                const itemColor = techColors[item.label as keyof typeof techColors] || '#94a3b8';
+                const isImg = typeof item.icon === 'string' && /\.(svg|png|webp)$/i.test(item.icon);
+                const Element = item.href ? 'a' : 'div';
+
+                return (
+                  <Element
+                    href={item.href}
+                    target={item.href ? "_blank" : undefined}
+                    rel={item.href ? "noreferrer" : undefined}
+                    class="group relative flex items-center gap-3 rounded-full border border-white/10 bg-slate-900/60 px-5 py-3 backdrop-blur-md transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[var(--tech-color)] hover:bg-slate-900"
+                    style={{ '--tech-color': itemColor }}
+                  >
+                    <div class="absolute inset-0 rounded-full bg-[var(--tech-color)] opacity-0 blur-xl transition-all duration-500 group-hover:opacity-20" />
+                    
+                    <span class="relative flex h-6 w-6 items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                      {isImg ? (
+                        <img src={item.icon!} alt={item.label} class="h-5 w-5 object-contain" loading="lazy" />
+                      ) : (
+                        <span class="text-sm font-bold" style={{ color: itemColor }}>{item.icon ?? '•'}</span>
+                      )}
+                    </span>
+                    
+                    <span class="relative text-sm font-medium tracking-wide text-slate-200 transition-colors duration-300 group-hover:text-white">
+                      {item.label}
+                    </span>
+                  </Element>
+                );
+              })}
+            </div>
+
+          </div>
+        </div>
+      );
+    })}
   </div>
 </section>
+
+<script>
+  const setupMarquees = () => {
+    const parents = document.querySelectorAll('.marquee-parent');
+
+    parents.forEach(parent => {
+      const inners = parent.querySelectorAll('.marquee-inner');
+
+      parent.addEventListener('mouseenter', () => {
+        inners.forEach(inner => {
+          // Obtenemos las animaciones web activas del elemento
+          inner.getAnimations().forEach(animation => {
+            animation.playbackRate = 0.25; // Baja al 25% de la velocidad (Súper fluido)
+          });
+        });
+      });
+
+      parent.addEventListener('mouseleave', () => {
+        inners.forEach(inner => {
+          inner.getAnimations().forEach(animation => {
+            animation.playbackRate = 1; // Vuelve a velocidad normal
+          });
+        });
+      });
+    });
+  };
+
+  // Se ejecuta al cargar la página
+  setupMarquees();
+</script>
+
+<style>
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  @keyframes marquee-reverse {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 35s linear infinite;
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee-reverse 35s linear infinite;
+  }
+</style>

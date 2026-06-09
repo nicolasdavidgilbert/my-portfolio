@@ -1,149 +1,131 @@
 ---
-/**
- * Props esperadas:
- * categories: Array<{
- *   title: string,
- *   items: Array<{ label: string; icon?: string; href?: string }>
- * }>
- *
- * - icon puede ser emoji ("🟦"), texto corto ("TS") o ruta a imagen (p.ej. "/icons/react.svg").
- * - href es opcional: si lo das, el item se renderiza como enlace.
- */
-interface Item { label: string; icon?: string; href?: string }
-interface Category { title: string; items: Item[] }
+interface Item {
+  label: string;
+  icon?: string;
+  href?: string;
+}
+
+interface Category {
+  title: string;
+  items: Item[];
+}
+
 const { id } = Astro.props;
 
-// Colores oficiales de las tecnologías
 const techColors = {
-  "HTML": "#E34F26",
-  "CSS": "#1572B6",
-  "JavaScript": "#F7DF1E",
-  "React": "#087EA4",
-  "TailwindCSS": "#38BDF8",
-  "Python": "#3776AB",
-  "Node.js": "#339933",
-  "MySQL": "#4479A1",
-  "MongoDB": "#6CAC48",
-  "MariaDB": "#909090",
-  "Next.js": "#909090",
-  "Nginx": "#009438",
-  "Flask": "#38A8BE",
-  "Docker": "#1D63ED",
-  "Pushover": "#409CED",
-  "Astro": "#FF5D01",
-  "TypeScript": "#3178C6",
-  "Git": "#F05032",
-  "GitHub": "#909090",
-  "Terminal": "#4D4D4D",
-  "VS Code": "#007ACC",
-  "npm": "#CB3837",
-  "kotlin": "#CF5F9F",
-  "flet": "#5672B0",
+  HTML: '#E34F26',
+  CSS: '#1572B6',
+  JavaScript: '#F7DF1E',
+  React: '#087EA4',
+  TailwindCSS: '#38BDF8',
+  Python: '#3776AB',
+  'Node.js': '#339933',
+  MySQL: '#4479A1',
+  MongoDB: '#6CAC48',
+  MariaDB: '#909090',
+  'Next.js': '#909090',
+  Nginx: '#009438',
+  Flask: '#38A8BE',
+  Docker: '#1D63ED',
+  Pushover: '#409CED',
+  Astro: '#FF5D01',
+  TypeScript: '#3178C6',
+  Git: '#F05032',
+  GitHub: '#909090',
+  Terminal: '#4D4D4D',
+  'VS Code': '#007ACC',
+  npm: '#CB3837',
+  Kotlin: '#CF5F9F',
+  flet: '#5672B0',
 } as const;
 
-const categories = [
-	{
-		title: "Frontend",
-		items: [
-			{ label: "HTML", icon: "/icons/html5.svg" },
-			{ label: "CSS", icon: "/icons/css3.svg" },
-			{ label: "JavaScript", icon: "/icons/js.svg" },
-			{ label: "React", icon: "/icons/react.svg" },
-			{ label: "TailwindCSS", icon: "/icons/tailwind.svg" },
-      { label: "flet", icon: "/icons/flet.svg" },
-		],
-	},
-	{
-		title: "Backend",
-		items: [
-			{ label: "Python", icon: "/icons/python.svg" },
-      { label: "Kotlin", icon: "/icons/kotlin.svg" },
-			{ label: "Node.js", icon: "/icons/nodejs.svg" },
-			{ label: "MySQL", icon: "/icons/mysql.svg" },
-			{ label: "MongoDB", icon: "/icons/mongodb.svg" },
-			{ label: "MariaDB", icon: "/icons/mariadb.svg" },
-			{ label: "Next.js", icon: "/icons/nextjs.svg" },
-			{ label: "Nginx", icon: "/icons/nginx.svg" },
-			{ label: "Flask", icon: "/icons/flask.svg" },
-			{ label: "Docker", icon: "/icons/docker.svg" },
-			{ label: "Pushover", icon: "/icons/pushover.svg" },
-
-		],
-	},
-	{
-		title: "Aprendiendo",
-		items: [
-			{ label: "Astro", icon: "/icons/astro.svg" },
-			{ label: "TypeScript", icon: "/icons/typescript.svg" },
-		],
-	},
-	{
-		title: "Herramientas",
-		items: [
-			{ label: "Git", icon: "/icons/git.svg" },
-			{ label: "GitHub", icon: "/icons/github.svg" },
-			{ label: "Terminal", icon: "/icons/terminal-linux.svg" },
-			{ label: "VS Code", icon: "/icons/vscode.svg" },
-			{ label: "npm", icon: "/icons/npm.svg" },
-		],
-	},
+const categories: Category[] = [
+  {
+    title: 'Frontend',
+    items: [
+      { label: 'HTML', icon: '/icons/html5.svg' },
+      { label: 'CSS', icon: '/icons/css3.svg' },
+      { label: 'JavaScript', icon: '/icons/js.svg' },
+      { label: 'React', icon: '/icons/react.svg' },
+      { label: 'TailwindCSS', icon: '/icons/tailwind.svg' },
+      { label: 'flet', icon: '/icons/flet.svg' },
+    ],
+  },
+  {
+    title: 'Backend',
+    items: [
+      { label: 'Python', icon: '/icons/python.svg' },
+      { label: 'Kotlin', icon: '/icons/kotlin.svg' },
+      { label: 'Node.js', icon: '/icons/nodejs.svg' },
+      { label: 'MySQL', icon: '/icons/mysql.svg' },
+      { label: 'MongoDB', icon: '/icons/mongodb.svg' },
+      { label: 'MariaDB', icon: '/icons/mariadb.svg' },
+      { label: 'Next.js', icon: '/icons/nextjs.svg' },
+      { label: 'Nginx', icon: '/icons/nginx.svg' },
+      { label: 'Flask', icon: '/icons/flask.svg' },
+      { label: 'Docker', icon: '/icons/docker.svg' },
+      { label: 'Pushover', icon: '/icons/pushover.svg' },
+    ],
+  },
+  {
+    title: 'Aprendiendo',
+    items: [
+      { label: 'Astro', icon: '/icons/astro.svg' },
+      { label: 'TypeScript', icon: '/icons/typescript.svg' },
+    ],
+  },
+  {
+    title: 'Herramientas',
+    items: [
+      { label: 'Git', icon: '/icons/git.svg' },
+      { label: 'GitHub', icon: '/icons/github.svg' },
+      { label: 'Terminal', icon: '/icons/terminal-linux.svg' },
+      { label: 'VS Code', icon: '/icons/vscode.svg' },
+      { label: 'npm', icon: '/icons/npm.svg' },
+    ],
+  },
 ];
-
 ---
 
-<section id={id ?? 'tags'} class="max-w-5xl mx-auto px-6 py-8" aria-labelledby="skills-title">
-  <h2 id="skills-title" class="font-mono text-[20px] text-[#cfe3ff] mb-3">git tag — skills</h2>
+<section id={id ?? 'skills'} class="scroll-mt-24">
+  <div class="flex flex-col gap-2 reveal">
+    <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">Skills</p>
+    <h2 class="text-2xl font-semibold tracking-tight text-white/90 sm:text-3xl">
+      Un sistema visual para tecnologías, no una nube de iconos.
+    </h2>
+  </div>
 
-  <div class="grid gap-4 md:grid-cols-2">
-    {categories.map((cat: Category) => (
-      <article
-        class="relative rounded-2xl border border-[#1f2a44] bg-[rgba(15,23,42,0.75)]
-               backdrop-blur ring-1 ring-[rgba(96,165,250,0.10)] overflow-hidden"
-      >
-        <!-- cabecera -->
-        <header class="px-4 py-3 border-b border-[#1f2a44]
-                       bg-gradient-to-r from-[#0b1327] to-[#0a142b]">
-          <h3 class="m-0 text-[22px] md:text-[24px] font-bold tracking-tight">
-            <span class="bg-gradient-to-r from-accent2 to-accent bg-clip-text text-transparent">
-              {cat.title}
-            </span>
-          </h3>
+  <div class="mt-6 grid gap-4 lg:grid-cols-2">
+    {categories.map((category, categoryIndex) => (
+      <article class:list={['overflow-hidden rounded-2xl border border-white/10 bg-slate-950/80 shadow-[0_18px_40px_rgba(2,6,23,0.28)] backdrop-blur-xl', categoryIndex === 0 ? 'reveal reveal-delay-1' : categoryIndex === 1 ? 'reveal reveal-delay-2' : categoryIndex === 2 ? 'reveal reveal-delay-3' : 'reveal reveal-delay-4']}>
+        <header class="border-b border-white/5 bg-gradient-to-r from-slate-950 via-slate-900/90 to-slate-950 px-5 py-4">
+          <p class="font-mono text-[11px] uppercase tracking-[0.24em] text-accent-warm">Categoría</p>
+          <h3 class="mt-2 text-xl font-semibold tracking-tight text-white/90 sm:text-2xl">{category.title}</h3>
         </header>
 
-        <!-- items -->
-        <ul class="p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-          {cat.items.map((it) => {
-            const isImg = typeof it.icon === "string" &&
-                          (it.icon.endsWith(".svg") || it.icon.endsWith(".png") || it.icon.endsWith(".webp"));
-            const itemColor = techColors[it.label as keyof typeof techColors] || "#4D4D4D";
-            const content = (
-              <div class="flex flex-col items-center gap-2 group">
-                <div style={{
-                  '--tech-color': itemColor,
-                  '--tech-shadow': `0 0 20px ${itemColor}40`
-                }}
-                class="w-20 h-20 grid place-items-center rounded-xl
-                       bg-[#0e1a36] border border-[#22345f] text-accent
-                       transition-all duration-300 p-4
-                       group-hover:scale-110 
-                       group-hover:shadow-[var(--tech-shadow)]
-                       group-hover:border-[color:var(--tech-color)]">
-                  {isImg
-                    ? <img src={it.icon!} alt={it.label} title={it.label} class="w-full h-full object-contain" loading="lazy" />
-                    : <span class="text-lg">{it.icon ?? "•"}</span>}
-                </div>
-                <span class="text-sm text-[#cfe3ff] transition-colors duration-300"
-                      style={{color: '#cfe3ff', '--tech-color': itemColor}}
-                      class="group-hover:[color:var(--tech-color)]">{it.label}</span>
-              </div>
+        <ul class="grid grid-cols-2 gap-3 p-5 sm:grid-cols-3 xl:grid-cols-4">
+          {category.items.map((item) => {
+            const itemColor = techColors[item.label as keyof typeof techColors] || '#94a3b8';
+            const isImg = typeof item.icon === 'string' && /\.(svg|png|webp)$/i.test(item.icon);
+            const tile = (
+              <span
+                class="group flex min-h-[104px] flex-col items-center justify-center gap-2 rounded-2xl border border-white/8 bg-white/[0.03] p-3 text-center transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-white/15 hover:bg-white/[0.05]"
+                style={{ '--tech-color': itemColor, '--tech-shadow': '0 16px 28px ' + itemColor + '22' }}
+              >
+                <span class="grid h-14 w-14 place-items-center rounded-2xl border border-white/10 bg-slate-900/90 transition-all duration-300 group-hover:border-[color:var(--tech-color)] group-hover:shadow-[var(--tech-shadow)]">
+                  {isImg ? (
+                    <img src={item.icon!} alt={item.label} class="h-8 w-8 object-contain" loading="lazy" />
+                  ) : (
+                    <span class="text-lg text-white/85">{item.icon ?? '•'}</span>
+                  )}
+                </span>
+                <span class="text-sm font-medium text-white/84 transition-colors duration-300 group-hover:text-[color:var(--tech-color)]">
+                  {item.label}
+                </span>
+              </span>
             );
-            return (
-              <li>
-                {it.href
-                  ? <a href={it.href} target="_blank" rel="noreferrer" class="block">{content}</a>
-                  : content}
-              </li>
-            );
+
+            return <li>{item.href ? <a href={item.href} target="_blank" rel="noreferrer">{tile}</a> : tile}</li>;
           })}
         </ul>
       </article>

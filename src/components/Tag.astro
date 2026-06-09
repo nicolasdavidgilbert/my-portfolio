@@ -1,6 +1,23 @@
 ---
-// src/components/Tag.astro
-const { text } = Astro.props;
+interface Props {
+  text: string;
+  href?: string;
+  icon?: string;
+}
+
+const { text, href, icon } = Astro.props;
+const Element = href ? 'a' : 'span';
 ---
 
-<span class="tag">{text}</span>
+<Element
+  href={href}
+  class:list={[
+    'chip inline-flex items-center gap-2 border-white/10 bg-slate-900/80 text-slate-100',
+    href && 'transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/30 hover:text-white',
+  ]}
+  target={href ? '_blank' : undefined}
+  rel={href ? 'noreferrer' : undefined}
+>
+  {icon && <span class="grid h-4 w-4 place-items-center text-[11px]">{icon}</span>}
+  <span>{text}</span>
+</Element>

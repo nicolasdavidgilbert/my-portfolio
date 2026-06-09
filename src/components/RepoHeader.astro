@@ -1,48 +1,100 @@
 ---
-// src/components/RepoHeader.astro
 interface Props {
   repoUrl: string;
   author?: string;
   role?: string;
 }
-const {
-  repoUrl
-} = Astro.props;
 
-// Deriva owner/repo a partir de la URL, fallback a nico/portfolio
-const repoPath =
-  repoUrl?.replace(/^https?:\/\/(www\.)?github\.com\//, '').replace(/\/$/, '');
-const [owner, repo] = repoPath.split('/');
+const { repoUrl, author = 'Nicolás David Gilbert González', role = 'Desarrollador Multiplataforma' } = Astro.props;
+
+const repoPath = repoUrl?.replace(/^https?:\/\/(www\.)?github\.com\//, '').replace(/\/$/, '') ?? '';
+const [owner = 'nicolasdavidgilbert', repo = 'portfolio'] = repoPath.split('/');
 ---
-<section
-  class="mt-8 rounded-2xl border border-[#1f2a44] bg-[rgba(15,23,42,0.85)] backdrop-blur
-         ring-1 ring-[rgba(96,165,250,0.12)] overflow-hidden
-         shadow-[0_20px_60px_rgba(0,0,0,.35)]"
->
-  <!-- Barra superior con degradado y badges -->
-  <div
-    class="flex flex-col md:flex-row md:items-center md:justify-between gap-4
-           px-5 py-4 bg-gradient-to-r from-[#0b1327] to-[#0a142b]
-           border-b border-border"
-  >
-    <!-- Título grande con acento azul y subrayado -->
-    <h1 class="m-0 text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
-      <span class="text-white/90">{owner}/</span>
-      <span
-        class="bg-gradient-to-r from-accent2 to-accent bg-clip-text text-transparent
-               underline decoration-accent/60 [text-decoration-thickness:4px] underline-offset-[10px]">
-        {repo || 'portfolio'}
-      </span>
-    </h1>
 
-    <div class="flex gap-2 flex-wrap">
-      <span class="badge kmono">
-        origin ·
-        <a href={repoUrl} target="_blank" rel="noreferrer">
-          {repoUrl.replace('https://', '')}
-        </a>
-      </span>
-      <span class="badge kmono">last update: {new Date().toISOString().slice(0, 10)}</span>
+<section id="hero" class="reveal">
+  <div class="relative overflow-hidden rounded-[28px] border border-white/10 bg-slate-950/88 shadow-[0_28px_70px_rgba(2,6,23,0.42)] backdrop-blur-xl">
+    <div aria-hidden="true" class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:56px_56px] opacity-60"></div>
+    <div aria-hidden="true" class="absolute -top-24 right-[-5rem] h-72 w-72 rounded-full bg-accent/10 blur-3xl"></div>
+    <div aria-hidden="true" class="absolute -bottom-28 left-[-6rem] h-80 w-80 rounded-full bg-accent-warm/10 blur-3xl"></div>
+
+    <div class="relative grid gap-8 px-6 py-8 sm:px-8 sm:py-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10 lg:px-10 lg:py-12">
+      <div class="flex flex-col justify-between gap-8">
+        <div class="space-y-5">
+          <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-mono uppercase tracking-[0.28em] text-accent-warm">
+            <span class="h-1.5 w-1.5 rounded-full bg-accent-warm"></span>
+            Portfolio
+          </div>
+
+          <h1 class="max-w-3xl text-4xl font-semibold tracking-tight text-white/94 sm:text-5xl lg:text-6xl xl:text-[4.5rem]">
+            <span class="block text-white/78">{author}</span>
+            <span class="bg-gradient-to-r from-accent-warm2 via-accent2 to-accent bg-clip-text text-transparent">
+              {role}
+            </span>
+          </h1>
+
+          <p class="max-w-2xl text-sm leading-7 text-muted sm:text-base">
+            Especializado en aplicaciones web, backend y automatización. Construyo interfaces y sistemas con una jerarquía clara, profundidad suave y una base pensada para crecer.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <a class="btn-primary px-5 py-2.5 text-sm" href={repoUrl} target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+          <a class="btn px-5 py-2.5 text-sm" href="#proyectos">
+            Ver proyectos
+          </a>
+          <a class="btn px-5 py-2.5 text-sm" href="#contacto">
+            Contacto
+          </a>
+        </div>
+      </div>
+
+      <div class="grid gap-4 self-stretch">
+        <div class="rounded-3xl border border-white/10 bg-slate-950/80 p-5 shadow-[0_18px_40px_rgba(2,6,23,0.28)]">
+          <div class="flex items-center justify-between gap-3 border-b border-white/5 pb-4">
+            <div>
+              <p class="font-mono text-[11px] uppercase tracking-[0.24em] text-accent-warm">Remote</p>
+              <p class="mt-2 text-sm text-white/82">{owner}/{repo}</p>
+            </div>
+            <span class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.22em] text-emerald-300">
+              active
+            </span>
+          </div>
+
+          <dl class="grid gap-3 py-4 text-sm sm:grid-cols-2">
+            <div class="rounded-2xl border border-white/5 bg-white/[0.03] px-4 py-3">
+              <dt class="font-mono text-[11px] uppercase tracking-[0.24em] text-muted">Focus</dt>
+              <dd class="mt-2 text-white/88">Frontend, backend y automatización</dd>
+            </div>
+            <div class="rounded-2xl border border-white/5 bg-white/[0.03] px-4 py-3">
+              <dt class="font-mono text-[11px] uppercase tracking-[0.24em] text-muted">Stack</dt>
+              <dd class="mt-2 text-white/88">Astro, React, Python, TypeScript</dd>
+            </div>
+            <div class="rounded-2xl border border-white/5 bg-white/[0.03] px-4 py-3 sm:col-span-2">
+              <dt class="font-mono text-[11px] uppercase tracking-[0.24em] text-muted">Approach</dt>
+              <dd class="mt-2 text-white/88">
+                Interfaces densas, lectura rápida y movimientos suaves sin ruido visual.
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="grid gap-3 sm:grid-cols-3">
+          <div class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+            <p class="font-mono text-[11px] uppercase tracking-[0.24em] text-accent-warm">Build</p>
+            <p class="mt-2 text-sm text-white/86">Static-first</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+            <p class="font-mono text-[11px] uppercase tracking-[0.24em] text-accent-warm">Motion</p>
+            <p class="mt-2 text-sm text-white/86">CSS only</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+            <p class="font-mono text-[11px] uppercase tracking-[0.24em] text-accent-warm">Mode</p>
+            <p class="mt-2 text-sm text-white/86">Reduced-safe</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

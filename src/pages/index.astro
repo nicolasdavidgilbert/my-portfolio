@@ -1,102 +1,191 @@
 ---
-// src/pages/index.astro
-import Layout from "../layouts/Layout.astro";
-import RepoHeader from "../components/RepoHeader.astro";
-import CommitCard from "../components/CommitCard.astro";
-import CodeWindow from "../components/CodeWindow.astro";
-import { commits, readme } from "../data/commits";
+import Layout from '../layouts/Layout.astro';
+import RepoHeader from '../components/RepoHeader.astro';
+import CommitCard from '../components/CommitCard.astro';
+import { commits } from '../data/commits';
+import SkillsBoard from '../components/SkillsBoard.astro';
 
-const repoUrl = "https://github.com/nicolasdavidgilbert";
-
-import SkillsBoard from "../components/SkillsBoard.astro";
-
+const repoUrl = 'https://github.com/nicolasdavidgilbert';
+const linkedinUrl = 'https://www.linkedin.com/in/nicolasdavidgilbertgonzalez';
+const emailUrl = 'mailto:nicolasdavidgilbertgonzalez@gmail.com';
 ---
 
-<Layout title="Nico — Portfolio estilo Git log">
-	<div id="#"></div>
-	<RepoHeader repoUrl={repoUrl} />
-	{/* README */}
-	<section id="readme" class="mt-8">
-		<h2 class="font-mono text-[20px] text-[#cfe3ff]">README.md</h2>
-		<CodeWindow title="README.md">
-			<div class="max-h-[48vh] overflow-auto rounded-md border border-border bg-[#0C1530]">
-				<pre class="m-0 p-4 text-[13px] text-[#e2e8f0] whitespace-pre-wrap">{readme}</pre>
-			</div>
-		</CodeWindow>
-	</section>
-	{/* Log */}
-	<section id="log" class="mt-7">
-		<h2 class="font-mono text-[20px] text-[#cfe3ff]">
-			git log — proyectos & experiencia
-		</h2>
-		<p class="text-muted mt-1">
-			Explora los “commits”. Abre los diffs para ver detalles del proyecto
-			o rol.
-		</p>
-		<div class="relative pl-6 mt-3">
-			<div
-				class="absolute left-2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#204170] to-[#1a2a4a]"
-			>
-			</div>
-			<div class="space-y-3">
-				{
-					commits.map((c) => (
-						<div class="relative">
-							<div class="absolute -left-[13px] top-[18px] w-2.5 h-2.5 rounded-full bg-accent" />
-							<CommitCard {...c} />
-						</div>
-					))
-				}
-			</div>
-		</div>
-	</section>
-	{/* Skills */}
-	<SkillsBoard id="tags"/>
+<Layout title="Nico · Desarrollador Multiplataforma">
+  <div id="top" class="space-y-12 lg:space-y-16">
+    <section class="space-y-5">
+      <RepoHeader repoUrl={repoUrl} />
 
+      <div class="grid gap-4 md:grid-cols-3">
+        <article class="reveal reveal-delay-1 rounded-2xl border border-white/10 bg-slate-950/70 p-5 shadow-[0_18px_40px_rgba(2,6,23,0.24)] backdrop-blur-xl">
+          <p class="font-mono text-[11px] uppercase tracking-[0.24em] text-accent-warm">Build</p>
+          <p class="mt-3 text-lg font-semibold text-white/90">Static-first</p>
+          <p class="mt-2 text-sm leading-7 text-muted">Astro y Tailwind como base ligera, sin cargar el arranque con ruido innecesario.</p>
+        </article>
 
-	{/* Contacto */}
-	<section id="contacto" class="mt-8 mb-10">
-		<h2 class="font-mono text-[20px] text-[#cfe3ff]">
-			git remote -v — contacto
-		</h2>
-		<div class="mt-2 grid gap-3">
-			<div
-				class="flex items-center justify-between gap-2 px-3 py-2 bg-[#0a142b] border border-border rounded-xl text-sm"
-			>
-				<span
-					>origin <a href={repoUrl} target="_blank" rel="noreferrer"
-						>{repoUrl}</a
-					> (fetch)</span
-				>
-				<a class="btn" href={repoUrl} target="_blank">Abrir</a>
-			</div>
-			<div
-				class="flex items-center justify-between gap-2 px-3 py-2 bg-[#0a142b] border border-border rounded-xl text-sm"
-			>
-				<span
-					>origin <a
-						href="https://www.linkedin.com/in/nicolasdavidgilbertgonzalez"
-						target="_blank"
-						rel="noreferrer"
-						>https://www.linkedin.com/in/nicolasdavidgilbertgonzalez</a
-					> (social)</span
-				>
-				<a
-					class="btn"
-					href="https://www.linkedin.com/in/nicolasdavidgilbertgonzalez"
-					target="_blank"
-					rel="noreferrer">Abrir</a
-				>
-			</div>
-			<div
-				class="flex items-center justify-between gap-2 px-3 py-2 bg-[#0a142b] border border-border rounded-xl text-sm"
-			>
-				<span
-					>origin <a href="mailto:nicolasdavidgilbertgonzalez@gmail.com"
-						>nicolasdavidgilbertgonzalez@gmail.com</a
-					> (email)</span
-				>
-			</div>
-		</div>
-	</section></Layout
->
+        <article class="reveal reveal-delay-2 rounded-2xl border border-white/10 bg-slate-950/70 p-5 shadow-[0_18px_40px_rgba(2,6,23,0.24)] backdrop-blur-xl">
+          <p class="font-mono text-[11px] uppercase tracking-[0.24em] text-accent-warm">Motion</p>
+          <p class="mt-3 text-lg font-semibold text-white/90">CSS only</p>
+          <p class="mt-2 text-sm leading-7 text-muted">Entrada escalonada, hover states suaves y respeto por reduced motion.</p>
+        </article>
+
+        <article class="reveal reveal-delay-3 rounded-2xl border border-white/10 bg-slate-950/70 p-5 shadow-[0_18px_40px_rgba(2,6,23,0.24)] backdrop-blur-xl">
+          <p class="font-mono text-[11px] uppercase tracking-[0.24em] text-accent-warm">Mode</p>
+          <p class="mt-3 text-lg font-semibold text-white/90">Reduced-safe</p>
+          <p class="mt-2 text-sm leading-7 text-muted">Una primera pantalla más limpia para que el foco caiga en el contenido real.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="scroll-mt-24">
+      <div class="grid gap-6 lg:grid-cols-12">
+        <article class="rounded-2xl border border-white/10 bg-slate-950/70 p-6 shadow-[0_18px_40px_rgba(2,6,23,0.32)] backdrop-blur-xl lg:col-span-7 reveal reveal-delay-1">
+          <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">Sobre mí</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-white/90 sm:text-4xl">
+            Desarrollo software con foco en producto, claridad y mantenimiento.
+          </h2>
+          <p class="mt-4 text-base leading-8 text-white/84 sm:text-lg">
+            Soy desarrollador de aplicaciones multiplataforma con experiencia en frontend, backend y automatización. Me interesa construir sistemas que se vean bien, se entiendan rápido y aguanten crecer sin volverse frágiles.
+          </p>
+          <p class="mt-4 max-w-2xl text-sm leading-7 text-muted sm:text-base">
+            Disfruto trabajar sobre bases técnicas ordenadas, con componentes reutilizables, estados claros y una estética que mantenga la concentración en el contenido.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="badge">Astro</span>
+            <span class="badge">React</span>
+            <span class="badge">Next.js</span>
+            <span class="badge">Python</span>
+            <span class="badge">TypeScript</span>
+            <span class="badge">Docker</span>
+            <span class="badge">Node.js</span>
+            <span class="badge">PostgreSQL</span>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#proyectos" class="btn-primary px-5 py-2.5 text-sm">Ver proyectos</a>
+            <a href="#contacto" class="btn px-5 py-2.5 text-sm">Contacto</a>
+          </div>
+        </article>
+
+        <div class="grid gap-4 lg:col-span-5 reveal reveal-delay-2">
+          <article class="rounded-2xl border border-white/10 bg-elev/80 p-5 shadow-[0_18px_40px_rgba(2,6,23,0.28)] backdrop-blur-xl">
+            <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent2">Fortalezas</p>
+            <ul class="mt-4 space-y-3 text-sm text-muted">
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-accent-warm">▸</span>
+                Apps web full-stack con estructura limpia.
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-accent-warm">▸</span>
+                Automatización con scripts y procesos repetibles.
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-accent-warm">▸</span>
+                Integración de IA, despliegue y observabilidad básica.
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-accent-warm">▸</span>
+                Infraestructura con Docker, Nginx y servicios externos.
+              </li>
+            </ul>
+          </article>
+
+          <article class="rounded-2xl border border-white/10 bg-slate-950/60 p-5 shadow-[0_18px_40px_rgba(2,6,23,0.28)] backdrop-blur-xl">
+            <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">Entrega</p>
+            <div class="mt-4 grid gap-3 text-sm text-muted">
+              <div class="flex items-center justify-between rounded-xl border border-white/5 bg-white/3 px-4 py-3">
+                <span>UI coherente</span>
+                <span class="font-mono text-accent2">Tailwind</span>
+              </div>
+              <div class="flex items-center justify-between rounded-xl border border-white/5 bg-white/3 px-4 py-3">
+                <span>Animaciones</span>
+                <span class="font-mono text-accent2">CSS only</span>
+              </div>
+              <div class="flex items-center justify-between rounded-xl border border-white/5 bg-white/3 px-4 py-3">
+                <span>Accesibilidad</span>
+                <span class="font-mono text-accent2">reduced-motion</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos" class="scroll-mt-24 space-y-5">
+      <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between reveal">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">Proyectos destacados</p>
+          <h2 class="mt-2 text-2xl font-semibold tracking-tight text-white/90 sm:text-3xl">
+            Cambios con contexto, no una lista plana.
+          </h2>
+        </div>
+        <p class="max-w-xl text-sm leading-7 text-muted">
+          Cada tarjeta representa una entrega real. La intención es que el proyecto se entienda en segundos y el detalle técnico siga ahí cuando hace falta.
+        </p>
+      </div>
+
+      <div class="relative pl-6">
+        <div class="absolute left-2 top-0 bottom-0 w-px bg-gradient-to-b from-accent-warm/40 via-accent/30 to-accent-warm/10"></div>
+        <div class="space-y-4">
+          {commits.map((commit, index) => (
+            <div
+              class:list={[
+                'relative',
+                'reveal',
+                index % 4 === 1 && 'reveal-delay-1',
+                index % 4 === 2 && 'reveal-delay-2',
+                index % 4 === 3 && 'reveal-delay-3',
+                index % 4 === 0 && 'reveal-delay-4',
+              ]}
+            >
+              <div class="absolute -left-[13px] top-[18px] h-2.5 w-2.5 rounded-full bg-accent-warm ring-2 ring-bg"></div>
+              <CommitCard {...commit} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <SkillsBoard id="skills" />
+
+    <section id="contacto" class="scroll-mt-24 pb-8">
+      <div class="flex flex-col gap-2 reveal">
+        <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">Contacto</p>
+        <h2 class="text-2xl font-semibold tracking-tight text-white/90 sm:text-3xl">Canales directos, sin ruido.</h2>
+      </div>
+
+      <div class="mt-5 grid gap-4 lg:grid-cols-3">
+        <a href={repoUrl} target="_blank" rel="noreferrer" class="group rounded-2xl border border-white/10 bg-elev/80 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-[0_18px_40px_rgba(2,6,23,0.30)] reveal reveal-delay-1">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">01</p>
+              <p class="mt-2 text-lg font-semibold text-white/90 group-hover:text-accent2">GitHub</p>
+              <p class="mt-1 break-all text-sm text-muted">{repoUrl}</p>
+            </div>
+            <span class="text-2xl text-accent2 transition-transform duration-300 group-hover:translate-x-0.5">↗</span>
+          </div>
+        </a>
+
+        <a href={linkedinUrl} target="_blank" rel="noreferrer" class="group rounded-2xl border border-white/10 bg-elev/80 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-[0_18px_40px_rgba(2,6,23,0.30)] reveal reveal-delay-2">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">02</p>
+              <p class="mt-2 text-lg font-semibold text-white/90 group-hover:text-accent2">LinkedIn</p>
+              <p class="mt-1 text-sm text-muted">/in/nicolasdavidgilbertgonzalez</p>
+            </div>
+            <span class="text-2xl text-accent2 transition-transform duration-300 group-hover:translate-x-0.5">↗</span>
+          </div>
+        </a>
+
+        <a href={emailUrl} class="group rounded-2xl border border-white/10 bg-elev/80 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-[0_18px_40px_rgba(2,6,23,0.30)] reveal reveal-delay-3">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">03</p>
+              <p class="mt-2 text-lg font-semibold text-white/90 group-hover:text-accent2">Email</p>
+              <p class="mt-1 text-sm text-muted">nicolasdavidgilbertgonzalez@gmail.com</p>
+            </div>
+            <span class="text-2xl text-accent2 transition-transform duration-300 group-hover:translate-x-0.5">↗</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>

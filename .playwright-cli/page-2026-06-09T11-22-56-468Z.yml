@@ -1,0 +1,426 @@
+- generic [ref=e2]:
+  - link "Saltar al contenido" [ref=e3] [cursor=pointer]:
+    - /url: "#content"
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "Nico Portfolio Nicolás David" [ref=e6] [cursor=pointer]:
+        - /url: "#top"
+        - img "Nico" [ref=e8]
+        - generic [ref=e9]:
+          - generic [ref=e10]: Portfolio
+          - generic [ref=e11]: Nicolás David
+      - navigation [ref=e12]:
+        - link "Sobre mí" [ref=e13] [cursor=pointer]:
+          - /url: "#about"
+        - link "Proyectos" [ref=e14] [cursor=pointer]:
+          - /url: "#proyectos"
+        - link "Skills" [ref=e15] [cursor=pointer]:
+          - /url: "#skills"
+        - link "Contacto" [ref=e16] [cursor=pointer]:
+          - /url: "#contacto"
+  - main [ref=e17]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - generic [ref=e23]:
+          - generic [ref=e24]:
+            - paragraph [ref=e25]: Portfolio
+            - generic [ref=e26]:
+              - generic [ref=e27]:
+                - heading "Nicolás David Gilbert González Desarrollador Multiplataforma" [level=1] [ref=e28]:
+                  - generic [ref=e29]: Nicolás David Gilbert González
+                  - text: Desarrollador Multiplataforma
+                - paragraph [ref=e30]: Especializado en aplicaciones web, backend y automatización. Construyo interfaces y sistemas con una jerarquía clara, profundidad suave y una base pensada para crecer.
+              - generic [ref=e31]:
+                - generic [ref=e32]: Astro
+                - generic [ref=e33]: Tailwind
+                - generic [ref=e34]: Zero JS
+          - generic [ref=e35]:
+            - generic [ref=e36]:
+              - generic [ref=e38]:
+                - generic [ref=e39]: origin
+                - generic [ref=e40]: remote
+                - link "https://github.com/nicolasdavidgilbert" [ref=e41] [cursor=pointer]:
+                  - /url: https://github.com/nicolasdavidgilbert
+              - generic [ref=e42]:
+                - generic [ref=e43]:
+                  - paragraph [ref=e44]: Owner
+                  - paragraph [ref=e45]: nicolasdavidgilbert
+                - generic [ref=e46]:
+                  - paragraph [ref=e47]: Repository
+                  - paragraph [ref=e48]: portfolio
+            - generic [ref=e49]:
+              - link "GitHub" [ref=e50] [cursor=pointer]:
+                - /url: https://github.com/nicolasdavidgilbert
+              - link "Ver proyectos" [ref=e51] [cursor=pointer]:
+                - /url: "#proyectos"
+        - generic [ref=e52]:
+          - article [ref=e53]:
+            - paragraph [ref=e54]: Base visual
+            - heading "Interfaz limpia, jerarquía fuerte y movimientos discretos." [level=2] [ref=e55]
+            - paragraph [ref=e56]: "El objetivo aquí es que cada bloque parezca una pieza de producto: lectura rápida, profundidad suave y acentos de color que no compiten entre sí."
+            - generic [ref=e57]:
+              - generic [ref=e58]: Astro
+              - generic [ref=e59]: React
+              - generic [ref=e60]: Python
+              - generic [ref=e61]: Docker
+              - generic [ref=e62]: TypeScript
+              - generic [ref=e63]: Automatización
+          - article [ref=e64]:
+            - paragraph [ref=e65]: Prioridades
+            - list [ref=e66]:
+              - listitem [ref=e67]:
+                - generic [ref=e69]: Frontend y backend con una misma línea visual y técnica.
+              - listitem [ref=e70]:
+                - generic [ref=e72]: Automatización, despliegue y scripts orientados a producción.
+              - listitem [ref=e73]:
+                - generic [ref=e75]: Interfaces densas pero claras, pensadas para escanear rápido.
+      - generic [ref=e77]:
+        - article [ref=e78]:
+          - paragraph [ref=e79]: Sobre mí
+          - heading "Desarrollo software con foco en producto, claridad y mantenimiento." [level=2] [ref=e80]
+          - paragraph [ref=e81]: Soy desarrollador de aplicaciones multiplataforma con experiencia en frontend, backend y automatización. Me interesa construir sistemas que se vean bien, se entiendan rápido y aguanten crecer sin volverse frágiles.
+          - paragraph [ref=e82]: Disfruto trabajar sobre bases técnicas ordenadas, con componentes reutilizables, estados claros y una estética que mantenga la concentración en el contenido.
+          - generic [ref=e83]:
+            - generic [ref=e84]: Astro
+            - generic [ref=e85]: React
+            - generic [ref=e86]: Next.js
+            - generic [ref=e87]: Python
+            - generic [ref=e88]: TypeScript
+            - generic [ref=e89]: Docker
+            - generic [ref=e90]: Node.js
+            - generic [ref=e91]: PostgreSQL
+          - generic [ref=e92]:
+            - link "Ver proyectos" [ref=e93] [cursor=pointer]:
+              - /url: "#proyectos"
+            - link "Contacto" [ref=e94] [cursor=pointer]:
+              - /url: "#contacto"
+        - generic [ref=e95]:
+          - article [ref=e96]:
+            - paragraph [ref=e97]: Fortalezas
+            - list [ref=e98]:
+              - listitem [ref=e99]:
+                - generic [ref=e100]: ▸
+                - text: Apps web full-stack con estructura limpia.
+              - listitem [ref=e101]:
+                - generic [ref=e102]: ▸
+                - text: Automatización con scripts y procesos repetibles.
+              - listitem [ref=e103]:
+                - generic [ref=e104]: ▸
+                - text: Integración de IA, despliegue y observabilidad básica.
+              - listitem [ref=e105]:
+                - generic [ref=e106]: ▸
+                - text: Infraestructura con Docker, Nginx y servicios externos.
+          - article [ref=e107]:
+            - paragraph [ref=e108]: Entrega
+            - generic [ref=e109]:
+              - generic [ref=e110]:
+                - generic [ref=e111]: UI coherente
+                - generic [ref=e112]: Tailwind
+              - generic [ref=e113]:
+                - generic [ref=e114]: Animaciones
+                - generic [ref=e115]: CSS only
+              - generic [ref=e116]:
+                - generic [ref=e117]: Accesibilidad
+                - generic [ref=e118]: reduced-motion
+      - generic [ref=e119]:
+        - generic [ref=e120]:
+          - generic [ref=e121]:
+            - paragraph [ref=e122]: Proyectos destacados
+            - heading "Cambios con contexto, no una lista plana." [level=2] [ref=e123]
+          - paragraph [ref=e124]: Cada tarjeta representa una entrega real. La intención es que el proyecto se entienda en segundos y el detalle técnico siga ahí cuando hace falta.
+        - generic [ref=e127]:
+          - article [ref=e130]:
+            - generic [ref=e132]:
+              - generic [ref=e133]: feature
+              - generic [ref=e134]: "#e75e90b"
+              - generic [ref=e135]: ·
+              - time [ref=e136]: 2026-06-09
+            - heading "app pública con generación desde PDF, validación y moderación" [level=3] [ref=e137]
+            - generic [ref=e138]:
+              - generic "Astro" [ref=e139]:
+                - img "Astro" [ref=e141]
+                - generic [ref=e142]: Astro
+              - generic "React" [ref=e143]:
+                - img "React" [ref=e145]
+                - generic [ref=e146]: React
+              - generic "Neon Postgres" [ref=e147]:
+                - img "Neon Postgres" [ref=e149]
+                - generic [ref=e150]: Neon Postgres
+              - generic "Vercel" [ref=e151]:
+                - img "Vercel" [ref=e153]
+                - generic [ref=e154]: Vercel
+              - generic "Groq" [ref=e155]:
+                - img "Groq" [ref=e157]
+                - generic [ref=e158]: Groq
+            - generic [ref=e159]:
+              - link "Repositorio" [ref=e160] [cursor=pointer]:
+                - /url: https://github.com/nicolasdavidgilbert/cuestionario
+              - link "Demo" [ref=e161] [cursor=pointer]:
+                - /url: https://cuestionario.online
+              - group [ref=e162]:
+                - generic "Ver diff" [ref=e163] [cursor=pointer]
+          - article [ref=e166]:
+            - generic [ref=e168]:
+              - generic [ref=e169]: feature
+              - generic [ref=e170]: "#8df66d1"
+              - generic [ref=e171]: ·
+              - time [ref=e172]: 2026-06-04
+            - heading "listas de compra colaborativas en tiempo real" [level=3] [ref=e173]
+            - generic [ref=e174]:
+              - generic "Next.js" [ref=e175]:
+                - img "Next.js" [ref=e177]
+                - generic [ref=e178]: Next.js
+              - generic "React" [ref=e179]:
+                - img "React" [ref=e181]
+                - generic [ref=e182]: React
+              - generic "TypeScript" [ref=e183]:
+                - img "TypeScript" [ref=e185]
+                - generic [ref=e186]: TypeScript
+              - generic "InsForge" [ref=e187]:
+                - img "InsForge" [ref=e189]
+                - generic [ref=e190]: InsForge
+              - generic "Tailwind" [ref=e191]:
+                - img "Tailwind" [ref=e193]
+                - generic [ref=e194]: Tailwind
+            - generic [ref=e195]:
+              - link "Repositorio" [ref=e196] [cursor=pointer]:
+                - /url: https://github.com/nicolasdavidgilbert/cestapp
+              - link "Demo" [ref=e197] [cursor=pointer]:
+                - /url: https://cestapp.insforge.site
+              - group [ref=e198]:
+                - generic "Ver diff" [ref=e199] [cursor=pointer]
+          - article [ref=e202]:
+            - generic [ref=e204]:
+              - generic [ref=e205]: maintenance
+              - generic [ref=e206]: "#4a83f43"
+              - generic [ref=e207]: ·
+              - time [ref=e208]: 2026-03-01
+            - heading "copias completas e incrementales en Linux" [level=3] [ref=e209]
+            - generic [ref=e210]:
+              - generic "Bash" [ref=e211]:
+                - img "Bash" [ref=e213]
+                - generic [ref=e214]: Bash
+              - generic "Linux" [ref=e215]:
+                - img "Linux" [ref=e217]
+                - generic [ref=e218]: Linux
+              - generic "tar" [ref=e219]:
+                - img "tar" [ref=e221]
+                - generic [ref=e222]: tar
+              - generic "Backups" [ref=e223]:
+                - img "Backups" [ref=e225]
+                - generic [ref=e226]: Backups
+            - generic [ref=e227]:
+              - link "Repositorio" [ref=e228] [cursor=pointer]:
+                - /url: https://github.com/nicolasdavidgilbert/backups
+              - group [ref=e229]:
+                - generic "Ver diff" [ref=e230] [cursor=pointer]
+          - article [ref=e233]:
+            - generic [ref=e235]:
+              - generic [ref=e236]: feature
+              - generic [ref=e237]: "#e3a805d"
+              - generic [ref=e238]: ·
+              - time [ref=e239]: 2026-02-25
+            - heading "bot de Telegram activado por presencia en red local" [level=3] [ref=e240]
+            - generic [ref=e241]:
+              - generic "Python" [ref=e242]:
+                - img "Python" [ref=e244]
+                - generic [ref=e245]: Python
+              - generic "Telegram Bot" [ref=e246]:
+                - img "Telegram Bot" [ref=e248]
+                - generic [ref=e249]: Telegram Bot
+              - generic "arping" [ref=e250]:
+                - img "arping" [ref=e252]
+                - generic [ref=e253]: arping
+              - generic "Linux" [ref=e254]:
+                - img "Linux" [ref=e256]
+                - generic [ref=e257]: Linux
+              - generic "dotenv" [ref=e258]:
+                - img "dotenv" [ref=e260]
+                - generic [ref=e261]: dotenv
+            - generic [ref=e262]:
+              - link "Repositorio" [ref=e263] [cursor=pointer]:
+                - /url: https://github.com/nicolasdavidgilbert/RecordatoriosBot
+              - group [ref=e264]:
+                - generic "Ver diff" [ref=e265] [cursor=pointer]
+          - article [ref=e268]:
+            - generic [ref=e270]:
+              - generic [ref=e271]: maintenance
+              - generic [ref=e272]: "#2d23545"
+              - generic [ref=e273]: ·
+              - time [ref=e274]: 2025-05-21
+            - heading "Enfermero — servidor Flask, panel web y control de relés" [level=3] [ref=e275]
+            - generic [ref=e276]:
+              - generic "Flask" [ref=e277]:
+                - img "Flask" [ref=e279]
+                - generic [ref=e280]: Flask
+              - generic "MariaDB" [ref=e281]:
+                - img "MariaDB" [ref=e283]
+                - generic [ref=e284]: MariaDB
+              - generic "Docker" [ref=e285]:
+                - img "Docker" [ref=e287]
+                - generic [ref=e288]: Docker
+              - generic "Nginx" [ref=e289]:
+                - img "Nginx" [ref=e291]
+                - generic [ref=e292]: Nginx
+              - generic "Pushover" [ref=e293]:
+                - img "Pushover" [ref=e295]
+                - generic [ref=e296]: Pushover
+            - generic [ref=e297]:
+              - link "Repositorio" [ref=e298] [cursor=pointer]:
+                - /url: https://github.com/nicolasdavidgilbert/Sistema-de-llamadas-Paciente-Enfermero
+              - group [ref=e299]:
+                - generic "Ver diff" [ref=e300] [cursor=pointer]
+      - generic [ref=e301]:
+        - generic [ref=e302]:
+          - paragraph [ref=e303]: Skills
+          - heading "Un sistema visual para tecnologías, no una nube de iconos." [level=2] [ref=e304]
+        - generic [ref=e305]:
+          - article [ref=e306]:
+            - generic [ref=e307]:
+              - paragraph [ref=e308]: Categoría
+              - heading "Frontend" [level=3] [ref=e309]
+            - list [ref=e310]:
+              - listitem [ref=e311]:
+                - generic [ref=e312]:
+                  - img "HTML" [ref=e314]
+                  - generic [ref=e315]: HTML
+              - listitem [ref=e316]:
+                - generic [ref=e317]:
+                  - img "CSS" [ref=e319]
+                  - generic [ref=e320]: CSS
+              - listitem [ref=e321]:
+                - generic [ref=e322]:
+                  - img "JavaScript" [ref=e324]
+                  - generic [ref=e325]: JavaScript
+              - listitem [ref=e326]:
+                - generic [ref=e327]:
+                  - img "React" [ref=e329]
+                  - generic [ref=e330]: React
+              - listitem [ref=e331]:
+                - generic [ref=e332]:
+                  - img "TailwindCSS" [ref=e334]
+                  - generic [ref=e335]: TailwindCSS
+              - listitem [ref=e336]:
+                - generic [ref=e337]:
+                  - img "flet" [ref=e339]
+                  - generic [ref=e340]: flet
+          - article [ref=e341]:
+            - generic [ref=e342]:
+              - paragraph [ref=e343]: Categoría
+              - heading "Backend" [level=3] [ref=e344]
+            - list [ref=e345]:
+              - listitem [ref=e346]:
+                - generic [ref=e347]:
+                  - img "Python" [ref=e349]
+                  - generic [ref=e350]: Python
+              - listitem [ref=e351]:
+                - generic [ref=e352]:
+                  - img "Kotlin" [ref=e354]
+                  - generic [ref=e355]: Kotlin
+              - listitem [ref=e356]:
+                - generic [ref=e357]:
+                  - img "Node.js" [ref=e359]
+                  - generic [ref=e360]: Node.js
+              - listitem [ref=e361]:
+                - generic [ref=e362]:
+                  - img "MySQL" [ref=e364]
+                  - generic [ref=e365]: MySQL
+              - listitem [ref=e366]:
+                - generic [ref=e367]:
+                  - img "MongoDB" [ref=e369]
+                  - generic [ref=e370]: MongoDB
+              - listitem [ref=e371]:
+                - generic [ref=e372]:
+                  - img "MariaDB" [ref=e374]
+                  - generic [ref=e375]: MariaDB
+              - listitem [ref=e376]:
+                - generic [ref=e377]:
+                  - img "Next.js" [ref=e379]
+                  - generic [ref=e380]: Next.js
+              - listitem [ref=e381]:
+                - generic [ref=e382]:
+                  - img "Nginx" [ref=e384]
+                  - generic [ref=e385]: Nginx
+              - listitem [ref=e386]:
+                - generic [ref=e387]:
+                  - img "Flask" [ref=e389]
+                  - generic [ref=e390]: Flask
+              - listitem [ref=e391]:
+                - generic [ref=e392]:
+                  - img "Docker" [ref=e394]
+                  - generic [ref=e395]: Docker
+              - listitem [ref=e396]:
+                - generic [ref=e397]:
+                  - img "Pushover" [ref=e399]
+                  - generic [ref=e400]: Pushover
+          - article [ref=e401]:
+            - generic [ref=e402]:
+              - paragraph [ref=e403]: Categoría
+              - heading "Aprendiendo" [level=3] [ref=e404]
+            - list [ref=e405]:
+              - listitem [ref=e406]:
+                - generic [ref=e407]:
+                  - img "Astro" [ref=e409]
+                  - generic [ref=e410]: Astro
+              - listitem [ref=e411]:
+                - generic [ref=e412]:
+                  - img "TypeScript" [ref=e414]
+                  - generic [ref=e415]: TypeScript
+          - article [ref=e416]:
+            - generic [ref=e417]:
+              - paragraph [ref=e418]: Categoría
+              - heading "Herramientas" [level=3] [ref=e419]
+            - list [ref=e420]:
+              - listitem [ref=e421]:
+                - generic [ref=e422]:
+                  - img "Git" [ref=e424]
+                  - generic [ref=e425]: Git
+              - listitem [ref=e426]:
+                - generic [ref=e427]:
+                  - img "GitHub" [ref=e429]
+                  - generic [ref=e430]: GitHub
+              - listitem [ref=e431]:
+                - generic [ref=e432]:
+                  - img "Terminal" [ref=e434]
+                  - generic [ref=e435]: Terminal
+              - listitem [ref=e436]:
+                - generic [ref=e437]:
+                  - img "VS Code" [ref=e439]
+                  - generic [ref=e440]: VS Code
+              - listitem [ref=e441]:
+                - generic [ref=e442]:
+                  - img "npm" [ref=e444]
+                  - generic [ref=e445]: npm
+      - generic [ref=e446]:
+        - generic [ref=e447]:
+          - paragraph [ref=e448]: Contacto
+          - heading "Canales directos, sin ruido." [level=2] [ref=e449]
+        - generic [ref=e450]:
+          - link "01 GitHub https://github.com/nicolasdavidgilbert ↗" [ref=e451] [cursor=pointer]:
+            - /url: https://github.com/nicolasdavidgilbert
+            - generic [ref=e452]:
+              - generic [ref=e453]:
+                - paragraph [ref=e454]: "01"
+                - paragraph [ref=e455]: GitHub
+                - paragraph [ref=e456]: https://github.com/nicolasdavidgilbert
+              - generic [ref=e457]: ↗
+          - link "02 LinkedIn /in/nicolasdavidgilbertgonzalez ↗" [ref=e458] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/nicolasdavidgilbertgonzalez
+            - generic [ref=e459]:
+              - generic [ref=e460]:
+                - paragraph [ref=e461]: "02"
+                - paragraph [ref=e462]: LinkedIn
+                - paragraph [ref=e463]: /in/nicolasdavidgilbertgonzalez
+              - generic [ref=e464]: ↗
+          - link "03 Email nicolasdavidgilbertgonzalez@gmail.com ↗" [ref=e465] [cursor=pointer]:
+            - /url: mailto:nicolasdavidgilbertgonzalez@gmail.com
+            - generic [ref=e466]:
+              - generic [ref=e467]:
+                - paragraph [ref=e468]: "03"
+                - paragraph [ref=e469]: Email
+                - paragraph [ref=e470]: nicolasdavidgilbertgonzalez@gmail.com
+              - generic [ref=e471]: ↗
+  - contentinfo [ref=e472]:
+    - generic [ref=e473]:
+      - paragraph [ref=e474]: © 2026 Nicolás David Gilbert González
+      - paragraph [ref=e475]: Astro + Tailwind CSS

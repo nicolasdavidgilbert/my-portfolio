@@ -1,79 +1,98 @@
 ---
-// src/layouts/Layout.astro
-import '../styles/global.css';   // <— importa el CSS para que pase por Tailwind/PostCSS
+import '../styles/global.css';
+
 const {
-    title = "Portfolio — Git log style",
-    description = "Dev Multiplataforma",
+  title = 'Nico · Desarrollador Multiplataforma',
+  description = 'Portfolio de desarrollo multiplataforma con foco en frontend, backend y automatización.',
 } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es" class="dark">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={description} />
-        <title>{title}</title>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="shortcut icon" href="/favicon.svg" />
-        <link rel="mask-icon" href="/favicon.svg" color="#60a5fa" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;600;800&display=swap"
-            rel="stylesheet"
-        />
-    </head>
-    <body class="font-sans min-h-screen flex flex-col">
-        <header
-            class="sticky top-0 z-10 backdrop-blur border-b border-border bg-[rgba(10,15,29,0.85)]"
-        >
-            <div
-                class="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between gap-3"
-            >
-                <div class="flex items-center gap-2">
-                    <div
-                        class="w-9 h-9 grid place-items-center rounded-lg border border-border bg-gradient-to-br from-[#0d1530] to-[#070c18] shadow-[inset_0_0_24px_rgba(59,130,246,0.18)]"
-                    >
-                        <a href="#"><img src="/favicon.svg" alt="Nico logo" class="w-5 h-5" /></a>
-                    </div>
-                    <strong>Nico</strong>
-                    <span class="text-muted">/ Dev Multiplataforma</span>
-                </div>
-                <!-- Mobile: collapsible nav -->
-                <details class="md:hidden relative group">
-                    <summary class="flex items-center gap-2 px-3 py-2 rounded-md cursor-pointer bg-[rgba(255,255,255,0.02)] group-open:bg-[rgba(255,255,255,0.03)]">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#bcd3ff] group-open:rotate-90 transition-transform duration-150" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </summary>
-                    <!-- absolute panel so header doesn't grow when opened -->
-                    <div class="absolute right-3 top-full mt-2 w-44 bg-[rgba(8,12,20,0.95)] border border-[#203157] rounded-md shadow-lg z-40 p-2">
-                        <div class="flex flex-col gap-2">
-                            <a class="btn w-full text-left" href="#readme" onclick="this.closest('details').open=false">README</a>
-                            <a class="btn w-full text-left" href="#log" onclick="this.closest('details').open=false">Commits</a>
-                            <a class="btn w-full text-left" href="#tags" onclick="this.closest('details').open=false">Tags</a>
-                            <a class="btn btn-primary w-full text-left" href="#contacto" onclick="this.closest('details').open=false">Contacto</a>
-                        </div>
-                    </div>
-                </details>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#070c18" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="/favicon.svg" />
+    <link rel="mask-icon" href="/favicon.svg" color="#60a5fa" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="relative min-h-screen overflow-x-hidden font-sans text-text">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+      <div class="absolute inset-x-0 top-0 h-[24rem] bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_60%)]"></div>
+      <div class="absolute inset-x-0 bottom-0 h-[18rem] bg-[radial-gradient(circle_at_bottom,rgba(20,184,166,0.10),transparent_62%)]"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:56px_56px] opacity-[0.12]"></div>
+    </div>
 
-                <!-- Desktop nav -->
-                <nav class="hidden md:flex gap-3 text-sm">
-                    <a class="btn" href="#readme">README</a>
-                    <a class="btn" href="#log">Commits</a>
-                    <a class="btn" href="#tags">Tags</a>
-                    <a class="btn btn-primary" href="#contacto">Contacto</a>
-                </nav>
+    <div class="relative flex min-h-screen flex-col">
+      <a
+        href="#content"
+        class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:border focus:border-border focus:bg-elev focus:px-4 focus:py-2"
+      >
+        Saltar al contenido
+      </a>
+
+      <header class="sticky top-0 z-40 border-b border-white/5 bg-slate-950/70 backdrop-blur-xl">
+        <div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+          <a href="#top" class="group inline-flex items-center gap-3">
+            <span class="grid h-11 w-11 place-items-center rounded-2xl border border-white/10 bg-slate-950/80 shadow-[inset_0_0_24px_rgba(59,130,246,0.18)] transition-transform duration-300 group-hover:-translate-y-0.5">
+              <img src="/favicon.svg" alt="Nico" class="h-6 w-6" />
+            </span>
+            <span class="hidden flex-col leading-none sm:flex">
+              <span class="text-[11px] uppercase tracking-[0.28em] text-muted">Portfolio</span>
+              <span class="text-sm font-semibold text-white/90">Nicolás David</span>
+            </span>
+          </a>
+
+          <nav class="hidden items-center gap-2 md:flex">
+            <a class="btn text-sm" href="#about">Sobre mí</a>
+            <a class="btn text-sm" href="#proyectos">Proyectos</a>
+            <a class="btn text-sm" href="#skills">Skills</a>
+            <a class="btn-primary text-sm" href="#contacto">Contacto</a>
+          </nav>
+
+          <details class="group relative md:hidden">
+            <summary class="flex cursor-pointer list-none items-center gap-2 rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2 text-sm text-white/85 transition-all duration-300 hover:border-accent/40 hover:bg-slate-900/90">
+              <span class="sr-only">Abrir navegación</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-open:rotate-90" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </summary>
+
+            <div class="absolute right-0 top-full mt-2 w-52 rounded-2xl border border-white/10 bg-slate-950/95 p-2 shadow-2xl backdrop-blur-xl">
+              <div class="flex flex-col gap-2">
+                <a class="btn justify-center text-sm" href="#about">Sobre mí</a>
+                <a class="btn justify-center text-sm" href="#proyectos">Proyectos</a>
+                <a class="btn justify-center text-sm" href="#skills">Skills</a>
+                <a class="btn-primary justify-center text-sm" href="#contacto">Contacto</a>
+              </div>
             </div>
-        </header>
-        <main class="flex-1 flex items-center justify-center">
-            <div class="w-full max-w-5xl mx-auto px-6">
-                <slot />
-            </div>
-        </main>
-        <footer
-            class="max-w-5xl mx-auto px-6 mt-7 mb-2 border-t border-border text-muted py-4 text-sm"
-        >
-            © {new Date().getFullYear()} Nico · Portfolio Nico David Gilbert González
-        </footer>
-    </body>
+          </details>
+        </div>
+      </header>
+
+      <main id="content" class="relative z-10 flex-1">
+        <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+          <slot />
+        </div>
+      </main>
+
+      <footer class="relative z-10 border-t border-white/5 bg-slate-950/40">
+        <div class="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-5 text-sm text-muted sm:px-6 lg:px-8 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Nicolás David Gilbert González</p>
+          <p class="font-mono text-[11px] uppercase tracking-[0.24em] text-muted/80">Astro + Tailwind CSS</p>
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>

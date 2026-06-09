@@ -1,79 +1,67 @@
 ---
 import type { RepoHeaderProps } from '../data/header';
-import { DEFAULT_AUTHOR, DEFAULT_ROLE, getRepoInfo } from '../data/header';
+import { DEFAULT_AUTHOR, DEFAULT_ROLE, LOCATION, getRepoInfo } from '../data/header';
 
 const { repoUrl, author = DEFAULT_AUTHOR, role = DEFAULT_ROLE } = Astro.props as RepoHeaderProps;
 const { owner, repo } = getRepoInfo(repoUrl);
 ---
 
 <section id="hero" class="reveal py-8 px-4 max-w-6xl mx-auto">
-  <!-- Contenedor con sutiles destellos azul premium de fondo -->
   <div class="relative overflow-hidden rounded-3xl border border-white/5 bg-slate-900/40 shadow-2xl shadow-black/40 backdrop-blur-md">
-    
-    <!-- Luces de ambiente en azul y cian profundos (no cansan la vista) -->
     <div aria-hidden="true" class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.008)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.008)_1px,transparent_1px)] bg-[size:48px_48px] opacity-40"></div>
     <div aria-hidden="true" class="absolute -top-24 right-[-5rem] h-80 w-80 rounded-full bg-blue-600/10 blur-[120px]"></div>
     <div aria-hidden="true" class="absolute -bottom-28 left-[-6rem] h-80 w-80 rounded-full bg-indigo-500/5 blur-[120px]"></div>
 
-    <!-- Grid de Contenido -->
     <div class="relative grid gap-8 px-6 py-10 sm:px-8 sm:py-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-12 lg:p-14">
-      
-      <!-- Columna Izquierda: Identidad Impactante -->
       <div class="flex flex-col justify-between gap-10">
         <div class="space-y-6">
-          <!-- Badge de Estado en Azul Técnico -->
           <div class="inline-flex items-center gap-2 rounded-full border border-blue-500/10 bg-blue-500/5 px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-blue-400">
             <span class="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-            Disponible
+            Disponible · {LOCATION}
           </div>
 
-          <!-- Foco absoluto en tu Nombre -->
           <h1 class="tracking-tighter">
-            <!-- Tu nombre gigante, limpio y con una presencia masiva -->
             <span class="block text-4xl font-black text-white sm:text-6xl lg:text-6xl mb-2 drop-shadow-sm">
               {author}
             </span>
-            <!-- Tu rol con un degradado azul premium refinado -->
             <span class="block text-xl font-bold bg-gradient-to-r from-blue-400 via-indigo-300 to-slate-400 bg-clip-text text-transparent sm:text-2xl lg:text-3xl">
               {role}
             </span>
           </h1>
 
           <p class="max-w-xl text-sm leading-relaxed text-slate-400 sm:text-base font-medium">
-            Construyo aplicaciones web y sistemas de automatización estables. Enfoque absoluto en interfaces limpias, rendimiento óptimo y código mantenible.
+            Desarrollador Multiplataforma (<strong class="text-slate-300">DAM</strong>) y estudiante de
+            <strong class="text-slate-300"> ASIR</strong>, especializado en desarrollo Full Stack, Linux,
+            redes y automatización con IA.
           </p>
         </div>
 
-        <!-- Botones con interacciones de luz azul ultra suaves (500ms) -->
         <div class="flex flex-wrap gap-3">
-          <a 
-            href={repoUrl} 
-            target="_blank" 
-            rel="noreferrer" 
+          <a
+            href={repoUrl}
+            target="_blank"
+            rel="noreferrer"
             class="rounded-xl bg-white px-5 py-3 text-xs font-bold uppercase tracking-wider text-slate-950 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-lg hover:shadow-blue-500/10"
           >
             GitHub
           </a>
-          <a 
-            href="#proyectos" 
+          <a
+            href="#about"
+            class="rounded-xl border border-white/10 bg-white/[0.02] px-5 py-3 text-xs font-bold uppercase tracking-wider text-slate-300 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-blue-500/30 hover:bg-slate-900"
+          >
+            Sobre mí
+          </a>
+          <a
+            href="#proyectos"
             class="rounded-xl border border-white/10 bg-white/[0.02] px-5 py-3 text-xs font-bold uppercase tracking-wider text-slate-300 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-blue-500/30 hover:bg-slate-900"
           >
             Proyectos
           </a>
-          <a 
-            href="#contacto" 
-            class="rounded-xl border border-white/10 bg-white/[0.02] px-5 py-3 text-xs font-bold uppercase tracking-wider text-slate-300 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-blue-500/30 hover:bg-slate-900"
-          >
-            Contacto
-          </a>
         </div>
       </div>
 
-      <!-- Columna Derecha: Tarjeta Técnica Estilizada -->
       <div class="flex items-center">
         <div class="w-full rounded-2xl border border-white/5 bg-slate-950/40 p-6 backdrop-blur-sm transition-all duration-500 ease-out hover:border-blue-500/20">
-          
-          <!-- Encabezado de la Tarjeta con Badge Azul -->
           <div class="flex items-center justify-between gap-3 border-b border-white/5 pb-4 mb-4">
             <div>
               <p class="font-mono text-[10px] uppercase tracking-widest text-slate-500">Repositorio Base</p>
@@ -84,26 +72,28 @@ const { owner, repo } = getRepoInfo(repoUrl);
             </span>
           </div>
 
-          <!-- Datos técnicos -->
           <dl class="space-y-4 text-xs">
             <div class="rounded-xl border border-white/[0.03] bg-white/[0.01] px-4 py-3">
-              <dt class="font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1">Especialidad</dt>
-              <dd class="font-semibold text-slate-300">Desarrollo Fullstack y Arquitectura</dd>
-            </div>
-            <div class="rounded-xl border border-white/[0.03] bg-white/[0.01] px-4 py-3">
-              <dt class="font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1">Core Stack</dt>
-              <dd class="font-semibold text-slate-300">Astro, React, Python, TypeScript</dd>
-            </div>
-            <div class="rounded-xl border border-white/[0.03] bg-white/[0.01] px-4 py-3">
-              <dt class="font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1">Filosofía de desarrollo</dt>
+              <dt class="font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1">Perfil</dt>
               <dd class="font-semibold text-slate-300 leading-relaxed">
-                Interfaces ligeras, lectura rápida y cero ruido visual.
+                Desarrollo Full Stack, administración de sistemas, Linux y redes.
+              </dd>
+            </div>
+            <div class="rounded-xl border border-white/[0.03] bg-white/[0.01] px-4 py-3">
+              <dt class="font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1">Enfoque</dt>
+              <dd class="font-semibold text-slate-300 leading-relaxed">
+                Software, despliegue, contenedores y automatización de procesos.
+              </dd>
+            </div>
+            <div class="rounded-xl border border-white/[0.03] bg-white/[0.01] px-4 py-3">
+              <dt class="font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1">Interés profesional</dt>
+              <dd class="font-semibold text-slate-300 leading-relaxed">
+                Full Stack, automatización, DevOps junior e ingeniería de software.
               </dd>
             </div>
           </dl>
         </div>
       </div>
-
     </div>
   </div>
 </section>

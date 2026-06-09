@@ -22,23 +22,21 @@ const emailUrl = 'nicolasdavidgilbertgonzalez@gmail.com';
         <article class="rounded-2xl border border-white/10 bg-slate-950/70 p-6 shadow-[0_18px_40px_rgba(2,6,23,0.32)] backdrop-blur-xl lg:col-span-7 reveal reveal-delay-1">
           <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">Sobre mí</p>
           <h2 class="mt-3 text-3xl font-semibold tracking-tight text-white/90 sm:text-4xl">
-            Desarrollo software con foco en producto, claridad y mantenimiento.
+            Desarrollo software y administro los sistemas que lo sostienen.
           </h2>
           <p class="mt-4 text-base leading-8 text-white/84 sm:text-lg">
-            Soy desarrollador de aplicaciones multiplataforma con experiencia en frontend, backend y automatización. Me interesa construir sistemas que se vean bien, se entiendan rápido y aguanten crecer sin volverse frágiles.
+            Soy Desarrollador Multiplataforma y estudiante de ASIR. Combino desarrollo de software con administración de sistemas y redes, lo que me permite diseñar soluciones completas: desde backend y frontend hasta despliegue, contenedores y automatización de procesos.
           </p>
           <p class="mt-4 max-w-2xl text-sm leading-7 text-muted sm:text-base">
-            Disfruto trabajar sobre bases técnicas ordenadas, con componentes reutilizables, estados claros y una estética que mantenga la concentración en el contenido.
+            Tengo experiencia con Python, JavaScript, React, Kotlin, Docker, Linux, Git, GitHub, bases de datos SQL y NoSQL, automatización con n8n e integración de IA en agentes conversacionales y voice AI. Durante mi Erasmus+ en Bulgaria lideré la implementación de un agente de IA para prospección comercial.
           </p>
           <div class="mt-5 flex flex-wrap gap-2">
-            <span class="badge">Astro</span>
-            <span class="badge">React</span>
-            <span class="badge">Next.js</span>
-            <span class="badge">Python</span>
-            <span class="badge">TypeScript</span>
+            <span class="badge">Full Stack</span>
+            <span class="badge">Linux</span>
+            <span class="badge">Redes</span>
             <span class="badge">Docker</span>
-            <span class="badge">Node.js</span>
-            <span class="badge">PostgreSQL</span>
+            <span class="badge">Automatización</span>
+            <span class="badge">IA</span>
           </div>
           <div class="mt-6 flex flex-wrap gap-3">
             <a href="#proyectos" class="btn-primary px-5 py-2.5 text-sm">Ver proyectos</a>
@@ -52,37 +50,37 @@ const emailUrl = 'nicolasdavidgilbertgonzalez@gmail.com';
             <ul class="mt-4 space-y-3 text-sm text-muted">
               <li class="flex items-start gap-3">
                 <span class="mt-1 text-accent-warm">▸</span>
-                Apps web full-stack con estructura limpia.
+                Desarrollo Full Stack con visión de frontend, backend y despliegue.
               </li>
               <li class="flex items-start gap-3">
                 <span class="mt-1 text-accent-warm">▸</span>
-                Automatización con scripts y procesos repetibles.
+                Administración de sistemas Linux, redes y contenedores Docker.
               </li>
               <li class="flex items-start gap-3">
                 <span class="mt-1 text-accent-warm">▸</span>
-                Integración de IA, despliegue y observabilidad básica.
+                Automatización de procesos con n8n e integración de IA.
               </li>
               <li class="flex items-start gap-3">
                 <span class="mt-1 text-accent-warm">▸</span>
-                Infraestructura con Docker, Nginx y servicios externos.
+                Bases de datos SQL y NoSQL para soluciones completas.
               </li>
             </ul>
           </article>
 
           <article class="rounded-2xl border border-white/10 bg-slate-950/60 p-5 shadow-[0_18px_40px_rgba(2,6,23,0.28)] backdrop-blur-xl">
-            <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">Entrega</p>
+            <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">Soft skills</p>
             <div class="mt-4 grid gap-3 text-sm text-muted">
               <div class="flex items-center justify-between rounded-xl border border-white/5 bg-white/3 px-4 py-3">
-                <span>UI coherente</span>
-                <span class="font-mono text-accent2">Tailwind</span>
+                <span>Liderazgo técnico</span>
+                <span class="font-mono text-accent2">IA</span>
               </div>
               <div class="flex items-center justify-between rounded-xl border border-white/5 bg-white/3 px-4 py-3">
-                <span>Animaciones</span>
-                <span class="font-mono text-accent2">CSS only</span>
+                <span>Resolución de problemas</span>
+                <span class="font-mono text-accent2">Sistemas</span>
               </div>
               <div class="flex items-center justify-between rounded-xl border border-white/5 bg-white/3 px-4 py-3">
-                <span>Accesibilidad</span>
-                <span class="font-mono text-accent2">reduced-motion</span>
+                <span>Coordinación técnica</span>
+                <span class="font-mono text-accent2">Equipo</span>
               </div>
             </div>
           </article>
@@ -103,25 +101,12 @@ const emailUrl = 'nicolasdavidgilbertgonzalez@gmail.com';
         </p>
       </div>
 
-      <div class="relative pl-6">
-        <div class="absolute left-2 top-0 bottom-0 w-px bg-gradient-to-b from-accent-warm/40 via-accent/30 to-accent-warm/10"></div>
-        <div class="space-y-4">
-          {commits.map((commit, index) => (
-            <div
-              class:list={[
-                'relative',
-                'reveal',
-                index % 4 === 1 && 'reveal-delay-1',
-                index % 4 === 2 && 'reveal-delay-2',
-                index % 4 === 3 && 'reveal-delay-3',
-                index % 4 === 0 && 'reveal-delay-4',
-              ]}
-            >
-              <div class="absolute -left-[13px] top-[18px] h-2.5 w-2.5 rounded-full bg-accent-warm ring-2 ring-bg"></div>
-              <CommitCard {...commit} />
-            </div>
-          ))}
-        </div>
+      <div class="project-stack">
+        {commits.map((commit) => (
+          <div class="project-stack-item">
+            <CommitCard {...commit} />
+          </div>
+        ))}
       </div>
     </section>
 

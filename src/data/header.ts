@@ -16,4 +16,5 @@ export function getRepoInfo(repoUrl: string): RepoInfo {
 }
 
 export const DEFAULT_AUTHOR = 'Nicolás David Gilbert González';
-export const DEFAULT_ROLE = 'Desarrollador Multiplataforma';
+export const DEFAULT_ROLE = 'Desarrollador Multiplataforma | ASIR | Full Stack, Linux y Redes';
+export const LOCATION = 'Canarias, España';

@@ -5,13 +5,14 @@ import CommitCard from '../components/CommitCard.astro';
 import { commits } from '../data/projects';
 import SkillsBoard from '../components/SkillsBoard.astro';
 import ContactSection from '../components/ContactSection.astro';
+import { SITE_DESCRIPTION, SITE_TITLE, portfolioStructuredData } from '../data/seo';
 
 const repoUrl = 'https://github.com/nicolasdavidgilbert';
-const linkedinUrl = 'https://www.linkedin.com/in/nicolasdavidgilbertgonzalez';
+const linkedinUrl = 'https://www.linkedin.com/in/gilbertnicolas';
 const emailUrl = 'nicolasdavidgilbertgonzalez@gmail.com';
 ---
 
-<Layout title="Nico · Desarrollador Multiplataforma">
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION} structuredData={[portfolioStructuredData]}>
   <div id="top" class="space-y-12 lg:space-y-16">
     <section class="space-y-5">
       <RepoHeader repoUrl={repoUrl} />

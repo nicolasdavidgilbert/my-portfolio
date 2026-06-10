@@ -18,7 +18,7 @@ interface Props {
 
 const { date, title, chips = [], repo, demo, diff = [] } = Astro.props;
 
-const cleanTitle = title.replace(/^[^—–-]+[—–-]\s*/, '');
+const cleanTitle = title.replace(/^[^:]+:\s*/, '');
 const prefix = title.split(':', 1)[0]?.trim().toLowerCase();
 const commitType = prefix.startsWith('feat')
   ? 'feature'

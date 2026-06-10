@@ -1,10 +1,28 @@
 ---
 import '../styles/global.css';
+import {
+  SOCIAL_IMAGE,
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_TITLE,
+  absoluteUrl,
+  personStructuredData,
+  portfolioStructuredData,
+  websiteStructuredData,
+} from '../data/seo';
 
 const {
-  title = 'Nico · Desarrollador Multiplataforma',
-  description = 'Portfolio de desarrollo multiplataforma con foco en frontend, backend y automatización.',
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  image = SOCIAL_IMAGE,
+  type = 'profile',
+  structuredData = [websiteStructuredData, personStructuredData, portfolioStructuredData],
 } = Astro.props;
+
+const canonicalUrl = absoluteUrl(Astro.url.pathname);
+const imageUrl = absoluteUrl(image);
+const jsonLd = JSON.stringify(structuredData);
 ---
 
 <!doctype html>
@@ -12,20 +30,57 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="description" content={description} />
+    <meta name="author" content="Nicolás David Gilbert González" />
+    <meta name="creator" content="Nicolás David Gilbert González" />
+    <meta name="publisher" content="Nicolás David Gilbert González" />
+    <meta name="keywords" content={SITE_KEYWORDS.join(', ')} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="format-detection" content="telephone=no" />
     <meta name="theme-color" content="#070c18" />
     <meta name="color-scheme" content="dark" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content={SITE_NAME} />
+    <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
+
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:secure_url" content={imageUrl} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Portfolio de Nicolás David Gilbert González" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content="Portfolio de Nicolás David Gilbert González" />
+
     <title>{title}</title>
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" href={canonicalUrl} hreflang="es" />
+    <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="shortcut icon" href="/favicon.svg" />
     <link rel="mask-icon" href="/favicon.svg" color="#60a5fa" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script is:inline type="application/ld+json" set:html={jsonLd}></script>
   </head>
   <body class="relative min-h-screen overflow-x-hidden font-sans text-text">
     <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">

@@ -1,0 +1,19 @@
+{
+  "name": "Portfolio de Nicolás David Gilbert González",
+  "short_name": "Nico Portfolio",
+  "description": "Portfolio de desarrollador multiplataforma, Full Stack, Linux, redes, Docker, automatización e IA.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#070c18",
+  "theme_color": "#070c18",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

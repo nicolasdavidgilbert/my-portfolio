@@ -11,7 +11,7 @@ export const commits: Commit[] = [
     highlights: ['Colaboración Realtime', 'Acceso por invitación', 'Historial de precios'],
     image: '/projects/cestapp.webp',
     visual: 'web',
-    accent: '#60a5fa',
+    accent: '#f59e0b',
     diff: [
       { type: 'ctx', text: '@@' },
       { type: 'add', text: 'feat: app de gestión de listas de compra colaborativas' },
@@ -59,7 +59,7 @@ export const commits: Commit[] = [
     summary: 'Herramientas Bash para automatizar copias completas e incrementales con snapshots, estructura por fechas y cancelación segura.',
     highlights: ['Backups FULL e INC', 'Snapshots con .snar', 'Recuperación y limpieza segura'],
     visual: 'terminal',
-    accent: '#f59e0b',
+    accent: '#60a5fa',
     diff: [
       { type: 'ctx', text: '@@' },
       { type: 'add', text: 'feat: script inicial.sh para backup completo comprimido en .tar.gz' },

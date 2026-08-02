@@ -26,7 +26,7 @@ const jsonLd = JSON.stringify(structuredData);
 ---
 
 <!doctype html>
-<html lang="es" class="dark">
+<html lang="es" class="dark scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -43,6 +43,7 @@ const jsonLd = JSON.stringify(structuredData);
     <meta name="theme-color" content="#070c18" />
     <meta name="color-scheme" content="dark" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="application-name" content={SITE_NAME} />
     <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
 
@@ -82,10 +83,9 @@ const jsonLd = JSON.stringify(structuredData);
     />
     <script is:inline type="application/ld+json" set:html={jsonLd}></script>
   </head>
-  <body class="relative min-h-screen overflow-x-hidden font-sans text-text">
+  <body class="relative min-h-screen overflow-x-hidden bg-bg bg-[linear-gradient(180deg,rgba(2,6,23,0.1),rgba(2,6,23,0.55)),radial-gradient(1100px_600px_at_90%_-15%,rgba(20,184,166,0.1),transparent_60%),radial-gradient(900px_500px_at_-10%_10%,rgba(59,130,246,0.12),transparent_55%)] font-sans leading-7 text-text antialiased">
     <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
       <div class="absolute inset-x-0 top-0 h-[24rem] bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_60%)]"></div>
-      <div class="absolute inset-x-0 bottom-0 h-[18rem] bg-[radial-gradient(circle_at_bottom,rgba(20,184,166,0.10),transparent_62%)]"></div>
       <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:56px_56px] opacity-[0.12]"></div>
     </div>
 
@@ -97,8 +97,8 @@ const jsonLd = JSON.stringify(structuredData);
         Saltar al contenido
       </a>
 
-      <header class="site-header sticky top-0 z-40 border-b border-transparent backdrop-blur-xl">
-        <div class="site-header-inner mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+      <header class="site-header sticky top-0 z-40 isolate border-b border-transparent bg-transparent shadow-none backdrop-blur-xl before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:-bottom-9 before:-z-10 before:bg-[linear-gradient(180deg,rgba(7,12,24,0.92)_0%,rgba(7,12,24,0.62)_54%,rgba(7,12,24,0)_100%)]">
+        <div class="site-header-inner relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
           <a href="#top" class="group inline-flex items-center gap-3">
             <span class="site-brand-icon grid h-11 w-11 place-items-center rounded-2xl border border-white/10 bg-slate-950/80 shadow-[inset_0_0_24px_rgba(59,130,246,0.18)] transition-transform duration-300 group-hover:-translate-y-0.5">
               <img src="/favicon.svg" alt="Nico" class="h-6 w-6" />
@@ -109,29 +109,27 @@ const jsonLd = JSON.stringify(structuredData);
             </span>
           </a>
 
-          <nav class="site-nav hidden items-center gap-2 md:flex">
-            <a class="btn text-sm" href="#about">Sobre mí</a>
-            <a class="btn text-sm" href="#proyectos">Proyectos</a>
-            <a class="btn text-sm" href="#skills">Skills</a>
-            <a class="btn-primary text-sm" href="#contacto">Contacto</a>
+          <nav class="site-nav hidden items-center gap-1 md:flex" aria-label="Navegación principal">
+            <a class="site-nav-link relative inline-flex min-h-10 items-center rounded-md px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[rgba(230,240,255,0.66)] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-[#2dd4bf] after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#about" data-nav-link>Perfil</a>
+            <a class="site-nav-link relative inline-flex min-h-10 items-center rounded-md px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[rgba(230,240,255,0.66)] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-[#2dd4bf] after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#proyectos" data-nav-link>Proyectos</a>
+            <a class="site-nav-link relative inline-flex min-h-10 items-center rounded-md px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[rgba(230,240,255,0.66)] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-[#2dd4bf] after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#skills" data-nav-link>Skills</a>
+            <a class="site-nav-link site-nav-contact relative ml-1 inline-flex min-h-10 items-center rounded-md border border-[rgba(45,212,191,0.35)] px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[#8de8da] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-[#2dd4bf] after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#contacto" data-nav-link>Contacto</a>
           </nav>
 
-          <details class="group relative md:hidden">
-            <summary class="flex cursor-pointer list-none items-center gap-2 rounded-xl border border-white/10 bg-slate-900/70 px-3 py-2 text-sm text-white/85 transition-all duration-300 hover:border-accent/40 hover:bg-slate-900/90">
+          <details class="group relative md:hidden" data-site-menu>
+            <summary class="site-menu-toggle grid h-[2.65rem] w-[2.65rem] cursor-pointer list-none place-items-center rounded-md border border-[rgba(255,255,255,0.12)] bg-[rgba(8,14,27,0.86)] text-[rgba(255,255,255,0.86)] transition-[border-color,background-color] duration-200 hover:border-[rgba(45,212,191,0.55)] hover:bg-[#101827] [&::-webkit-details-marker]:hidden">
               <span class="sr-only">Abrir navegación</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-open:rotate-90" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </summary>
 
-            <div class="absolute right-0 top-full mt-2 w-52 rounded-2xl border border-white/10 bg-slate-950/95 p-2 shadow-2xl backdrop-blur-xl">
-              <div class="flex flex-col gap-2">
-                <a class="btn justify-center text-sm" href="#about">Sobre mí</a>
-                <a class="btn justify-center text-sm" href="#proyectos">Proyectos</a>
-                <a class="btn justify-center text-sm" href="#skills">Skills</a>
-                <a class="btn-primary justify-center text-sm" href="#contacto">Contacto</a>
-              </div>
-            </div>
+            <nav class="site-mobile-nav absolute right-0 top-[calc(100%+0.6rem)] grid w-[min(17rem,calc(100vw-2rem))] overflow-hidden rounded-lg border border-[rgba(255,255,255,0.12)] bg-[rgba(7,12,24,0.97)] shadow-[0_1.5rem_4rem_rgba(0,0,0,0.45)] backdrop-blur-[18px]" aria-label="Navegación móvil">
+              <a class="flex min-h-[3.25rem] items-center justify-between border-b border-white/[0.07] px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(45,212,191,0.06)] hover:text-white [&.is-active]:bg-[rgba(45,212,191,0.06)] [&.is-active]:text-white" href="#about" data-nav-link>Perfil <span class="font-mono text-[0.58rem] text-[#2dd4bf]" aria-hidden="true">01</span></a>
+              <a class="flex min-h-[3.25rem] items-center justify-between border-b border-white/[0.07] px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(45,212,191,0.06)] hover:text-white [&.is-active]:bg-[rgba(45,212,191,0.06)] [&.is-active]:text-white" href="#proyectos" data-nav-link>Proyectos <span class="font-mono text-[0.58rem] text-[#2dd4bf]" aria-hidden="true">02</span></a>
+              <a class="flex min-h-[3.25rem] items-center justify-between border-b border-white/[0.07] px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(45,212,191,0.06)] hover:text-white [&.is-active]:bg-[rgba(45,212,191,0.06)] [&.is-active]:text-white" href="#skills" data-nav-link>Skills <span class="font-mono text-[0.58rem] text-[#2dd4bf]" aria-hidden="true">03</span></a>
+              <a class="flex min-h-[3.25rem] items-center justify-between px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(45,212,191,0.06)] hover:text-white [&.is-active]:bg-[rgba(45,212,191,0.06)] [&.is-active]:text-white" href="#contacto" data-nav-link>Contacto <span class="font-mono text-[0.58rem] text-[#2dd4bf]" aria-hidden="true">04</span></a>
+            </nav>
           </details>
         </div>
       </header>
@@ -149,5 +147,44 @@ const jsonLd = JSON.stringify(structuredData);
         </div>
       </footer>
     </div>
+    <script>
+      const initSiteNavigation = () => {
+        const menu = document.querySelector<HTMLDetailsElement>("[data-site-menu]");
+        const links = [...document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]")];
+        const sections = ["about", "proyectos", "skills", "contacto"]
+          .map((id) => document.getElementById(id))
+          .filter((section): section is HTMLElement => Boolean(section));
+
+        links.forEach((link) => {
+          if (link.dataset.bound === "true") return;
+          link.dataset.bound = "true";
+          link.addEventListener("click", () => menu?.removeAttribute("open"));
+        });
+
+        if (document.documentElement.dataset.navSpyReady === "true") return;
+        document.documentElement.dataset.navSpyReady = "true";
+
+        const setActive = (id: string) => {
+          links.forEach((link) => {
+            const active = link.getAttribute("href") === "#" + id;
+            link.classList.toggle("is-active", active);
+            if (active) link.setAttribute("aria-current", "true");
+            else link.removeAttribute("aria-current");
+          });
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (visible?.target.id) setActive(visible.target.id);
+        }, { rootMargin: "-30% 0px -55%", threshold: [0, 0.15, 0.35, 0.6] });
+
+        sections.forEach((section) => observer.observe(section));
+      };
+
+      initSiteNavigation();
+      document.addEventListener("astro:page-load", initSiteNavigation);
+    </script>
   </body>
 </html>

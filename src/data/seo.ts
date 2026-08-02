@@ -56,7 +56,7 @@ export const personStructuredData = {
     addressRegion: LOCATION,
     addressCountry: 'ES',
   },
-  email: 'mailto:nicolasdavidgilbertgonzalez@gmail.com',
+  email: 'mailto:nicolas.david.gilbert@gmail.com',
   sameAs: profileLinks,
   knowsAbout: SITE_KEYWORDS.filter((keyword) => keyword !== DEFAULT_AUTHOR),
   hasOccupation: {

@@ -5,94 +5,25 @@ import { commits } from '../data/projects';
 import SkillsBoard from '../components/SkillsBoard.astro';
 import ContactSection from '../components/ContactSection.astro';
 import ProjectShowcase from '../components/ProjectShowcase.astro';
+import ProfileStory from '../components/ProfileStory.astro';
 import { SITE_DESCRIPTION, SITE_TITLE, portfolioStructuredData } from '../data/seo';
 
-const repoUrl = 'https://github.com/nicolasdavidgilbert';
+const githubUrl = 'https://github.com/nicolasdavidgilbert';
+const portfolioRepoUrl = 'https://github.com/nicolasdavidgilbert/my-portfolio';
 const linkedinUrl = 'https://www.linkedin.com/in/gilbertnicolas';
-const emailUrl = 'nicolasdavidgilbertgonzalez@gmail.com';
+const emailUrl = 'nicolas.david.gilbert@gmail.com';
 ---
 
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION} structuredData={[portfolioStructuredData]}>
   <div id="top" class="space-y-12 lg:space-y-16">
-    <section class="space-y-5">
-      <RepoHeader repoUrl={repoUrl} />
-    </section>
+    <RepoHeader repoUrl={portfolioRepoUrl} linkedinUrl={linkedinUrl} />
 
-    <section id="about" class="scroll-mt-24">
-      <div class="grid gap-6 lg:grid-cols-12">
-        <article class="rounded-2xl border border-white/10 bg-slate-950/70 p-6 shadow-[0_18px_40px_rgba(2,6,23,0.32)] backdrop-blur-xl lg:col-span-7 reveal reveal-delay-1">
-          <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">Sobre mí</p>
-          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-white/90 sm:text-4xl">
-            Desarrollo software y administro los sistemas que lo sostienen.
-          </h2>
-          <p class="mt-4 text-base leading-8 text-white/84 sm:text-lg">
-            Soy Desarrollador Multiplataforma y estudiante de ASIR. Combino desarrollo de software con administración de sistemas y redes, lo que me permite diseñar soluciones completas: desde backend y frontend hasta despliegue, contenedores y automatización de procesos.
-          </p>
-          <p class="mt-4 max-w-2xl text-sm leading-7 text-muted sm:text-base">
-            Tengo experiencia con Python, JavaScript, React, Kotlin, Docker, Linux, Git, GitHub, bases de datos SQL y NoSQL, automatización con n8n e integración de IA en agentes conversacionales y voice AI. Durante mi Erasmus+ en Bulgaria lideré la implementación de un agente de IA para prospección comercial.
-          </p>
-          <div class="mt-5 flex flex-wrap gap-2">
-            <span class="badge">Full Stack</span>
-            <span class="badge">Linux</span>
-            <span class="badge">Redes</span>
-            <span class="badge">Docker</span>
-            <span class="badge">Automatización</span>
-            <span class="badge">IA</span>
-          </div>
-          <div class="mt-6 flex flex-wrap gap-3">
-            <a href="#proyectos" class="btn-primary px-5 py-2.5 text-sm">Ver proyectos</a>
-            <a href="#contacto" class="btn px-5 py-2.5 text-sm">Contacto</a>
-          </div>
-        </article>
-
-        <div class="grid gap-4 lg:col-span-5 reveal reveal-delay-2">
-          <article class="rounded-2xl border border-white/10 bg-elev/80 p-5 shadow-[0_18px_40px_rgba(2,6,23,0.28)] backdrop-blur-xl">
-            <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent2">Fortalezas</p>
-            <ul class="mt-4 space-y-3 text-sm text-muted">
-              <li class="flex items-start gap-3">
-                <span class="mt-1 text-accent-warm">▸</span>
-                Desarrollo Full Stack con visión de frontend, backend y despliegue.
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-1 text-accent-warm">▸</span>
-                Administración de sistemas Linux, redes y contenedores Docker.
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-1 text-accent-warm">▸</span>
-                Automatización de procesos con n8n e integración de IA.
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="mt-1 text-accent-warm">▸</span>
-                Bases de datos SQL y NoSQL para soluciones completas.
-              </li>
-            </ul>
-          </article>
-
-          <article class="rounded-2xl border border-white/10 bg-slate-950/60 p-5 shadow-[0_18px_40px_rgba(2,6,23,0.28)] backdrop-blur-xl">
-            <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">Soft skills</p>
-            <div class="mt-4 grid gap-3 text-sm text-muted">
-              <div class="flex items-center justify-between rounded-xl border border-white/5 bg-white/3 px-4 py-3">
-                <span>Liderazgo técnico</span>
-                <span class="font-mono text-accent2">IA</span>
-              </div>
-              <div class="flex items-center justify-between rounded-xl border border-white/5 bg-white/3 px-4 py-3">
-                <span>Resolución de problemas</span>
-                <span class="font-mono text-accent2">Sistemas</span>
-              </div>
-              <div class="flex items-center justify-between rounded-xl border border-white/5 bg-white/3 px-4 py-3">
-                <span>Coordinación técnica</span>
-                <span class="font-mono text-accent2">Equipo</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+    <ProfileStory />
 
     <ProjectShowcase projects={commits} />
 
     <SkillsBoard id="skills" />
 
-    <ContactSection {repoUrl} {linkedinUrl} {emailUrl} />
+    <ContactSection repoUrl={githubUrl} {linkedinUrl} {emailUrl} />
   </div>
 </Layout>

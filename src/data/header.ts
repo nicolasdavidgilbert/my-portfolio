@@ -2,6 +2,8 @@ export interface RepoHeaderProps {
   repoUrl: string;
   author?: string;
   role?: string;
+  linkedinUrl: string;
+  cvUrl?: string;
 }
 
 export interface RepoInfo {
@@ -11,7 +13,7 @@ export interface RepoInfo {
 
 export function getRepoInfo(repoUrl: string): RepoInfo {
   const path = repoUrl?.replace(/^https?:\/\/(www\.)?github\.com\//, '').replace(/\/$/, '') ?? '';
-  const [owner = 'nicolasdavidgilbert', repo = 'portfolio'] = path.split('/');
+  const [owner = 'nicolasdavidgilbert', repo = 'my-portfolio'] = path.split('/');
   return { owner, repo };
 }
 

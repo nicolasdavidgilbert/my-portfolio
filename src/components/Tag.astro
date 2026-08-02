@@ -12,7 +12,7 @@ const Element = href ? 'a' : 'span';
 <Element
   href={href}
   class:list={[
-    'chip inline-flex items-center gap-2 border-white/10 bg-slate-900/80 text-slate-100',
+    'inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-900/80 px-2.5 py-1 text-[11.5px] font-mono text-slate-100 transition-all duration-300 ease-in-out',
     href && 'transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/30 hover:text-white',
   ]}
   target={href ? '_blank' : undefined}

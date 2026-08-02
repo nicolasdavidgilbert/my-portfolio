@@ -1,99 +1,66 @@
 ---
 import type { RepoHeaderProps } from '../data/header';
-import { DEFAULT_AUTHOR, DEFAULT_ROLE, LOCATION, getRepoInfo } from '../data/header';
+import { DEFAULT_AUTHOR, LOCATION, getRepoInfo } from '../data/header';
 
-const { repoUrl, author = DEFAULT_AUTHOR, role = DEFAULT_ROLE } = Astro.props as RepoHeaderProps;
+const {
+  repoUrl,
+  linkedinUrl,
+  cvUrl,
+  author = DEFAULT_AUTHOR,
+} = Astro.props as RepoHeaderProps;
 const { owner, repo } = getRepoInfo(repoUrl);
 ---
 
-<section id="hero" class="reveal py-8 px-4 max-w-6xl mx-auto">
-  <div class="relative overflow-hidden rounded-3xl border border-white/5 bg-slate-900/40 shadow-2xl shadow-black/40 backdrop-blur-md">
-    <div aria-hidden="true" class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.008)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.008)_1px,transparent_1px)] bg-[size:48px_48px] opacity-40"></div>
-    <div aria-hidden="true" class="absolute -top-24 right-[-5rem] h-80 w-80 rounded-full bg-blue-600/10 blur-[120px]"></div>
-    <div aria-hidden="true" class="absolute -bottom-28 left-[-6rem] h-80 w-80 rounded-full bg-indigo-500/5 blur-[120px]"></div>
-
-    <div class="relative grid gap-8 px-6 py-10 sm:px-8 sm:py-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-12 lg:p-14">
-      <div class="flex flex-col justify-between gap-10">
-        <div class="space-y-6">
-          <div class="inline-flex items-center gap-2 rounded-full border border-blue-500/10 bg-blue-500/5 px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-blue-400">
-            <span class="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-            Disponible · {LOCATION}
-          </div>
-
-          <h1 class="tracking-tighter">
-            <span class="block text-4xl font-black text-white sm:text-6xl lg:text-6xl mb-2 drop-shadow-sm">
-              {author}
-            </span>
-            <span class="block text-xl font-bold bg-gradient-to-r from-blue-400 via-indigo-300 to-slate-400 bg-clip-text text-transparent sm:text-2xl lg:text-3xl">
-              {role}
-            </span>
-          </h1>
-
-          <p class="max-w-xl text-sm leading-relaxed text-slate-400 sm:text-base font-medium">
-            Desarrollador Multiplataforma (<strong class="text-slate-300">DAM</strong>) y estudiante de
-            <strong class="text-slate-300"> ASIR</strong>, especializado en desarrollo Full Stack, Linux,
-            redes y automatización con IA.
-          </p>
-        </div>
-
-        <div class="flex flex-wrap gap-3">
-          <a
-            href={repoUrl}
-            target="_blank"
-            rel="noreferrer"
-            class="rounded-xl bg-white px-5 py-3 text-xs font-bold uppercase tracking-wider text-slate-950 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-lg hover:shadow-blue-500/10"
-          >
-            GitHub
-          </a>
-          <a
-            href="#about"
-            class="rounded-xl border border-white/10 bg-white/[0.02] px-5 py-3 text-xs font-bold uppercase tracking-wider text-slate-300 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-blue-500/30 hover:bg-slate-900"
-          >
-            Sobre mí
-          </a>
-          <a
-            href="#proyectos"
-            class="rounded-xl border border-white/10 bg-white/[0.02] px-5 py-3 text-xs font-bold uppercase tracking-wider text-slate-300 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-blue-500/30 hover:bg-slate-900"
-          >
-            Proyectos
-          </a>
-        </div>
+<section id="hero" class="hero-editorial relative isolate scroll-mt-24 py-12 motion-safe:animate-[fade-in-up_0.65s_ease-out_both] motion-reduce:animate-none before:pointer-events-none before:absolute before:inset-y-0 before:left-1/2 before:-z-10 before:w-screen before:-translate-x-1/2 before:bg-[linear-gradient(180deg,var(--section-tone-clear)_0%,var(--section-tone-steel-blue)_12%,var(--section-tone-steel-blue)_88%,var(--section-tone-clear)_100%)] sm:py-16 lg:py-20" aria-labelledby="hero-title">
+  <div class="grid items-center gap-10 min-[900px]:grid-cols-[minmax(0,1.12fr)_minmax(22rem,0.88fr)] min-[900px]:gap-[clamp(2.5rem,6vw,5.5rem)]">
+    <div class="max-w-[44rem]">
+      <div class="inline-flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-[rgba(159,179,216,0.8)]">
+        <span class="h-2 w-2 rounded-full bg-accent-warm2 shadow-[0_0_12px_rgba(45,212,191,0.65)]" aria-hidden="true"></span>
+        Disponible para oportunidades
+        <i class="text-white/25 not-italic" aria-hidden="true">·</i>
+        {LOCATION}
       </div>
 
-      <div class="flex items-center">
-        <div class="w-full rounded-2xl border border-white/5 bg-slate-950/40 p-6 backdrop-blur-sm transition-all duration-500 ease-out hover:border-blue-500/20">
-          <div class="flex items-center justify-between gap-3 border-b border-white/5 pb-4 mb-4">
-            <div>
-              <p class="font-mono text-[10px] uppercase tracking-widest text-slate-500">Repositorio Base</p>
-              <p class="mt-1 text-xs font-mono font-bold text-slate-300">{owner}/{repo}</p>
-            </div>
-            <span class="rounded-full border border-blue-500/20 bg-blue-500/5 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-blue-400 font-semibold">
-              active
-            </span>
-          </div>
+      <h1 id="hero-title" class="mt-5 max-w-[13ch] text-[clamp(3rem,8vw,6.4rem)] font-[750] leading-[0.92] tracking-normal text-white">{author}</h1>
+      <p class="mt-6 flex flex-wrap gap-x-2 font-mono text-[0.7rem] font-semibold uppercase leading-[1.7] tracking-[0.08em] text-accent2 [&>span]:text-white/25">Desarrollo Full Stack <span>/</span> Sistemas <span>/</span> Automatización</p>
+      <p class="mt-5 max-w-[39rem] text-[clamp(1rem,1.7vw,1.15rem)] leading-[1.8] text-[rgba(230,240,255,0.76)]">
+        Construyo aplicaciones completas y administro la infraestructura que las mantiene en marcha.
+        Combino desarrollo, Linux, redes e integración de IA con una visión práctica de producto.
+      </p>
 
-          <dl class="space-y-4 text-xs">
-            <div class="rounded-xl border border-white/[0.03] bg-white/[0.01] px-4 py-3">
-              <dt class="font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1">Perfil</dt>
-              <dd class="font-semibold text-slate-300 leading-relaxed">
-                Desarrollo Full Stack, administración de sistemas, Linux y redes.
-              </dd>
-            </div>
-            <div class="rounded-xl border border-white/[0.03] bg-white/[0.01] px-4 py-3">
-              <dt class="font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1">Enfoque</dt>
-              <dd class="font-semibold text-slate-300 leading-relaxed">
-                Software, despliegue, contenedores y automatización de procesos.
-              </dd>
-            </div>
-            <div class="rounded-xl border border-white/[0.03] bg-white/[0.01] px-4 py-3">
-              <dt class="font-mono text-[10px] uppercase tracking-widest text-slate-500 mb-1">Interés profesional</dt>
-              <dd class="font-semibold text-slate-300 leading-relaxed">
-                Full Stack, automatización, DevOps junior e ingeniería de software.
-              </dd>
-            </div>
-          </dl>
-        </div>
+      <div class:list={["mt-8 flex flex-wrap gap-3", !cvUrl && "hero-actions-two"]}>
+        <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-accent-warm2 bg-accent-warm2 px-4 py-2.5 text-[0.76rem] font-bold text-[#06121d] transition-[transform,filter] duration-200 hover:-translate-y-0.5 hover:text-[#06121d] hover:brightness-110" href="#proyectos">Ver proyectos <span aria-hidden="true">↓</span></a>
+        {cvUrl && (
+          <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/[0.035] px-4 py-2.5 text-[0.76rem] font-bold text-white/85 transition-[transform,border-color,color,background-color] duration-200 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.06] hover:text-white" href={cvUrl} download>Descargar CV <span aria-hidden="true">↓</span></a>
+        )}
+        <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/[0.035] px-4 py-2.5 text-[0.76rem] font-bold text-white/85 transition-[transform,border-color,color,background-color] duration-200 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.06] hover:text-white" href={linkedinUrl} target="_blank" rel="noreferrer">LinkedIn <span class="external-link-icon" aria-hidden="true"></span></a>
       </div>
     </div>
+
+    <aside class="repo-feature relative overflow-hidden rounded-lg border border-white/[0.11] bg-[rgba(8,15,29,0.8)] p-5 shadow-[0_1.75rem_4rem_rgba(0,0,0,0.28)] backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-[linear-gradient(90deg,#60a5fa,#2dd4bf)] sm:p-6" aria-label="Repositorio de este portfolio">
+      <div class="flex items-center justify-between gap-4 border-b border-white/[0.08] pb-4 font-mono text-[0.58rem] uppercase tracking-[0.12em] text-muted">
+        <span class="inline-flex items-center gap-2"><i class="h-2 w-2 rounded-full bg-accent2 shadow-[0_0_10px_rgba(96,165,250,0.55)]" aria-hidden="true"></i> Repositorio del portfolio</span>
+        <span class="rounded border border-white/10 px-2 py-1 text-white/60">Público</span>
+      </div>
+
+      <a class="mt-5 flex min-w-0 items-center gap-1 font-mono text-[clamp(0.88rem,2.5vw,1.12rem)] text-muted hover:text-accent2" href={repoUrl} target="_blank" rel="noreferrer" aria-label="Abrir repositorio en GitHub">
+        <span class="truncate">{owner}/</span><strong class="truncate text-white">{repo}</strong><span class="external-link-icon ml-auto" aria-hidden="true"></span>
+      </a>
+
+      <p class="mt-4 text-[0.8rem] leading-[1.7] text-[rgba(159,179,216,0.72)]">El código fuente de esta experiencia: contenido estructurado, componentes Astro y una interfaz diseñada para contar cada proyecto.</p>
+
+      <dl class="mt-6 grid grid-cols-3 gap-2 border-y border-white/[0.08] py-4 text-center" aria-label="Detalles técnicos del repositorio">
+        <div class="grid min-w-0 gap-1 px-1"><dt class="font-mono text-[0.52rem] uppercase tracking-[0.08em] text-white/40">Framework</dt><dd class="truncate text-[0.72rem] font-semibold text-white/85">Astro</dd></div>
+        <div class="grid min-w-0 gap-1 border-x border-white/[0.08] px-1"><dt class="font-mono text-[0.52rem] uppercase tracking-[0.08em] text-white/40">Lenguaje</dt><dd class="truncate text-[0.72rem] font-semibold text-white/85">TypeScript</dd></div>
+        <div class="grid min-w-0 gap-1 px-1"><dt class="font-mono text-[0.52rem] uppercase tracking-[0.08em] text-white/40">Entrega</dt><dd class="truncate text-[0.72rem] font-semibold text-white/85">Static</dd></div>
+      </dl>
+
+      <div class="mt-5 flex items-center justify-center gap-2 font-mono text-[0.58rem] uppercase text-white/45" aria-label="Flujo de publicación"><span>Contenido</span><i class="h-px min-w-3 flex-1 bg-white/15" aria-hidden="true"></i><span>Build</span><i class="h-px min-w-3 flex-1 bg-white/15" aria-hidden="true"></i><span>Web</span></div>
+
+      <footer class="mt-5 flex items-center justify-between gap-4 border-t border-white/[0.08] pt-4 font-mono text-[0.62rem]">
+        <span class="inline-flex items-center gap-2 text-white/50"><i class="h-1.5 w-1.5 rounded-full bg-accent-warm2" aria-hidden="true"></i> main</span>
+        <a class="inline-flex items-center gap-2 text-accent2 hover:text-white" href={repoUrl} target="_blank" rel="noreferrer">Explorar código <span class="external-link-icon" aria-hidden="true"></span></a>
+      </footer>
+    </aside>
   </div>
 </section>

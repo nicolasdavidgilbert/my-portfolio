@@ -1,5 +1,4 @@
 import type { SkillCategory } from '../types';
-export { iconColors as techColors } from './iconColors';
 
 export const categories: SkillCategory[] = [
   {

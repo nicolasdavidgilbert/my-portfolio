@@ -1,10 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import RepoHeader from '../components/RepoHeader.astro';
-import CommitCard from '../components/CommitCard.astro';
 import { commits } from '../data/projects';
 import SkillsBoard from '../components/SkillsBoard.astro';
 import ContactSection from '../components/ContactSection.astro';
+import ProjectShowcase from '../components/ProjectShowcase.astro';
 import { SITE_DESCRIPTION, SITE_TITLE, portfolioStructuredData } from '../data/seo';
 
 const repoUrl = 'https://github.com/nicolasdavidgilbert';
@@ -89,27 +89,7 @@ const emailUrl = 'nicolasdavidgilbertgonzalez@gmail.com';
       </div>
     </section>
 
-    <section id="proyectos" class="scroll-mt-24 space-y-5">
-      <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between reveal">
-        <div>
-          <p class="font-mono text-xs uppercase tracking-[0.24em] text-accent-warm">Proyectos destacados</p>
-          <h2 class="mt-2 text-2xl font-semibold tracking-tight text-white/90 sm:text-3xl">
-            Cambios con contexto, no una lista plana.
-          </h2>
-        </div>
-        <p class="max-w-xl text-sm leading-7 text-muted">
-          Cada tarjeta representa una entrega real. La intención es que el proyecto se entienda en segundos y el detalle técnico siga ahí cuando hace falta.
-        </p>
-      </div>
-
-      <div class="project-stack">
-        {commits.map((commit) => (
-          <div class="project-stack-item">
-            <CommitCard {...commit} />
-          </div>
-        ))}
-      </div>
-    </section>
+    <ProjectShowcase projects={commits} />
 
     <SkillsBoard id="skills" />
 

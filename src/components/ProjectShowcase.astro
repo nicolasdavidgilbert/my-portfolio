@@ -1,0 +1,241 @@
+---
+import type { Commit } from '../types';
+import { commitHash } from '../../lib/functions';
+import { getIconColor } from '../data/iconColors';
+
+interface Props {
+  projects: Commit[];
+}
+
+const { projects } = Astro.props as Props;
+const cleanTitle = (title: string) => title.replace(/^[^:]+:\s*/, '');
+const projectName = (title: string) => cleanTitle(title).split('—')[0]?.trim() ?? cleanTitle(title);
+const projectDetail = (title: string) => cleanTitle(title).split('—').slice(1).join('—').trim();
+const pad = (value: number) => String(value).padStart(2, '0');
+---
+
+<section id="proyectos" class="project-showcase scroll-mt-24" data-project-explorer>
+  <header class="project-showcase-heading reveal">
+    <div>
+      <p class="project-kicker">Proyectos destacados</p>
+      <h2>Trabajo real, recorrido como una historia.</h2>
+    </div>
+    <div class="project-heading-aside">
+      <span class="project-scroll-mark" aria-hidden="true"><span></span></span>
+      <p>Desplázate para explorar cada entrega.</p>
+    </div>
+  </header>
+
+  <div class="project-progress" aria-hidden="true"><span data-project-progress></span></div>
+
+  <div class="project-journey">
+    <aside class="project-stage" aria-label="Vista del proyecto activo">
+      <div class="project-stage-chrome">
+        <div class="project-stage-topbar">
+          <div class="stage-lights" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p><span data-stage-number>{pad(1)}</span> / {pad(projects.length)}</p>
+          <span class="stage-status"><i></i> live preview</span>
+        </div>
+
+        <div class="project-stage-panels">
+          {projects.map((project, index) => (
+            <article
+              class:list={['project-stage-panel', index === 0 && 'is-active']}
+              data-project-panel
+              aria-hidden={index === 0 ? 'false' : 'true'}
+              style={`--project-accent: ${project.accent}`}
+            >
+              {project.visual === 'web' && project.image ? (
+                <div class="project-browser">
+                  <div class="project-browser-bar">
+                    <div class="browser-controls" aria-hidden="true"><span>‹</span><span>›</span><span>↻</span></div>
+                    <div class="browser-address"><span aria-hidden="true">⌁</span>{project.demo?.replace(/^https?:\/\//, '')}</div>
+                    <span aria-hidden="true">⋮</span>
+                  </div>
+                  <div class="project-browser-canvas">
+                    <img src={project.image} alt={`Captura de ${projectName(project.title)}`} loading={index === 0 ? 'eager' : 'lazy'} />
+                  </div>
+                </div>
+              ) : project.visual === 'terminal' ? (
+                <div class="project-terminal" aria-label="Simulación del proceso de backup">
+                  <div class="terminal-line dim">$ ./incremental.sh /home /mnt/backups</div>
+                  <div class="terminal-line"><span>→</span> Buscando último snapshot...</div>
+                  <div class="terminal-line"><span>✓</span> snapshot_2026-03-01.snar</div>
+                  <div class="terminal-tree">
+                    <p>backups/</p><p>├── FULL/2026-03-01.tar.gz</p><p>└── INC/</p>
+                    <p>&nbsp;&nbsp;&nbsp;├── 2026-03-02.tar.gz</p><p>&nbsp;&nbsp;&nbsp;└── 2026-03-03.tar.gz</p>
+                  </div>
+                  <div class="terminal-line success"><span>✓</span> Backup verificado · 1.8 GB</div>
+                  <span class="terminal-cursor" aria-hidden="true"></span>
+                </div>
+              ) : project.visual === 'network' ? (
+                <div class="network-visual" aria-label="Flujo de detección y recordatorios">
+                  <div class="network-node node-router"><span>01</span><strong>Red local</strong><small>arping activo</small></div>
+                  <div class="network-path path-one"><i></i></div>
+                  <div class="network-node node-engine"><span>02</span><strong>Python</strong><small>presencia detectada</small></div>
+                  <div class="network-path path-two"><i></i></div>
+                  <div class="network-node node-message"><span>03</span><strong>Telegram</strong><small>recordatorio enviado</small></div>
+                  <div class="network-pulse pulse-one"></div><div class="network-pulse pulse-two"></div>
+                </div>
+              ) : (
+                <div class="system-visual" aria-label="Arquitectura del sistema de llamadas">
+                  <div class="system-call">
+                    <span class="call-beacon"></span><small>HABITACIÓN 204</small><strong>Llamada activa</strong><time>00:18</time>
+                  </div>
+                  <div class="system-flow-line"></div>
+                  <div class="system-services">
+                    <div><span>01</span><strong>Flask API</strong><small>evento recibido</small></div>
+                    <div><span>02</span><strong>MariaDB</strong><small>registro creado</small></div>
+                    <div><span>03</span><strong>Pushover</strong><small>equipo avisado</small></div>
+                    <div><span>04</span><strong>Relé</strong><small>señal activa</small></div>
+                  </div>
+                </div>
+              )}
+
+              <div class="stage-project-label">
+                <span>{pad(index + 1)}</span>
+                <div><small>Proyecto activo</small><strong>{projectName(project.title)}</strong></div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <nav class="project-stage-nav" aria-label="Ir a un proyecto">
+        {projects.map((project, index) => (
+          <button
+            type="button"
+            class:list={['project-stage-dot', index === 0 && 'is-active']}
+            data-project-nav={index}
+            aria-label={`Ir a ${projectName(project.title)}`}
+            aria-current={index === 0 ? 'true' : undefined}
+            style={`--project-accent: ${project.accent}`}
+          >
+            <span>{pad(index + 1)}</span><strong>{projectName(project.title)}</strong>
+          </button>
+        ))}
+      </nav>
+    </aside>
+
+    <div class="project-story">
+      {projects.map((project, index) => (
+        <article
+          class:list={['project-chapter', index === 0 && 'is-active']}
+          data-project-step
+          data-index={index}
+          style={`--project-accent: ${project.accent}`}
+        >
+          <div class="project-mobile-visual" aria-hidden="true">
+            {project.image ? <img src={project.image} alt="" loading="lazy" /> : <span>{pad(index + 1)}</span>}
+          </div>
+
+          <div class="project-meta">
+            <span class="project-index">{pad(index + 1)}</span>
+            <span class="project-commit">commit {commitHash(project.date + '|' + project.title)}</span>
+            <time datetime={project.date}>{project.date}</time>
+          </div>
+
+          <h3>{projectName(project.title)}</h3>
+          {projectDetail(project.title) && <p class="project-subtitle">{projectDetail(project.title)}</p>}
+          <p class="project-summary">{project.summary}</p>
+
+          <ul class="project-highlights">
+            {project.highlights.map((highlight) => <li>{highlight}</li>)}
+          </ul>
+
+          <div class="project-tech" aria-label="Tecnologías">
+            {project.chips.map((chip) => {
+              const slug = chip.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+              return (
+                <span style={`--chip-color: ${getIconColor(chip)}`}>
+                  <img src={`/icons/${slug}.svg`} alt="" loading="lazy" />{chip}
+                </span>
+              );
+            })}
+          </div>
+
+          <div class="project-actions">
+            {project.demo && <a href={project.demo} target="_blank" rel="noreferrer">Ver proyecto <span aria-hidden="true">↗</span></a>}
+            {project.repo && (
+              <a class="project-repo-link" href={project.repo} target="_blank" rel="noreferrer">
+                <img src="/icons/github.svg" alt="" /> Repositorio <span aria-hidden="true">↗</span>
+              </a>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const initProjectExplorer = () => {
+    const explorer = document.querySelector<HTMLElement>('[data-project-explorer]');
+    if (!explorer || explorer.dataset.ready === 'true') return;
+    explorer.dataset.ready = 'true';
+
+    const steps = [...explorer.querySelectorAll<HTMLElement>('[data-project-step]')];
+    const panels = [...explorer.querySelectorAll<HTMLElement>('[data-project-panel]')];
+    const navButtons = [...explorer.querySelectorAll<HTMLButtonElement>('[data-project-nav]')];
+    const number = explorer.querySelector<HTMLElement>('[data-stage-number]');
+    const progress = explorer.querySelector<HTMLElement>('[data-project-progress]');
+    let activeIndex = 0;
+    let ticking = false;
+
+    const setActive = (nextIndex: number) => {
+      if (nextIndex === activeIndex && panels[nextIndex]?.classList.contains('is-active')) return;
+      activeIndex = nextIndex;
+      steps.forEach((step, index) => step.classList.toggle('is-active', index === nextIndex));
+      panels.forEach((panel, index) => {
+        const isActive = index === nextIndex;
+        panel.classList.toggle('is-active', isActive);
+        panel.setAttribute('aria-hidden', String(!isActive));
+      });
+      navButtons.forEach((button, index) => {
+        const isActive = index === nextIndex;
+        button.classList.toggle('is-active', isActive);
+        if (isActive) button.setAttribute('aria-current', 'true');
+        else button.removeAttribute('aria-current');
+      });
+      if (number) number.textContent = String(nextIndex + 1).padStart(2, '0');
+    };
+
+    const update = () => {
+      ticking = false;
+      const focusLine = window.innerHeight * 0.5;
+      let closestIndex = 0;
+      let closestDistance = Number.POSITIVE_INFINITY;
+      steps.forEach((step, index) => {
+        const rect = step.getBoundingClientRect();
+        const distance = Math.abs(rect.top + rect.height / 2 - focusLine);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+      setActive(closestIndex);
+      if (progress) {
+        const rect = explorer.getBoundingClientRect();
+        const travel = Math.max(1, rect.height - window.innerHeight);
+        const value = Math.min(1, Math.max(0, -rect.top / travel));
+        progress.style.transform = `scaleX(${value})`;
+      }
+    };
+
+    const requestUpdate = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    };
+
+    navButtons.forEach((button, index) => {
+      button.addEventListener('click', () => steps[index]?.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+    });
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    update();
+  };
+
+  initProjectExplorer();
+  document.addEventListener('astro:page-load', initProjectExplorer);
+</script>

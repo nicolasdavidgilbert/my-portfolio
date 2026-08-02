@@ -2,31 +2,16 @@ import type { Commit } from '../types';
 
 export const commits: Commit[] = [
   {
-    date: '2026-06-09',
-    title: 'feat: Cuestionarios Online — app pública con generación desde PDF, validación y moderación',
-    chips: ['Astro', 'React', 'Neon', 'Vercel', 'Groq'],
-    repo: 'https://github.com/nicolasdavidgilbert/cuestionario',
-    demo: 'https://cuestionario.online',
-    diff: [
-      { type: 'ctx', text: '@@' },
-      { type: 'add', text: 'feat: aplicación web de cuestionarios interactivos con Astro + React' },
-      { type: 'add', text: 'feat: catálogo por grado, curso y unidad' },
-      { type: 'add', text: 'feat: creación de cuestionarios desde PDF, JSON o texto pegado' },
-      { type: 'add', text: 'feat: generación de preguntas con IA usando Groq' },
-      { type: 'add', text: 'feat: persistencia en Neon Postgres con tabla user_quizzes' },
-      { type: 'add', text: 'feat: validación centralizada de preguntas, opciones y respuestas correctas' },
-      { type: 'add', text: 'feat: sistema de reportes, auditoría y soft delete' },
-      { type: 'add', text: 'feat: deduplicación de cuestionarios mediante hash' },
-      { type: 'add', text: 'feat: exportación admin de cuestionarios, reportes y auditoría' },
-      { type: 'add', text: 'chore: CI con tests y build automático' },
-    ]
-  },
-  {
     date: '2026-06-04',
     title: 'feat: Cesta++ — listas de compra colaborativas en tiempo real',
     chips: ['Next.js', 'React', 'TypeScript', 'InsForge', 'Tailwind'],
     repo: 'https://github.com/nicolasdavidgilbert/cestapp',
     demo: 'https://cestapp.insforge.site',
+    summary: 'Listas de compra compartidas que sincronizan cambios al instante y mantienen productos, precios e invitaciones en un único flujo.',
+    highlights: ['Colaboración Realtime', 'Acceso por invitación', 'Historial de precios'],
+    image: '/projects/cestapp.webp',
+    visual: 'web',
+    accent: '#60a5fa',
     diff: [
       { type: 'ctx', text: '@@' },
       { type: 'add', text: 'feat: app de gestión de listas de compra colaborativas' },
@@ -42,10 +27,39 @@ export const commits: Commit[] = [
     ]
   },
   {
+    date: '2026-06-09',
+    title: 'feat: Cuestionarios Online — app pública con generación desde PDF, validación y moderación',
+    chips: ['Astro', 'React', 'Neon', 'Vercel', 'Groq'],
+    repo: 'https://github.com/nicolasdavidgilbert/cuestionario',
+    demo: 'https://cuestionario.online',
+    summary: 'Plataforma educativa pública que transforma PDFs y texto en cuestionarios listos para practicar, compartir y moderar.',
+    highlights: ['Generación asistida por IA', 'Validación y deduplicación', 'Moderación con auditoría'],
+    image: '/projects/cuestionarios.webp',
+    visual: 'web',
+    accent: '#2dd4bf',
+    diff: [
+      { type: 'ctx', text: '@@' },
+      { type: 'add', text: 'feat: aplicación web de cuestionarios interactivos con Astro + React' },
+      { type: 'add', text: 'feat: catálogo por grado, curso y unidad' },
+      { type: 'add', text: 'feat: creación de cuestionarios desde PDF, JSON o texto pegado' },
+      { type: 'add', text: 'feat: generación de preguntas con IA usando Groq' },
+      { type: 'add', text: 'feat: persistencia en Neon Postgres con tabla user_quizzes' },
+      { type: 'add', text: 'feat: validación centralizada de preguntas, opciones y respuestas correctas' },
+      { type: 'add', text: 'feat: sistema de reportes, auditoría y soft delete' },
+      { type: 'add', text: 'feat: deduplicación de cuestionarios mediante hash' },
+      { type: 'add', text: 'feat: exportación admin de cuestionarios, reportes y auditoría' },
+      { type: 'add', text: 'chore: CI con tests y build automático' },
+    ]
+  },
+  {
     date: '2026-03-01',
     title: 'chore: Backup Scripts — copias completas e incrementales en Linux',
     chips: ['Bash', 'Linux', 'tar'],
     repo: 'https://github.com/nicolasdavidgilbert/backups',
+    summary: 'Herramientas Bash para automatizar copias completas e incrementales con snapshots, estructura por fechas y cancelación segura.',
+    highlights: ['Backups FULL e INC', 'Snapshots con .snar', 'Recuperación y limpieza segura'],
+    visual: 'terminal',
+    accent: '#f59e0b',
     diff: [
       { type: 'ctx', text: '@@' },
       { type: 'add', text: 'feat: script inicial.sh para backup completo comprimido en .tar.gz' },
@@ -63,6 +77,10 @@ export const commits: Commit[] = [
     title: 'feat: RecordatoriosBot — bot de Telegram activado por presencia en red local',
     chips: ['Python', 'Telegram'],
     repo: 'https://github.com/nicolasdavidgilbert/RecordatoriosBot',
+    summary: 'Un bot que detecta cuándo alguien vuelve a casa y entrega sus recordatorios pendientes justo en ese momento.',
+    highlights: ['Detección local con arping', 'Avisos contextuales', 'Gestión desde Telegram'],
+    visual: 'network',
+    accent: '#38bdf8',
     diff: [
       { type: 'ctx', text: '@@' },
       { type: 'add', text: 'feat: bot de Telegram para enviar recordatorios pendientes' },
@@ -80,6 +98,10 @@ export const commits: Commit[] = [
     title: 'chore: Sistema Llamadas Paciente–Enfermero — servidor Flask, panel web y control de relés',
     chips: ['Flask', 'MariaDB', 'Docker', 'Nginx', 'Pushover'],
     repo: 'https://github.com/nicolasdavidgilbert/Sistema-de-llamadas-Paciente-Enfermero',
+    summary: 'Sistema completo de llamadas hospitalarias que conecta panel web, notificaciones, persistencia y control físico de relés.',
+    highlights: ['Flujo de atención trazable', 'Despliegue multi-contenedor', 'Integración hardware y push'],
+    visual: 'system',
+    accent: '#fb7185',
     diff: [
       { type: 'ctx', text: '@@' },
       { type: 'add', text: 'chore: docker-compose para entorno con servicios del sistema' },

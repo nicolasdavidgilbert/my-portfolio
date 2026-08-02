@@ -6,10 +6,10 @@ const { id } = Astro.props;
 const revealDelayClasses = ['[animation-delay:80ms]', '[animation-delay:160ms]', '[animation-delay:240ms]'];
 ---
 
-<section id={id ?? 'skills'} class="skills-board relative isolate scroll-mt-24 py-16 before:pointer-events-none before:absolute before:inset-y-0 before:left-1/2 before:-z-10 before:w-screen before:-translate-x-1/2 before:bg-[linear-gradient(180deg,var(--section-tone-clear)_0%,var(--section-tone-blue)_10%,var(--section-tone-blue)_90%,var(--section-tone-clear)_100%)]">
-  <div class="mb-12 max-w-2xl motion-safe:animate-[fade-in-up_0.65s_ease-out_both] motion-reduce:animate-none pl-4 sm:pl-0">
-    <p class="font-mono text-sm uppercase tracking-widest text-accent-warm/80 mb-2">Ecosistema</p>
-    <h2 class="text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 sm:text-4xl">
+<section id={id ?? 'skills'} class="skills-board relative scroll-mt-24 py-16 lg:py-20" aria-labelledby="skills-title">
+  <div class="mb-10 border-b border-white/[0.08] pb-8 pl-4 motion-safe:animate-[fade-in-up_0.65s_ease-out_both] motion-reduce:animate-none sm:pl-0">
+    <p class="mb-3 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-accent2">Ecosistema</p>
+    <h2 id="skills-title" class="max-w-[17ch] text-[clamp(2rem,4.5vw,3.35rem)] font-[700] leading-[1.06] tracking-normal text-white/95">
       Tecnologías en movimiento.
     </h2>
   </div>
@@ -20,7 +20,7 @@ const revealDelayClasses = ['[animation-delay:80ms]', '[animation-delay:160ms]',
       
       return (
         <div class:list={["motion-safe:animate-[fade-in-up_0.65s_ease-out_both] motion-reduce:animate-none marquee-parent", revealDelayClasses[index]]}>
-          <h3 class="text-xs font-semibold tracking-wider text-slate-500 uppercase mb-4 pl-4">
+          <h3 class="mb-4 pl-4 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-white/50">
             {category.title}
           </h3>
 
@@ -39,9 +39,9 @@ const revealDelayClasses = ['[animation-delay:80ms]', '[animation-delay:160ms]',
                     href={item.href}
                     target={item.href ? "_blank" : undefined}
                     rel={item.href ? "noreferrer" : undefined}
-                    class:list={["group relative flex items-center gap-3 rounded-full border border-white/10 bg-slate-900/60 px-5 py-3 backdrop-blur-md transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[var(--item-color)] hover:bg-slate-900", getIconColorClass(item.label)]}
+                    class:list={["group relative flex items-center gap-3 rounded-full border border-white/[0.09] bg-[rgba(8,15,29,0.68)] px-5 py-3 backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-[var(--item-color)] hover:bg-[rgba(12,23,42,0.86)]", getIconColorClass(item.label)]}
                   >
-                    <div class="absolute inset-0 rounded-full bg-[var(--item-color)] opacity-0 blur-xl transition-all duration-500 group-hover:opacity-20" />
+                    <div class="absolute inset-0 rounded-full bg-[var(--item-color)] opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-10" />
                     
                     <span class="relative flex h-6 w-6 items-center justify-center transition-transform duration-300 group-hover:scale-110">
                       {isImg ? (
@@ -72,9 +72,9 @@ const revealDelayClasses = ['[animation-delay:80ms]', '[animation-delay:160ms]',
                     href={item.href}
                     target={item.href ? "_blank" : undefined}
                     rel={item.href ? "noreferrer" : undefined}
-                    class:list={["group relative flex items-center gap-3 rounded-full border border-white/10 bg-slate-900/60 px-5 py-3 backdrop-blur-md transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[var(--item-color)] hover:bg-slate-900", getIconColorClass(item.label)]}
+                    class:list={["group relative flex items-center gap-3 rounded-full border border-white/[0.09] bg-[rgba(8,15,29,0.68)] px-5 py-3 backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-[var(--item-color)] hover:bg-[rgba(12,23,42,0.86)]", getIconColorClass(item.label)]}
                   >
-                    <div class="absolute inset-0 rounded-full bg-[var(--item-color)] opacity-0 blur-xl transition-all duration-500 group-hover:opacity-20" />
+                    <div class="absolute inset-0 rounded-full bg-[var(--item-color)] opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-10" />
                     
                     <span class="relative flex h-6 w-6 items-center justify-center transition-transform duration-300 group-hover:scale-110">
                       {isImg ? (

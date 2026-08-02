@@ -21,15 +21,12 @@
 
 :root {
   color-scheme: dark;
-  --section-tone-blue: rgba(10, 18, 34, 0.78);
-  --section-tone-steel-blue: rgba(12, 23, 42, 0.76);
-  --section-tone-clear: rgba(7, 12, 24, 0);
 }
 
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
-  @apply outline-2 outline-offset-2 outline-accent-warm;
+  @apply outline-2 outline-offset-2 outline-accent2;
 }
 
 @media (prefers-reduced-motion: no-preference) {

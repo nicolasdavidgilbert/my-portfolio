@@ -22,23 +22,23 @@ const projectAccentClasses: Record<string, string> = {
 const projectAccentClass = (accent: string) => projectAccentClasses[accent] ?? '[--project-accent:#60a5fa]';
 ---
 
-<section id="proyectos" class="project-showcase relative isolate scroll-mt-24 pt-12 pb-16 before:pointer-events-none before:absolute before:inset-y-0 before:left-1/2 before:-z-10 before:w-screen before:-translate-x-1/2 before:bg-[linear-gradient(180deg,var(--section-tone-clear)_0%,var(--section-tone-steel-blue)_5%,var(--section-tone-steel-blue)_95%,var(--section-tone-clear)_100%)] min-[900px]:pt-20 min-[900px]:pb-24" data-project-explorer>
+<section id="proyectos" class="project-showcase relative scroll-mt-24 py-16 lg:py-20" data-project-explorer>
   <header class="project-showcase-heading grid items-end gap-6 border-b border-white/10 pb-7 min-[900px]:grid-cols-[minmax(0,1fr)_13rem] min-[900px]:pb-10 motion-safe:animate-[fade-in-up_0.65s_ease-out_both] motion-reduce:animate-none">
     <div>
-      <p class="project-kicker font-mono text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-accent-warm2">Proyectos destacados</p>
-      <h2 class="mt-[0.65rem] max-w-[48rem] text-[clamp(2rem,5vw,3.8rem)] font-[650] leading-[1.04] tracking-normal text-[rgba(255,255,255,0.94)] max-[520px]:text-[2rem]">Trabajo real, recorrido como una historia.</h2>
+      <p class="project-kicker font-mono text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-accent2">Proyectos destacados</p>
+      <h2 class="mt-[0.65rem] max-w-[20ch] text-[clamp(2rem,4.5vw,3.35rem)] font-[700] leading-[1.04] tracking-normal text-[rgba(255,255,255,0.94)] max-[520px]:text-[2rem]">Trabajo real, recorrido como una historia.</h2>
     </div>
     <div class="project-heading-aside flex items-center gap-[0.85rem] text-[0.78rem] leading-[1.45] text-muted min-[900px]:justify-self-end max-[520px]:hidden">
-      <span class="grid h-9 min-w-9 place-items-center rounded-full border border-accent-warm2/30 font-mono text-[0.62rem] text-accent-warm2">{pad(projects.length)}</span>
+      <span class="grid h-9 min-w-9 place-items-center rounded-full border border-accent-warm2/30 font-mono text-[0.62rem] text-accent2">{pad(projects.length)}</span>
       <p>Entregas seleccionadas.</p>
     </div>
   </header>
 
-  <div class="project-progress relative z-[35] h-0.5 w-full overflow-hidden bg-white/[0.06]" aria-hidden="true"><span class="block h-full w-full origin-left bg-accent-warm2 [transform:scaleX(0)] [will-change:transform]" data-project-progress></span></div>
+  <div class="project-progress relative z-[35] h-0.5 w-full overflow-hidden bg-white/[0.06]" aria-hidden="true"><span class="block h-full w-full origin-left bg-accent2 [transform:scaleX(0)] [will-change:transform]" data-project-progress></span></div>
 
   <div class="project-journey relative min-[900px]:grid min-[900px]:grid-cols-[minmax(0,1.58fr)_minmax(19rem,0.82fr)] min-[900px]:items-stretch min-[900px]:gap-x-[clamp(2rem,5vw,4.5rem)] min-[900px]:gap-y-4">
     <aside class="project-stage hidden min-[900px]:grid min-[900px]:min-h-[min(43rem,calc(100vh-9rem))] min-[900px]:grid-rows-[minmax(0,1fr)_auto] min-[900px]:pt-8" aria-label="Vista del proyecto activo">
-      <div class="project-stage-chrome relative grid min-h-0 grid-rows-[3.25rem_minmax(0,1fr)] overflow-hidden rounded-lg border border-white/[0.12] bg-[#080d18] shadow-[0_2rem_5rem_rgba(0,0,0,0.3)]">
+      <div class="project-stage-chrome relative grid min-h-0 grid-rows-[3.25rem_minmax(0,1fr)] overflow-hidden rounded-lg border border-white/[0.1] bg-[rgba(8,15,29,0.76)] shadow-[0_1.5rem_3.5rem_rgba(0,0,0,0.24)]">
         <div class="project-stage-topbar relative z-10 grid h-[3.25rem] grid-cols-[1fr_auto_1fr] items-center border-b border-white/[0.08] bg-[#0d1422] px-4 font-mono text-[0.61rem] uppercase text-[rgba(159,179,216,0.72)]">
           <div class="stage-lights flex gap-[0.4rem] [&>span]:h-[0.48rem] [&>span]:w-[0.48rem] [&>span]:rounded-full [&>span]:bg-[#3b4558] [&>span:first-child]:bg-[#fb7185] [&>span:nth-child(2)]:bg-[#fbbf24] [&>span:last-child]:bg-[#34d399]" aria-hidden="true"><span></span><span></span><span></span></div>
           <p><span data-stage-number>{pad(1)}</span> / {pad(projects.length)}</p>
@@ -100,7 +100,7 @@ const projectAccentClass = (accent: string) => projectAccentClasses[accent] ?? '
                 </div>
               )}
 
-              <div class="stage-project-label absolute inset-x-4 bottom-4 z-[4] flex items-center gap-[0.8rem] rounded-md border border-white/[0.12] bg-[rgba(5,9,17,0.9)] px-[0.8rem] py-[0.7rem] shadow-[0_0.8rem_2rem_rgba(0,0,0,0.35)] [&>span]:font-mono [&>span]:text-[0.7rem] [&>span]:text-[var(--project-accent)] [&>div]:grid [&>div]:min-w-0 [&>div]:leading-[1.25] [&_small]:text-[0.52rem] [&_small]:uppercase [&_small]:text-[rgba(159,179,216,0.58)] [&_strong]:overflow-hidden [&_strong]:truncate [&_strong]:text-[0.78rem] [&_strong]:text-white">
+              <div class="stage-project-label absolute inset-x-4 bottom-4 z-[4] flex items-center gap-[0.8rem] rounded-md border border-white/[0.12] bg-[rgba(5,9,17,0.9)] px-[0.8rem] py-[0.7rem] shadow-[0_0.8rem_2rem_rgba(0,0,0,0.35)] [&>span]:font-mono [&>span]:text-[0.7rem] [&>span]:text-[var(--project-accent)] [&>div]:grid [&>div]:min-w-0 [&>div]:leading-[1.25] [&_small]:text-[0.52rem] [&_small]:uppercase [&_small]:text-[rgba(159,179,216,0.7)] [&_strong]:overflow-hidden [&_strong]:truncate [&_strong]:text-[0.78rem] [&_strong]:text-white">
                 <span>{pad(index + 1)}</span>
                 <div><small>Proyecto activo</small><strong>{projectName(project.title)}</strong></div>
               </div>
@@ -114,7 +114,7 @@ const projectAccentClass = (accent: string) => projectAccentClasses[accent] ?? '
 
       <nav class="project-stage-nav mt-[0.8rem] grid grid-cols-5 gap-[0.45rem]" aria-label="Ir a un proyecto">
         {projects.map((project, index) => (
-          <button type="button" class:list={["project-stage-dot relative grid h-[3.1rem] min-w-0 content-center overflow-hidden rounded border border-white/[0.08] bg-[rgba(15,23,42,0.5)] px-[0.55rem] py-[0.35rem] text-left text-[rgba(159,179,216,0.6)] transition-[border-color,background-color,color] duration-[250ms] before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:origin-left before:scale-x-0 before:bg-[var(--project-accent)] before:transition-transform before:duration-[350ms] hover:border-[color-mix(in_srgb,var(--project-accent)_45%,transparent)] hover:bg-[#101827] hover:text-white [&.is-active]:border-[color-mix(in_srgb,var(--project-accent)_45%,transparent)] [&.is-active]:bg-[#101827] [&.is-active]:text-white [&.is-active]:before:scale-x-100 [&>span]:font-mono [&>span]:text-[0.58rem] [&>strong]:overflow-hidden [&>strong]:truncate [&>strong]:text-[0.58rem] motion-reduce:before:transition-none", projectAccentClass(project.accent), index === 0 && "is-active"]} data-project-nav={index} aria-label={`Ir a ${projectName(project.title)}`} aria-current={index === 0 ? "true" : undefined}>
+          <button type="button" class:list={["project-stage-dot relative grid h-[3.1rem] min-w-0 content-center overflow-hidden rounded border border-white/[0.08] bg-[rgba(8,15,29,0.58)] px-[0.55rem] py-[0.35rem] text-left text-[rgba(159,179,216,0.72)] transition-[border-color,background-color,color] duration-[250ms] before:absolute before:inset-x-0 before:bottom-0 before:h-0.5 before:origin-left before:scale-x-0 before:bg-[var(--project-accent)] before:transition-transform before:duration-[350ms] hover:border-[color-mix(in_srgb,var(--project-accent)_45%,transparent)] hover:bg-[#101827] hover:text-white [&.is-active]:border-[color-mix(in_srgb,var(--project-accent)_45%,transparent)] [&.is-active]:bg-[#101827] [&.is-active]:text-white [&.is-active]:before:scale-x-100 [&>span]:font-mono [&>span]:text-[0.58rem] [&>strong]:overflow-hidden [&>strong]:truncate [&>strong]:text-[0.58rem] motion-reduce:before:transition-none", projectAccentClass(project.accent), index === 0 && "is-active"]} data-project-nav={index} aria-label={`Ir a ${projectName(project.title)}`} aria-current={index === 0 ? "true" : undefined}>
             <span>{pad(index + 1)}</span><strong>{projectName(project.title)}</strong>
           </button>
         ))}
@@ -140,7 +140,7 @@ const projectAccentClass = (accent: string) => projectAccentClasses[accent] ?? '
             {project.image ? <img class="h-full w-full object-cover object-top" src={project.image} alt="" loading="lazy" /> : <span class="font-mono text-[clamp(3rem,18vw,6rem)] font-bold text-[var(--project-accent)]">{pad(index + 1)}</span>}
           </div>
 
-          <div class="project-meta flex flex-wrap items-center gap-x-[0.8rem] gap-y-[0.55rem] font-mono text-[0.62rem] uppercase tracking-[0.12em] text-[rgba(159,179,216,0.65)] max-[520px]:gap-[0.45rem]">
+          <div class="project-meta flex flex-wrap items-center gap-x-[0.8rem] gap-y-[0.55rem] font-mono text-[0.62rem] uppercase tracking-[0.12em] text-[rgba(159,179,216,0.72)] max-[520px]:gap-[0.45rem]">
             <span class="project-index grid h-[2.1rem] w-[2.1rem] place-items-center rounded-full border border-[color-mix(in_srgb,var(--project-accent)_45%,transparent)] font-bold text-[var(--project-accent)]">{pad(index + 1)}</span>
             <span class="project-commit text-white/50 max-[520px]:w-[calc(100%-3rem)]">commit {commitHash(project.date + '|' + project.title)}</span>
             <time class="max-[520px]:ml-12" datetime={project.date}>{project.date}</time>
@@ -158,7 +158,7 @@ const projectAccentClass = (accent: string) => projectAccentClasses[accent] ?? '
             {project.chips.map((chip) => {
               const slug = chip.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
               return (
-                <span class:list={["inline-flex min-h-8 items-center gap-[0.45rem] rounded border border-white/[0.09] bg-[rgba(15,23,42,0.65)] px-[0.65rem] py-[0.35rem] font-mono text-[0.62rem] text-[rgba(230,240,255,0.82)]", getIconColorClass(chip)]}>
+                <span class:list={["inline-flex min-h-8 items-center gap-[0.45rem] rounded border border-white/[0.09] bg-[rgba(8,15,29,0.7)] px-[0.65rem] py-[0.35rem] font-mono text-[0.62rem] text-[rgba(230,240,255,0.82)]", getIconColorClass(chip)]}>
                   <img class="h-[0.95rem] w-[0.95rem] object-contain" src={`/icons/${slug}.svg`} alt="" loading="lazy" />{chip}
                 </span>
               );

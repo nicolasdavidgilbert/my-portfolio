@@ -11,7 +11,7 @@ const {
 const { owner, repo } = getRepoInfo(repoUrl);
 ---
 
-<section id="hero" class="hero-editorial relative isolate scroll-mt-24 py-12 motion-safe:animate-[fade-in-up_0.65s_ease-out_both] motion-reduce:animate-none before:pointer-events-none before:absolute before:inset-y-0 before:left-1/2 before:-z-10 before:w-screen before:-translate-x-1/2 before:bg-[linear-gradient(180deg,var(--section-tone-clear)_0%,var(--section-tone-steel-blue)_12%,var(--section-tone-steel-blue)_88%,var(--section-tone-clear)_100%)] sm:py-16 lg:py-20" aria-labelledby="hero-title">
+<section id="hero" class="hero-editorial relative scroll-mt-24 py-16 motion-safe:animate-[fade-in-up_0.65s_ease-out_both] motion-reduce:animate-none sm:py-20 lg:py-24" aria-labelledby="hero-title">
   <div class="grid items-center gap-10 min-[900px]:grid-cols-[minmax(0,1.12fr)_minmax(22rem,0.88fr)] min-[900px]:gap-[clamp(2.5rem,6vw,5.5rem)]">
     <div class="max-w-[44rem]">
       <div class="inline-flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-[rgba(159,179,216,0.8)]">
@@ -29,7 +29,7 @@ const { owner, repo } = getRepoInfo(repoUrl);
       </p>
 
       <div class:list={["mt-8 flex flex-wrap gap-3", !cvUrl && "hero-actions-two"]}>
-        <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-accent-warm2 bg-accent-warm2 px-4 py-2.5 text-[0.76rem] font-bold text-[#06121d] transition-[transform,filter] duration-200 hover:-translate-y-0.5 hover:text-[#06121d] hover:brightness-110" href="#proyectos">Ver proyectos <span aria-hidden="true">↓</span></a>
+        <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-accent2 bg-accent2 px-4 py-2.5 text-[0.76rem] font-bold text-[#06121d] transition-[transform,filter] duration-200 hover:-translate-y-0.5 hover:text-[#06121d] hover:brightness-110" href="#proyectos">Ver proyectos <span aria-hidden="true">↓</span></a>
         {cvUrl && (
           <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/[0.035] px-4 py-2.5 text-[0.76rem] font-bold text-white/85 transition-[transform,border-color,color,background-color] duration-200 hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.06] hover:text-white" href={cvUrl} download>Descargar CV <span aria-hidden="true">↓</span></a>
         )}
@@ -37,7 +37,7 @@ const { owner, repo } = getRepoInfo(repoUrl);
       </div>
     </div>
 
-    <aside class="repo-feature relative overflow-hidden rounded-lg border border-white/[0.11] bg-[rgba(8,15,29,0.8)] p-5 shadow-[0_1.75rem_4rem_rgba(0,0,0,0.28)] backdrop-blur-md before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-[linear-gradient(90deg,#60a5fa,#2dd4bf)] sm:p-6" aria-label="Repositorio de este portfolio">
+    <aside class="repo-feature relative overflow-hidden rounded-lg border border-white/[0.1] bg-[rgba(8,15,29,0.72)] p-5 shadow-[0_1.25rem_3rem_rgba(0,0,0,0.22)] backdrop-blur-sm before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-accent2 sm:p-6" aria-label="Repositorio de este portfolio">
       <div class="flex items-center justify-between gap-4 border-b border-white/[0.08] pb-4 font-mono text-[0.58rem] uppercase tracking-[0.12em] text-muted">
         <span class="inline-flex items-center gap-2"><i class="h-2 w-2 rounded-full bg-accent2 shadow-[0_0_10px_rgba(96,165,250,0.55)]" aria-hidden="true"></i> Repositorio del portfolio</span>
         <span class="rounded border border-white/10 px-2 py-1 text-white/60">Público</span>
@@ -50,12 +50,12 @@ const { owner, repo } = getRepoInfo(repoUrl);
       <p class="mt-4 text-[0.8rem] leading-[1.7] text-[rgba(159,179,216,0.72)]">El código fuente de esta experiencia: contenido estructurado, componentes Astro y una interfaz diseñada para contar cada proyecto.</p>
 
       <dl class="mt-6 grid grid-cols-3 gap-2 border-y border-white/[0.08] py-4 text-center" aria-label="Detalles técnicos del repositorio">
-        <div class="grid min-w-0 gap-1 px-1"><dt class="font-mono text-[0.52rem] uppercase tracking-[0.08em] text-white/40">Framework</dt><dd class="truncate text-[0.72rem] font-semibold text-white/85">Astro</dd></div>
-        <div class="grid min-w-0 gap-1 border-x border-white/[0.08] px-1"><dt class="font-mono text-[0.52rem] uppercase tracking-[0.08em] text-white/40">Lenguaje</dt><dd class="truncate text-[0.72rem] font-semibold text-white/85">TypeScript</dd></div>
-        <div class="grid min-w-0 gap-1 px-1"><dt class="font-mono text-[0.52rem] uppercase tracking-[0.08em] text-white/40">Entrega</dt><dd class="truncate text-[0.72rem] font-semibold text-white/85">Static</dd></div>
+        <div class="grid min-w-0 gap-1 px-1"><dt class="font-mono text-[0.52rem] uppercase tracking-[0.08em] text-white/55">Framework</dt><dd class="truncate text-[0.72rem] font-semibold text-white/85">Astro</dd></div>
+        <div class="grid min-w-0 gap-1 border-x border-white/[0.08] px-1"><dt class="font-mono text-[0.52rem] uppercase tracking-[0.08em] text-white/55">Lenguaje</dt><dd class="truncate text-[0.72rem] font-semibold text-white/85">TypeScript</dd></div>
+        <div class="grid min-w-0 gap-1 px-1"><dt class="font-mono text-[0.52rem] uppercase tracking-[0.08em] text-white/55">Entrega</dt><dd class="truncate text-[0.72rem] font-semibold text-white/85">Static</dd></div>
       </dl>
 
-      <div class="mt-5 flex items-center justify-center gap-2 font-mono text-[0.58rem] uppercase text-white/45" aria-label="Flujo de publicación"><span>Contenido</span><i class="h-px min-w-3 flex-1 bg-white/15" aria-hidden="true"></i><span>Build</span><i class="h-px min-w-3 flex-1 bg-white/15" aria-hidden="true"></i><span>Web</span></div>
+      <div class="mt-5 flex items-center justify-center gap-2 font-mono text-[0.58rem] uppercase text-white/55" aria-label="Flujo de publicación"><span>Contenido</span><i class="h-px min-w-3 flex-1 bg-white/15" aria-hidden="true"></i><span>Build</span><i class="h-px min-w-3 flex-1 bg-white/15" aria-hidden="true"></i><span>Web</span></div>
 
       <footer class="mt-5 flex items-center justify-between gap-4 border-t border-white/[0.08] pt-4 font-mono text-[0.62rem]">
         <span class="inline-flex items-center gap-2 text-white/50"><i class="h-1.5 w-1.5 rounded-full bg-accent-warm2" aria-hidden="true"></i> main</span>

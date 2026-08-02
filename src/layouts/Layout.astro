@@ -83,16 +83,16 @@ const jsonLd = JSON.stringify(structuredData);
     />
     <script is:inline type="application/ld+json" set:html={jsonLd}></script>
   </head>
-  <body class="relative min-h-screen overflow-x-hidden bg-bg bg-[linear-gradient(180deg,rgba(2,6,23,0.1),rgba(2,6,23,0.55)),radial-gradient(1100px_600px_at_90%_-15%,rgba(20,184,166,0.1),transparent_60%),radial-gradient(900px_500px_at_-10%_10%,rgba(59,130,246,0.12),transparent_55%)] font-sans leading-7 text-text antialiased">
+  <body class="relative min-h-screen overflow-x-hidden bg-bg bg-[linear-gradient(180deg,rgba(2,6,23,0.08)_0%,rgba(7,12,24,0)_32rem,rgba(2,6,23,0.22)_100%)] font-sans leading-7 text-text antialiased">
     <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
-      <div class="absolute inset-x-0 top-0 h-[24rem] bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_60%)]"></div>
-      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:56px_56px] opacity-[0.12]"></div>
+      <div class="absolute inset-x-0 top-0 h-[34rem] bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.11),transparent_62%)]"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.026)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.026)_1px,transparent_1px)] bg-[size:56px_56px] opacity-35"></div>
     </div>
 
     <div class="relative flex min-h-screen flex-col">
       <a
         href="#content"
-        class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:border focus:border-border focus:bg-elev focus:px-4 focus:py-2"
+        class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:border focus:border-border focus:bg-elev focus:px-4 focus:py-2"
       >
         Saltar al contenido
       </a>
@@ -100,7 +100,7 @@ const jsonLd = JSON.stringify(structuredData);
       <header class="site-header sticky top-0 z-40 isolate border-b border-transparent bg-transparent shadow-none backdrop-blur-xl before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:-bottom-9 before:-z-10 before:bg-[linear-gradient(180deg,rgba(7,12,24,0.92)_0%,rgba(7,12,24,0.62)_54%,rgba(7,12,24,0)_100%)]">
         <div class="site-header-inner relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
           <a href="#top" class="group inline-flex items-center gap-3">
-            <span class="site-brand-icon grid h-11 w-11 place-items-center rounded-2xl border border-white/10 bg-slate-950/80 shadow-[inset_0_0_24px_rgba(59,130,246,0.18)] transition-transform duration-300 group-hover:-translate-y-0.5">
+            <span class="site-brand-icon grid h-11 w-11 place-items-center rounded-lg border border-white/10 bg-slate-950/80 shadow-[inset_0_0_24px_rgba(59,130,246,0.18)] transition-transform duration-300 group-hover:-translate-y-0.5">
               <img src="/favicon.svg" alt="Nico" class="h-6 w-6" />
             </span>
             <span class="site-brand-copy hidden flex-col leading-none sm:flex">
@@ -110,37 +110,37 @@ const jsonLd = JSON.stringify(structuredData);
           </a>
 
           <nav class="site-nav hidden items-center gap-1 md:flex" aria-label="Navegación principal">
-            <a class="site-nav-link relative inline-flex min-h-10 items-center rounded-md px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[rgba(230,240,255,0.66)] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-[#2dd4bf] after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#about" data-nav-link>Perfil</a>
-            <a class="site-nav-link relative inline-flex min-h-10 items-center rounded-md px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[rgba(230,240,255,0.66)] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-[#2dd4bf] after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#proyectos" data-nav-link>Proyectos</a>
-            <a class="site-nav-link relative inline-flex min-h-10 items-center rounded-md px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[rgba(230,240,255,0.66)] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-[#2dd4bf] after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#skills" data-nav-link>Skills</a>
-            <a class="site-nav-link site-nav-contact relative ml-1 inline-flex min-h-10 items-center rounded-md border border-[rgba(45,212,191,0.35)] px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[#8de8da] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-[#2dd4bf] after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#contacto" data-nav-link>Contacto</a>
+            <a class="site-nav-link relative inline-flex min-h-10 items-center rounded-md px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[rgba(230,240,255,0.66)] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-accent2 after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#about" data-nav-link>Perfil</a>
+            <a class="site-nav-link relative inline-flex min-h-10 items-center rounded-md px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[rgba(230,240,255,0.66)] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-accent2 after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#proyectos" data-nav-link>Proyectos</a>
+            <a class="site-nav-link relative inline-flex min-h-10 items-center rounded-md px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[rgba(230,240,255,0.66)] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-accent2 after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#skills" data-nav-link>Skills</a>
+            <a class="site-nav-link site-nav-contact relative ml-1 inline-flex min-h-10 items-center rounded-md border border-accent2/35 px-3 py-[0.45rem] text-[0.72rem] font-semibold text-accent2 transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-accent2 after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#contacto" data-nav-link>Contacto</a>
           </nav>
 
           <details class="group relative md:hidden" data-site-menu>
-            <summary class="site-menu-toggle grid h-[2.65rem] w-[2.65rem] cursor-pointer list-none place-items-center rounded-md border border-[rgba(255,255,255,0.12)] bg-[rgba(8,14,27,0.86)] text-[rgba(255,255,255,0.86)] transition-[border-color,background-color] duration-200 hover:border-[rgba(45,212,191,0.55)] hover:bg-[#101827] [&::-webkit-details-marker]:hidden">
+            <summary class="site-menu-toggle grid h-[2.65rem] w-[2.65rem] cursor-pointer list-none place-items-center rounded-md border border-[rgba(255,255,255,0.12)] bg-[rgba(8,14,27,0.86)] text-[rgba(255,255,255,0.86)] transition-[border-color,background-color] duration-200 hover:border-accent2/50 hover:bg-[#101827] [&::-webkit-details-marker]:hidden">
               <span class="sr-only">Abrir navegación</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-open:rotate-90" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </summary>
 
-            <nav class="site-mobile-nav absolute right-0 top-[calc(100%+0.6rem)] grid w-[min(17rem,calc(100vw-2rem))] overflow-hidden rounded-lg border border-[rgba(255,255,255,0.12)] bg-[rgba(7,12,24,0.97)] shadow-[0_1.5rem_4rem_rgba(0,0,0,0.45)] backdrop-blur-[18px]" aria-label="Navegación móvil">
-              <a class="flex min-h-[3.25rem] items-center justify-between border-b border-white/[0.07] px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(45,212,191,0.06)] hover:text-white [&.is-active]:bg-[rgba(45,212,191,0.06)] [&.is-active]:text-white" href="#about" data-nav-link>Perfil <span class="font-mono text-[0.58rem] text-[#2dd4bf]" aria-hidden="true">01</span></a>
-              <a class="flex min-h-[3.25rem] items-center justify-between border-b border-white/[0.07] px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(45,212,191,0.06)] hover:text-white [&.is-active]:bg-[rgba(45,212,191,0.06)] [&.is-active]:text-white" href="#proyectos" data-nav-link>Proyectos <span class="font-mono text-[0.58rem] text-[#2dd4bf]" aria-hidden="true">02</span></a>
-              <a class="flex min-h-[3.25rem] items-center justify-between border-b border-white/[0.07] px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(45,212,191,0.06)] hover:text-white [&.is-active]:bg-[rgba(45,212,191,0.06)] [&.is-active]:text-white" href="#skills" data-nav-link>Skills <span class="font-mono text-[0.58rem] text-[#2dd4bf]" aria-hidden="true">03</span></a>
-              <a class="flex min-h-[3.25rem] items-center justify-between px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(45,212,191,0.06)] hover:text-white [&.is-active]:bg-[rgba(45,212,191,0.06)] [&.is-active]:text-white" href="#contacto" data-nav-link>Contacto <span class="font-mono text-[0.58rem] text-[#2dd4bf]" aria-hidden="true">04</span></a>
+            <nav class="site-mobile-nav absolute right-0 top-[calc(100%+0.6rem)] grid w-[min(17rem,calc(100vw-2rem))] overflow-hidden rounded-lg border border-[rgba(255,255,255,0.12)] bg-[rgba(7,12,24,0.97)] shadow-[0_1.25rem_3rem_rgba(0,0,0,0.32)] backdrop-blur-[18px]" aria-label="Navegación móvil">
+              <a class="flex min-h-[3.25rem] items-center justify-between border-b border-white/[0.07] px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(96,165,250,0.07)] hover:text-white [&.is-active]:bg-[rgba(96,165,250,0.07)] [&.is-active]:text-white" href="#about" data-nav-link>Perfil <span class="font-mono text-[0.58rem] text-accent2" aria-hidden="true">01</span></a>
+              <a class="flex min-h-[3.25rem] items-center justify-between border-b border-white/[0.07] px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(96,165,250,0.07)] hover:text-white [&.is-active]:bg-[rgba(96,165,250,0.07)] [&.is-active]:text-white" href="#proyectos" data-nav-link>Proyectos <span class="font-mono text-[0.58rem] text-accent2" aria-hidden="true">02</span></a>
+              <a class="flex min-h-[3.25rem] items-center justify-between border-b border-white/[0.07] px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(96,165,250,0.07)] hover:text-white [&.is-active]:bg-[rgba(96,165,250,0.07)] [&.is-active]:text-white" href="#skills" data-nav-link>Skills <span class="font-mono text-[0.58rem] text-accent2" aria-hidden="true">03</span></a>
+              <a class="flex min-h-[3.25rem] items-center justify-between px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(96,165,250,0.07)] hover:text-white [&.is-active]:bg-[rgba(96,165,250,0.07)] [&.is-active]:text-white" href="#contacto" data-nav-link>Contacto <span class="font-mono text-[0.58rem] text-accent2" aria-hidden="true">04</span></a>
             </nav>
           </details>
         </div>
       </header>
 
       <main id="content" class="relative z-10 flex-1">
-        <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
           <slot />
         </div>
       </main>
 
-      <footer class="relative z-10 border-t border-white/5 bg-slate-950/40">
+      <footer class="relative z-10 border-t border-white/[0.06] bg-transparent">
         <div class="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-5 text-sm text-muted sm:px-6 lg:px-8 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Nicolás David Gilbert González</p>
           <p class="font-mono text-[11px] uppercase tracking-[0.24em] text-muted/80">Astro + Tailwind CSS</p>

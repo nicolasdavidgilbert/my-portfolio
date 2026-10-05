@@ -1,0 +1,105 @@
+---
+import type { Technology } from '../../types/technology';
+
+interface Props {
+  tech: Technology;
+  categoryLabel: string;
+  projects: readonly { readonly id: string; readonly name: string }[];
+}
+
+const { tech, categoryLabel, projects } = Astro.props;
+---
+
+<article class="core-card spotlight" style={`--brand:${tech.color}`}>
+  <div class="flex items-center gap-4">
+    <span class="core-icon" aria-hidden="true">
+      {tech.icon ? (
+        <img src={tech.icon} alt="" width="32" height="32" loading="lazy" decoding="async" class:list={[tech.invert && 'icon-invert']} />
+      ) : (
+        <span class="font-mono font-bold text-[var(--brand)]">{tech.label.slice(0, 2)}</span>
+      )}
+    </span>
+    <div>
+      <h3 class="text-xl font-semibold text-fg">{tech.label}</h3>
+      <p class="label mt-0.5 text-fg-subtle">{categoryLabel}</p>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <p class="font-mono text-xs text-fg-muted">
+      {projects.length === 1 ? 'Usado en 1 proyecto' : `Usado en ${projects.length} proyectos`}
+    </p>
+    <ul class="mt-2 flex flex-wrap gap-2">
+      {projects.map((project) => (
+        <li>
+          <a href={`#${project.id}`} class="core-project">
+            <span aria-hidden="true">→</span> {project.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</article>
+
+<style>
+  .core-card {
+    /* The shared cursor spotlight takes the brand colour of this technology. */
+    --color-accent: var(--brand);
+    height: 100%;
+    padding: 1.4rem;
+    border-radius: 0.9rem;
+    border: 1px solid var(--color-border);
+    background:
+      radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--brand) 8%, transparent), transparent 60%),
+      var(--color-surface);
+    transition:
+      border-color 0.3s,
+      box-shadow 0.4s,
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .core-card:hover,
+  .core-card:focus-within {
+    border-color: color-mix(in srgb, var(--brand) 55%, transparent);
+    box-shadow: 0 20px 44px -26px color-mix(in srgb, var(--brand) 70%, transparent);
+    transform: translateY(-3px);
+  }
+
+  .core-icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 0.8rem;
+    border: 1px solid color-mix(in srgb, var(--brand) 30%, transparent);
+    background: color-mix(in srgb, var(--brand) 12%, var(--color-bg));
+  }
+
+  .core-icon img {
+    width: 1.9rem;
+    height: 1.9rem;
+    object-fit: contain;
+  }
+
+  .core-project {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 2rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border-strong);
+    font-size: 0.85rem;
+    color: var(--color-fg);
+    transition: border-color 0.2s;
+  }
+
+  .core-project span {
+    color: var(--brand);
+  }
+
+  .core-project:hover {
+    border-color: var(--brand);
+  }
+</style>

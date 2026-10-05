@@ -1,19 +1,59 @@
 ---
 import Section from '../common/Section.astro';
-import TechMarquee from '../ui/TechMarquee.astro';
-import { technologyRows } from '../../data/skills';
+import CoreTechCard from '../stack/CoreTechCard.astro';
+import { technologies, techCategories } from '../../data/skills';
+import { projects } from '../../data/projects';
+
+const projectNames = new Map(projects.map((project) => [project.id, project.shortName ?? project.name]));
+const categoryLabel = new Map(techCategories.map((category) => [category.id, category.label]));
+
+const core = technologies.filter((tech) => tech.core);
+const projectsFor = (ids: readonly string[]) =>
+  ids.flatMap((id) => {
+    const name = projectNames.get(id);
+    return name ? [{ id, name }] : [];
+  });
+
+// Everything else, grouped by area in the order the categories are defined.
+const others = techCategories
+  .map((category) => ({
+    label: category.label,
+    items: technologies.filter((tech) => !tech.core && tech.category === category.id).map((tech) => tech.label),
+  }))
+  .filter((group) => group.items.length > 0);
 ---
 
 <Section id="stack" index="04" label="Stack" title="Tecnologías con las que trabajo">
   <p slot="intro" class="mt-5 text-lg leading-relaxed text-fg-muted">
-    Agrupadas por área, empezando por las que más definen mi perfil. Pasa el ratón para pausar.
+    Las que más definen mi perfil, con los proyectos donde puedes comprobarlas, y el resto agrupado por área.
   </p>
 
-  <div slot="bleed" class="grid gap-8">
-    {technologyRows.map((row, index) => (
-      <div data-reveal="left" style={`--reveal-delay:${index * 120}ms`}>
-        <TechMarquee row={row} reverse={index % 2 === 1} duration={60 + index * 8} />
-      </div>
+  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {core.map((tech, index) => (
+      <li data-reveal style={`--reveal-delay:${index * 70}ms`}>
+        <CoreTechCard tech={tech} categoryLabel={categoryLabel.get(tech.category) ?? ''} projects={projectsFor(tech.projects)} />
+      </li>
     ))}
+  </ul>
+
+  <div class="mt-14" data-reveal>
+    <h3 class="label text-fg-subtle">También trabajo con</h3>
+    <dl class="mt-4 grid border-t border-border md:grid-cols-2 md:gap-x-12">
+      {others.map((group) => (
+        <div class="grid gap-1 border-b border-border py-4 sm:grid-cols-[10rem_1fr] sm:gap-4">
+          <dt class="label pt-0.5 text-fg-subtle">{group.label}</dt>
+          <dd class="text-fg">
+            <ul class="flex flex-wrap gap-x-2 gap-y-1">
+              {group.items.map((item, index) => (
+                <li>
+                  {item}
+                  {index < group.items.length - 1 && <span class="ml-2 text-fg-subtle" aria-hidden="true">·</span>}
+                </li>
+              ))}
+            </ul>
+          </dd>
+        </div>
+      ))}
+    </dl>
   </div>
 </Section>

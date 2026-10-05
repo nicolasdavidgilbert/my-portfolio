@@ -44,6 +44,8 @@ export type TerminalLine =
 export interface Project {
   readonly id: string;
   readonly name: string;
+  /** Compact name for tight spots such as technology tiles. */
+  readonly shortName?: string;
   readonly kind: ProjectKind;
   readonly category: string;
   readonly tagline: string;

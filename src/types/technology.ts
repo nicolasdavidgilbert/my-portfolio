@@ -8,9 +8,14 @@ export interface TechItem {
   readonly invert?: boolean;
 }
 
-export interface TechnologyRow {
-  readonly title: string;
-  readonly items: readonly TechItem[];
+export type TechCategory = 'systems' | 'devops' | 'languages' | 'frontend' | 'backend' | 'services' | 'tools';
+
+export interface Technology extends TechItem {
+  readonly category: TechCategory;
+  /** Technologies that define the profile get a larger tile. */
+  readonly core?: boolean;
+  /** Ids of the project cards where this technology is used. */
+  readonly projects: readonly string[];
 }
 
 export interface Capability {

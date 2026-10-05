@@ -159,6 +159,7 @@ export const projects: readonly Project[] = [
     id: 'sistema-llamadas',
     accent: '#fb7185',
     name: 'Sistema de llamadas Paciente–Enfermero',
+    shortName: 'Sistema de llamadas',
     kind: 'systems',
     category: 'Full stack + infraestructura',
     tagline: 'Servidor Flask, panel web y control de relés.',

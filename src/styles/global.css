@@ -150,12 +150,6 @@
   }
 }
 
-@keyframes marquee {
-  to {
-    transform: translateX(calc(-100% - var(--marquee-gap)));
-  }
-}
-
 @keyframes packet-x {
   from {
     left: 0;

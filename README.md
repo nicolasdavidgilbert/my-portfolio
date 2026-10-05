@@ -24,8 +24,9 @@ src/
     profile/   Timeline (trayectoria dentro de Perfil)
     projects/  ProjectCarousel, ProjectSlide, ProjectMetadata, ProjectVisual, TuiVisual
     sections/  Hero, About, Projects, Systems, Stack, Contact
+    stack/     CoreTechCard (tecnologías principales)
     systems/   SystemStatus, TerminalWindow, TerminalCommand, ArchitectureDiagram, CapabilityMap
-    ui/        ButtonLink, Icon, TechBadge, TechChip, TechMarquee, StatusDot
+    ui/        ButtonLink, Icon, TechBadge, StatusDot
   data/        site, socialLinks, projects, capabilities, experience, skills, seo
   scripts/     motion (reveals, tilt, parallax, sección activa)
   types/       project, architecture, experience, technology, site

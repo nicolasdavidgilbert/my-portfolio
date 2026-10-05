@@ -1,7 +1,10 @@
 ---
+import T from '../i18n/T.astro';
+import type { TranslationKey } from '../../i18n/types';
+
 interface Props {
   index: number;
-  category: string;
+  category: TranslationKey;
   date: string;
 }
 
@@ -11,7 +14,7 @@ const number = String(index + 1).padStart(2, '0');
 
 <p class="label flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
   <span class="text-[var(--accent,var(--color-accent))]">
-    <span class="text-fg-subtle">{number} /</span> {category}
+    <span class="text-fg-subtle">{number} /</span> <T k={category} />
   </span>
   <time datetime={date} class="text-fg-subtle">
     {date}

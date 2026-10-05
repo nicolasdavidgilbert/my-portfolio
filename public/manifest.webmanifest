@@ -1,13 +1,13 @@
 {
   "name": "Nicolás Gilbert — Portfolio",
   "short_name": "Nicolás Gilbert",
-  "description": "Desarrollador de software y administrador de sistemas: full stack, Linux, redes, Docker, automatización e IA.",
+  "description": "Software developer and systems administrator: full stack, Linux, networking, Docker, automation and AI.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#0e1013",
   "theme_color": "#0e1013",
-  "lang": "es",
+  "lang": "en",
   "icons": [
     {
       "src": "/favicon.svg",

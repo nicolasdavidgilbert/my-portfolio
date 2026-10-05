@@ -1,13 +1,14 @@
 import type { TechCategory, Technology } from '../types/technology';
 
-export const techCategories: readonly { readonly id: TechCategory; readonly label: string }[] = [
-  { id: 'systems', label: 'Systems' },
-  { id: 'devops', label: 'DevOps' },
-  { id: 'languages', label: 'Lenguajes' },
-  { id: 'frontend', label: 'Frontend' },
-  { id: 'backend', label: 'Backend y datos' },
-  { id: 'services', label: 'Servicios e IA' },
-  { id: 'tools', label: 'Herramientas' },
+/** Display order of the areas; labels live under `stack.categories.<id>`. */
+export const techCategories: readonly TechCategory[] = [
+  'systems',
+  'devops',
+  'languages',
+  'frontend',
+  'backend',
+  'services',
+  'tools',
 ];
 
 /**
@@ -68,7 +69,13 @@ export const technologies: readonly Technology[] = [
   },
 
   { label: 'Nginx', icon: '/icons/nginx.svg', color: '#009639', category: 'systems', projects: ['sistema-llamadas'] },
-  { label: 'Redes', color: '#6fb7ff', category: 'systems', projects: ['recordatorios-bot'] },
+  {
+    label: 'Networking',
+    labelKey: 'stack.tech.networking',
+    color: '#6fb7ff',
+    category: 'systems',
+    projects: ['recordatorios-bot'],
+  },
   {
     label: 'tar',
     icon: '/icons/tar.svg',

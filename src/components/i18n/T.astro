@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes, HTMLTag } from 'astro/types';
+import { t } from '../../i18n/translate';
+import type { TranslationKey, TranslationVars } from '../../i18n/types';
+
+type Props = Omit<HTMLAttributes<'span'>, 'children'> & {
+  /** Translation key; the element's whole text is replaced when the locale changes. */
+  k: TranslationKey;
+  /** Element to render (default `span`). It must not contain other elements. */
+  as?: HTMLTag;
+  vars?: TranslationVars;
+};
+
+const { k, as: Tag = 'span', vars, ...attributes } = Astro.props;
+---
+
+<Tag data-i18n={k} data-i18n-vars={vars ? JSON.stringify(vars) : undefined} {...attributes}>
+  {t(k, vars)}
+</Tag>

@@ -1,8 +1,11 @@
 ---
 import type { Project } from '../../types/project';
+import T from '../i18n/T.astro';
 import ProjectSlide from './ProjectSlide.astro';
 import { readableAccent } from '../../utils/color';
 import { themeColors } from '../../data/site';
+import { projectKey } from '../../i18n/project-keys';
+import { i18nAttrs } from '../../i18n/translate';
 
 interface Props {
   projects: readonly Project[];
@@ -28,8 +31,7 @@ const firstAccentText = readableAccent(firstAccent);
     class="track"
     data-track
     role="region"
-    aria-roledescription="carrusel"
-    aria-label="Proyectos seleccionados"
+    {...i18nAttrs({ 'aria-roledescription': 'carousel.roleCarousel', 'aria-label': 'carousel.regionLabel' })}
     tabindex="0"
   >
     {projects.map((project, index) => (
@@ -47,7 +49,13 @@ const firstAccentText = readableAccent(firstAccent);
       </p>
 
       <div class="flex items-center gap-2">
-        <button type="button" class="carousel-btn" data-toggle aria-label="Pausar el pase automático" hidden>
+        <button
+          type="button"
+          class="carousel-btn"
+          data-toggle
+          {...i18nAttrs({ 'aria-label': 'carousel.pause' })}
+          hidden
+        >
           <span class="icon-pause" aria-hidden="true">
             ❚❚
           </span>
@@ -55,16 +63,21 @@ const firstAccentText = readableAccent(firstAccent);
             ▶
           </span>
         </button>
-        <button type="button" class="carousel-btn" data-prev aria-label="Proyecto anterior">
+        <button type="button" class="carousel-btn" data-prev {...i18nAttrs({ 'aria-label': 'carousel.previous' })}>
           <span aria-hidden="true">←</span>
         </button>
-        <button type="button" class="carousel-btn carousel-btn--primary" data-next aria-label="Proyecto siguiente">
+        <button
+          type="button"
+          class="carousel-btn carousel-btn--primary"
+          data-next
+          {...i18nAttrs({ 'aria-label': 'carousel.next' })}
+        >
           <span aria-hidden="true">→</span>
         </button>
       </div>
     </div>
 
-    <nav aria-label="Ir a un proyecto">
+    <nav {...i18nAttrs({ 'aria-label': 'carousel.tabsLabel' })}>
       <ul class="tabs">
         {projects.map((project, index) => (
           <li>
@@ -79,7 +92,9 @@ const firstAccentText = readableAccent(firstAccent);
                 <i aria-hidden="true"></i>
                 {pad(index + 1)} · {project.kind}
               </span>
-              <span class="tab-name">{project.name}</span>
+              <span class="tab-name">
+                <T k={projectKey(project.id, 'name')} />
+              </span>
               <span class="tab-bar" aria-hidden="true">
                 <span data-bar></span>
               </span>

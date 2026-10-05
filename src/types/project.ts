@@ -1,4 +1,9 @@
+import type { en } from '../i18n/en';
+import type { TranslationKey } from '../i18n/types';
 import type { ArchitectureDiagram } from './architecture';
+
+/** Project ids; each one has its texts under `projects.<id>` in the dictionaries. */
+export type ProjectId = keyof typeof en.projects;
 
 /** Software projects and systems projects alternate visually in the list. */
 export type ProjectKind = 'software' | 'systems';
@@ -6,7 +11,7 @@ export type ProjectKind = 'software' | 'systems';
 export interface ScreenshotVisual {
   readonly type: 'screenshot';
   readonly src: string;
-  readonly alt: string;
+  readonly alt: TranslationKey;
   readonly width: number;
   readonly height: number;
 }
@@ -22,7 +27,10 @@ export interface DiagramVisual {
   readonly diagram: ArchitectureDiagram;
 }
 
-/** A curses-style interface mock built from the strings the app really renders. */
+/**
+ * A curses-style interface mock built from the strings the app really renders.
+ * Not translated: it reproduces the real (Spanish) UI of the tool.
+ */
 export interface TuiVisual {
   readonly type: 'tui';
   readonly title: string;
@@ -36,21 +44,15 @@ export interface TuiVisual {
 
 export type ProjectVisual = ScreenshotVisual | TerminalVisual | DiagramVisual | TuiVisual;
 
-export type TerminalLine =
-  | { readonly kind: 'command'; readonly text: string }
-  | { readonly kind: 'output'; readonly text: string }
-  | { readonly kind: 'comment'; readonly text: string };
+/** A terminal line is either translatable (`text`) or literal code shown as is (`raw`). */
+export type TerminalLine = { readonly kind: 'command' | 'output' | 'comment' } & (
+  { readonly text: TranslationKey } | { readonly raw: string }
+);
 
+/** Structural data only; name, category, tagline, problem and highlights live in the dictionaries. */
 export interface Project {
-  readonly id: string;
-  readonly name: string;
-  /** Compact name for tight spots such as technology tiles. */
-  readonly shortName?: string;
+  readonly id: ProjectId;
   readonly kind: ProjectKind;
-  readonly category: string;
-  readonly tagline: string;
-  readonly problem: string;
-  readonly highlights: readonly string[];
   readonly stack: readonly string[];
   /** YYYY-MM */
   readonly date: string;

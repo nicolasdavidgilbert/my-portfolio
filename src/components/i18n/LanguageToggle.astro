@@ -1,0 +1,64 @@
+---
+import { defaultLocale, locales } from '../../i18n/config';
+import { i18nAttrs } from '../../i18n/translate';
+
+/** Each option is named in its own language so it is recognisable whatever the current one is. */
+const nativeNames = { en: 'English', es: 'Español' } as const;
+---
+
+<!-- Hidden until the runtime enables it: without JavaScript there is no way to switch. -->
+<div class="lang-toggle" role="group" {...i18nAttrs({ 'aria-label': 'a11y.language' })} data-locale-toggle hidden>
+  {locales.map((locale) => (
+    <button
+      type="button"
+      class="lang-option"
+      data-locale-option={locale}
+      lang={locale}
+      aria-pressed={locale === defaultLocale ? 'true' : 'false'}
+    >
+      <span aria-hidden="true">{locale.toUpperCase()}</span>
+      <span class="sr-only">{nativeNames[locale]}</span>
+    </button>
+  ))}
+</div>
+
+<style>
+  .lang-toggle {
+    position: relative;
+    display: inline-grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    padding: 0.2rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-surface) 80%, transparent);
+  }
+
+  .lang-toggle[hidden] {
+    display: none;
+  }
+
+  .lang-option {
+    min-width: 2.6rem;
+    min-height: 2.25rem;
+    padding-inline: 0.6rem;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--color-fg-subtle);
+    transition:
+      color 0.2s,
+      background-color 0.25s;
+  }
+
+  .lang-option:hover {
+    color: var(--color-fg);
+  }
+
+  .lang-option[aria-pressed='true'] {
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
+  }
+</style>

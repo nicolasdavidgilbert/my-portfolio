@@ -1,11 +1,13 @@
 ---
+import T from '../i18n/T.astro';
 import { sectionIndex } from '../../data/site';
+import type { TranslationKey } from '../../i18n/types';
 
 interface Props {
   id: string;
-  label: string;
-  /** Plain heading text; use the `title` slot instead for rich markup. */
-  title?: string;
+  label: TranslationKey;
+  /** Heading text; use the `title` slot instead for mixed styling. */
+  title?: TranslationKey;
   /** `display` is the large closing-headline size used by Contacto. */
   size?: 'default' | 'display';
   /** `split` puts the header and content on the left and the `aside` slot on the right. */
@@ -43,7 +45,7 @@ const isSplit = layout === 'split';
         <p class="label flex items-center gap-3 text-accent">
           <span class="h-px w-8 bg-accent" aria-hidden="true"></span>
           <span>
-            <span class="text-fg-subtle">{index} /</span> {label}
+            <span class="text-fg-subtle">{index} /</span> <T k={label} />
           </span>
         </p>
         <h2
@@ -53,7 +55,7 @@ const isSplit = layout === 'split';
             size === 'display' ? 'mt-5 text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.02]' : 'mt-4 text-3xl sm:text-5xl',
           ]}
         >
-          {Astro.slots.has('title') ? <slot name="title" /> : title}
+          {Astro.slots.has('title') ? <slot name="title" /> : title && <T k={title} />}
         </h2>
         <slot name="intro" />
       </header>

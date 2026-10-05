@@ -77,6 +77,11 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Set before first paint when a saved language must be applied (see Layout). */
+  .lang-pending body {
+    visibility: hidden;
+  }
+
   ::selection {
     background-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
     color: var(--color-fg);

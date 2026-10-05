@@ -1,3 +1,5 @@
+import type { Locale } from '../i18n/config';
+
 /** Layer of the hero 3D stack being inspected, or null when none is. */
 export interface InfraLayerDetail {
   readonly id: string;
@@ -11,8 +13,14 @@ export interface ProjectOpenDetail {
   readonly id: string;
 }
 
+/** The page text has just been switched to another locale. */
+export interface LocaleChangeDetail {
+  readonly locale: Locale;
+}
+
 /** Custom DOM events shared between components, by name. */
 export interface AppEvents {
   'infra:layer': InfraLayerDetail | null;
   'project:open': ProjectOpenDetail;
+  'locale:change': LocaleChangeDetail;
 }

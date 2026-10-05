@@ -2,22 +2,22 @@ import type { ExperienceEntry } from '../types/experience';
 
 export const experience: readonly ExperienceEntry[] = [
   {
-    period: 'En curso',
-    title: 'Administración de Sistemas Informáticos en Red',
-    organization: 'ASIR',
-    description: 'Administración Linux, redes, contenedores, servicios y despliegues reproducibles.',
+    period: 'journey.asir.period',
+    title: 'journey.asir.title',
+    organization: 'journey.asir.organization',
+    description: 'journey.asir.description',
     current: true,
   },
   {
-    period: 'Experiencia internacional',
-    title: 'Erasmus+ en Bulgaria',
-    organization: 'Liderazgo técnico con IA',
-    description: 'Lideré la implementación de un agente de IA para prospección comercial.',
+    period: 'journey.erasmus.period',
+    title: 'journey.erasmus.title',
+    organization: 'journey.erasmus.organization',
+    description: 'journey.erasmus.description',
   },
   {
-    period: 'Titulación',
-    title: 'Desarrollo de Aplicaciones Multiplataforma',
-    organization: 'DAM',
-    description: 'Base en aplicaciones, bases de datos, interfaces y arquitectura de software.',
+    period: 'journey.dam.period',
+    title: 'journey.dam.title',
+    organization: 'journey.dam.organization',
+    description: 'journey.dam.description',
   },
 ];

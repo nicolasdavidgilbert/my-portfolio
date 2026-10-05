@@ -4,14 +4,18 @@ import ArchitectureDiagram from '../systems/ArchitectureDiagram.astro';
 import TerminalCommand from '../systems/TerminalCommand.astro';
 import TerminalWindow from '../systems/TerminalWindow.astro';
 import TuiVisual from './TuiVisual.astro';
+import { i18nAttrs } from '../../i18n/translate';
+import type { TranslationKey } from '../../i18n/types';
 
 interface Props {
   visual: ProjectVisual;
   /** Host shown in the screenshot frame. */
   host?: string;
+  /** Project name, used in accessible labels. */
+  nameKey: TranslationKey;
 }
 
-const { visual, host } = Astro.props;
+const { visual, host, nameKey } = Astro.props;
 ---
 
 {visual.type === 'screenshot' && (
@@ -24,7 +28,7 @@ const { visual, host } = Astro.props;
     )}
     <img
       src={visual.src}
-      alt={visual.alt}
+      {...i18nAttrs({ alt: visual.alt })}
       width={visual.width}
       height={visual.height}
       loading="lazy"
@@ -42,4 +46,4 @@ const { visual, host } = Astro.props;
 
 {visual.type === 'diagram' && <ArchitectureDiagram diagram={visual.diagram} />}
 
-{visual.type === 'tui' && <TuiVisual visual={visual} />}
+{visual.type === 'tui' && <TuiVisual visual={visual} nameKey={nameKey} />}

@@ -1,15 +1,19 @@
 ---
+import { i18nAttrs } from '../../i18n/translate';
+import type { TranslationKey } from '../../i18n/types';
 import type { TuiVisual } from '../../types/project';
 
 interface Props {
   visual: TuiVisual;
+  nameKey: TranslationKey;
 }
 
-const { visual } = Astro.props;
+const { visual, nameKey } = Astro.props;
 ---
 
-<figure class="tui" aria-label={`Interfaz de terminal de ${visual.title}`}>
-  <div class="tui-frame">
+<figure class="tui" {...i18nAttrs({ 'aria-label': 'projectUi.tuiLabel' }, { name: { k: nameKey } })}>
+  <!-- Mirrors the real interface of the tool, which is in Spanish. -->
+  <div class="tui-frame" lang="es">
     <p class="tui-title">
       <span>{visual.title}</span>
     </p>

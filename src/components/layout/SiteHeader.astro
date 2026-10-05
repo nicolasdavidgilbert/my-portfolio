@@ -1,8 +1,11 @@
 ---
+import LanguageToggle from '../i18n/LanguageToggle.astro';
+import T from '../i18n/T.astro';
 import ExternalLink from '../ui/ExternalLink.astro';
 import Icon from '../ui/Icon.astro';
 import { cvUrl, navigation, person } from '../../data/site';
 import { getSocialLink } from '../../data/socialLinks';
+import { i18nAttrs } from '../../i18n/translate';
 
 const profileLinks = [getSocialLink('github'), getSocialLink('linkedin')];
 ---
@@ -21,7 +24,7 @@ const profileLinks = [getSocialLink('github'), getSocialLink('linkedin')];
       {person.shortName}
     </a>
 
-    <nav aria-label="Principal" class="hidden lg:block">
+    <nav {...i18nAttrs({ 'aria-label': 'a11y.mainNav' })} class="hidden lg:block">
       <ul class="flex items-center gap-1">
         {navigation.map((item) => (
           <li>
@@ -30,77 +33,81 @@ const profileLinks = [getSocialLink('github'), getSocialLink('linkedin')];
               data-nav-link
               class="relative rounded-md px-3 py-2 text-sm text-fg-muted transition-colors after:absolute after:inset-x-3 after:bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-accent after:transition-transform after:duration-300 hover:text-fg hover:after:scale-x-100 aria-[current]:text-fg aria-[current]:after:scale-x-100"
             >
-              {item.label}
+              <T k={item.label} />
             </a>
           </li>
         ))}
       </ul>
     </nav>
 
-    <div class="hidden items-center gap-1 lg:flex">
-      {profileLinks.map((link) => (
-        <ExternalLink
-          href={link.href}
-          class="grid size-10 place-items-center rounded-md text-fg-muted transition-colors hover:bg-surface hover:text-fg"
-        >
-          <Icon name={link.id} class="size-[1.125rem]" />
-          <span class="sr-only">{link.label}</span>
-        </ExternalLink>
-      ))}
-      {cvUrl && (
-        <a
-          href={cvUrl}
-          class="ml-2 rounded-md border border-border-strong px-3 py-1.5 font-mono text-xs text-fg hover:border-fg-subtle"
-        >
-          CV
-        </a>
-      )}
-    </div>
+    <div class="flex items-center gap-2">
+      <LanguageToggle />
 
-    <details class="group lg:hidden" data-mobile-nav>
-      <summary class="grid size-11 cursor-pointer list-none [&::-webkit-details-marker]:hidden place-items-center rounded-md border border-border text-fg hover:bg-surface">
-        <Icon name="menu" class="size-5 group-open:hidden" />
-        <Icon name="close" class="hidden size-5 group-open:block" />
-        <span class="sr-only">Menú de navegación</span>
-      </summary>
-      <div class="absolute inset-x-0 top-16 border-b border-border bg-bg px-gutter pb-6 sm:px-6">
-        <nav aria-label="Principal (móvil)">
-          <ul class="divide-y divide-border">
-            {navigation.map((item) => (
+      <div class="hidden items-center gap-1 lg:flex">
+        {profileLinks.map((link) => (
+          <ExternalLink
+            href={link.href}
+            class="grid size-10 place-items-center rounded-md text-fg-muted transition-colors hover:bg-surface hover:text-fg"
+          >
+            <Icon name={link.id} class="size-[1.125rem]" />
+            <span class="sr-only">{link.label}</span>
+          </ExternalLink>
+        ))}
+        {cvUrl && (
+          <a
+            href={cvUrl}
+            class="ml-2 rounded-md border border-border-strong px-3 py-1.5 font-mono text-xs text-fg hover:border-fg-subtle"
+          >
+            CV
+          </a>
+        )}
+      </div>
+
+      <details class="group lg:hidden" data-mobile-nav>
+        <summary class="grid size-11 cursor-pointer list-none [&::-webkit-details-marker]:hidden place-items-center rounded-md border border-border text-fg hover:bg-surface">
+          <Icon name="menu" class="size-5 group-open:hidden" />
+          <Icon name="close" class="hidden size-5 group-open:block" />
+          <T k="a11y.menu" class="sr-only" />
+        </summary>
+        <div class="absolute inset-x-0 top-16 border-b border-border bg-bg px-gutter pb-6 sm:px-6">
+          <nav {...i18nAttrs({ 'aria-label': 'a11y.mobileNav' })}>
+            <ul class="divide-y divide-border">
+              {navigation.map((item) => (
+                <li>
+                  <a href={item.href} class="flex min-h-12 items-center text-base text-fg">
+                    <T k={item.label} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {profileLinks.map((link) => (
               <li>
-                <a href={item.href} class="flex min-h-12 items-center text-base text-fg">
-                  {item.label}
-                </a>
+                <ExternalLink
+                  href={link.href}
+                  class="inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-3 text-sm text-fg-muted hover:text-fg"
+                >
+                  <Icon name={link.id} />
+                  {link.label}
+                </ExternalLink>
               </li>
             ))}
+            {cvUrl && (
+              <li>
+                <a
+                  href={cvUrl}
+                  class="inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-3 text-sm text-fg-muted hover:text-fg"
+                >
+                  <Icon name="file" />
+                  CV
+                </a>
+              </li>
+            )}
           </ul>
-        </nav>
-        <ul class="mt-4 flex flex-wrap gap-2">
-          {profileLinks.map((link) => (
-            <li>
-              <ExternalLink
-                href={link.href}
-                class="inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-3 text-sm text-fg-muted hover:text-fg"
-              >
-                <Icon name={link.id} />
-                {link.label}
-              </ExternalLink>
-            </li>
-          ))}
-          {cvUrl && (
-            <li>
-              <a
-                href={cvUrl}
-                class="inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-3 text-sm text-fg-muted hover:text-fg"
-              >
-                <Icon name="file" />
-                CV
-              </a>
-            </li>
-          )}
-        </ul>
-      </div>
-    </details>
+        </div>
+      </details>
+    </div>
   </div>
 </header>
 

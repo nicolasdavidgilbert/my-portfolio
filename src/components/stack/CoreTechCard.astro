@@ -1,13 +1,13 @@
 ---
+import T from '../i18n/T.astro';
+import { projectKey } from '../../i18n/project-keys';
 import type { Technology } from '../../types/technology';
 
 interface Props {
   tech: Technology;
-  categoryLabel: string;
-  projects: readonly { readonly id: string; readonly name: string }[];
 }
 
-const { tech, categoryLabel, projects } = Astro.props;
+const { tech } = Astro.props;
 ---
 
 <article class="core-card spotlight" style={`--brand:${tech.color}`}>
@@ -28,20 +28,26 @@ const { tech, categoryLabel, projects } = Astro.props;
       )}
     </span>
     <div>
-      <h3 class="text-xl font-semibold text-fg">{tech.label}</h3>
-      <p class="label mt-0.5 text-fg-subtle">{categoryLabel}</p>
+      {tech.labelKey ? (
+        <T as="h3" k={tech.labelKey} class="text-xl font-semibold text-fg" />
+      ) : (
+        <h3 class="text-xl font-semibold text-fg">{tech.label}</h3>
+      )}
+      <T as="p" k={`stack.categories.${tech.category}`} class="label mt-0.5 text-fg-subtle" />
     </div>
   </div>
 
   <div class="mt-5">
-    <p class="font-mono text-xs text-fg-muted">
-      {projects.length === 1 ? 'Usado en 1 proyecto' : `Usado en ${projects.length} proyectos`}
-    </p>
+    {tech.projects.length === 1 ? (
+      <T as="p" k="stack.usedInOne" class="font-mono text-xs text-fg-muted" />
+    ) : (
+      <T as="p" k="stack.usedInMany" vars={{ n: tech.projects.length }} class="font-mono text-xs text-fg-muted" />
+    )}
     <ul class="mt-2 flex flex-wrap gap-2">
-      {projects.map((project) => (
+      {tech.projects.map((id) => (
         <li>
-          <a href={`#${project.id}`} class="core-project">
-            <span aria-hidden="true">→</span> {project.name}
+          <a href={`#${id}`} class="core-project">
+            <span aria-hidden="true">→</span> <T k={projectKey(id, 'shortName')} />
           </a>
         </li>
       ))}

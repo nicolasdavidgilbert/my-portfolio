@@ -1,5 +1,7 @@
+import type { TranslationKey } from '../i18n/types';
+
 export interface NavItem {
-  readonly label: string;
+  readonly label: TranslationKey;
   readonly href: `#${string}`;
 }
 

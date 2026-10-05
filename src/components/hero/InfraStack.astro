@@ -10,53 +10,54 @@
  * - dragging (mouse or touch) spins the stack with inertia, then it springs back
  * - a specular highlight follows the cursor across the planes
  */
+import T from '../i18n/T.astro';
+import { i18nAttrs } from '../../i18n/translate';
+import { projectKey } from '../../i18n/project-keys';
+import type { TranslationKey } from '../../i18n/types';
+import type { ProjectId } from '../../types/project';
+
 const layers = [
   {
     id: 'apps',
-    name: 'Apps',
+    name: 'infra.layers.apps',
     detail: 'React · Next.js · Astro',
     tone: 'accent',
-    href: '#cesta-plus-plus',
-    project: 'Cesta++',
+    project: 'cesta-plus-plus',
   },
   {
     id: 'services',
-    name: 'Servicios',
+    name: 'infra.layers.services',
     detail: 'Docker · Flask · Node.js',
     tone: 'warm',
-    href: '#sistema-llamadas',
-    project: 'Sistema de llamadas',
+    project: 'sistema-llamadas',
   },
   {
     id: 'network',
-    name: 'Red',
+    name: 'infra.layers.network',
     detail: 'Nginx · LAN · arping',
     tone: 'cool',
-    href: '#recordatorios-bot',
-    project: 'RecordatoriosBot',
+    project: 'recordatorios-bot',
   },
-  {
-    id: 'linux',
-    name: 'Linux',
-    detail: 'Bash · tar · find',
-    tone: 'base',
-    href: '#linux-backup-tui',
-    project: 'Linux Backup TUI',
-  },
-] as const;
+  { id: 'linux', name: 'infra.layers.linux', detail: 'Bash · tar · find', tone: 'base', project: 'linux-backup-tui' },
+] as const satisfies readonly {
+  id: string;
+  name: TranslationKey;
+  detail: string;
+  tone: string;
+  project: ProjectId;
+}[];
 ---
 
 <div class="infra-scene" data-infra>
-  <nav class="infra-stack" data-infra-stack aria-label="Capas de la pila: ir al proyecto de cada una">
+  <nav class="infra-stack" data-infra-stack {...i18nAttrs({ 'aria-label': 'infra.navLabel' })}>
     {layers.map((layer, index) => (
       <a
-        href={layer.href}
+        href={`#${layer.project}`}
         class:list={['infra-layer', `infra-layer--${layer.tone}`]}
         style={`--i:${layers.length - 1 - index}`}
         data-layer={layer.id}
-        data-name={layer.name}
         data-detail={layer.detail}
-        data-project={layer.project}
+        {...i18nAttrs({ 'data-name': layer.name, 'data-project': projectKey(layer.project, 'shortName') })}
         draggable="false"
       >
         <span class="infra-hit" aria-hidden="true"></span>
@@ -70,13 +71,15 @@ const layers = [
               <i></i>
             </span>
             <span class="infra-label">
-              <strong>{layer.name}</strong>
+              <strong>
+                <T k={layer.name} />
+              </strong>
               <small>{layer.detail}</small>
             </span>
             <span class="infra-go" aria-hidden="true">
-              → {layer.project}
+              → <T k={projectKey(layer.project, 'shortName')} />
             </span>
-            <span class="sr-only">: ver {layer.project}</span>
+            <T k="infra.view" vars={{ project: { k: projectKey(layer.project, 'name') } }} class="sr-only" />
           </span>
         </span>
       </a>
@@ -88,7 +91,7 @@ const layers = [
     </span>
   </nav>
   <p class="infra-hint" aria-hidden="true">
-    arrastra para girar · pasa por una capa
+    <T k="infra.hint" />
   </p>
 </div>
 

@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import T from '../i18n/T.astro';
 
 type Props = Omit<HTMLAttributes<'a'>, 'target' | 'rel'> & { href: string };
 
@@ -8,7 +9,5 @@ const { href, ...attributes } = Astro.props;
 
 <a href={href} target="_blank" rel="noopener noreferrer" {...attributes}>
   <slot />
-  <span class="sr-only" lang="es">
-    (se abre en una pestaña nueva)
-  </span>
+  <T k="a11y.newTab" class="sr-only" />
 </a>

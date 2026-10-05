@@ -1,6 +1,8 @@
 ---
 import Section from '../common/Section.astro';
+import Timeline from '../profile/Timeline.astro';
 import SystemStatus from '../systems/SystemStatus.astro';
+import { experience } from '../../data/experience';
 
 const pillars = [
   {
@@ -27,25 +29,36 @@ const pillars = [
     hasta el despliegue, la red y la automatización que hacen que una solución sea realmente utilizable.
   </p>
 
-  <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-start">
-    <ul class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-      {pillars.map((pillar, index) => (
-        <li data-reveal="tilt" style={`--reveal-delay:${index * 110}ms`}>
-          <div class="tilt spotlight group h-full rounded-lg border border-border bg-surface p-6 transition-colors hover:border-accent/50" data-tilt>
-            <span class="grid size-11 place-items-center rounded-md border border-accent/30 bg-accent/10 font-mono text-accent transition-transform duration-500 [transform:translateZ(30px)] group-hover:scale-110" aria-hidden="true">
-              {pillar.glyph}
-            </span>
-            <h3 class="label mt-5 text-fg [transform:translateZ(20px)]" lang="en">{pillar.label}</h3>
-            <p class="mt-2 leading-relaxed text-fg-muted">{pillar.text}</p>
-          </div>
-        </li>
-      ))}
-    </ul>
+  <ul class="grid gap-4 sm:grid-cols-3">
+    {pillars.map((pillar, index) => (
+      <li data-reveal="tilt" style={`--reveal-delay:${index * 110}ms`}>
+        <div class="tilt spotlight group h-full rounded-lg border border-border bg-surface p-6 transition-colors hover:border-accent/50" data-tilt>
+          <span class="grid size-11 place-items-center rounded-md border border-accent/30 bg-accent/10 font-mono text-accent transition-transform duration-500 [transform:translateZ(30px)] group-hover:scale-110" aria-hidden="true">
+            {pillar.glyph}
+          </span>
+          <h3 class="label mt-5 text-fg [transform:translateZ(20px)]" lang="en">{pillar.label}</h3>
+          <p class="mt-2 leading-relaxed text-fg-muted">{pillar.text}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
 
-    <div data-reveal="zoom" style="--reveal-delay:200ms">
+  <div id="trayectoria" class="mt-16 grid scroll-mt-24 gap-10 lg:mt-20 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-16">
+    <div>
+      <header class="mb-8" data-reveal>
+        <p class="label flex items-center gap-3 text-fg-subtle">
+          <span class="h-px w-6 bg-border-strong" aria-hidden="true"></span>
+          Trayectoria
+        </p>
+        <h3 class="mt-3 text-2xl font-semibold tracking-tight text-fg sm:text-3xl">Formación y experiencia</h3>
+      </header>
+      <Timeline entries={experience} />
+    </div>
+
+    <aside class="lg:sticky lg:top-24 lg:self-start" data-reveal="zoom" style="--reveal-delay:200ms" aria-label="Estado actual">
       <div class="tilt" data-tilt="0.6">
         <SystemStatus />
       </div>
-    </div>
+    </aside>
   </div>
 </Section>

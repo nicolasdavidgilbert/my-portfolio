@@ -1,0 +1,52 @@
+---
+import type { ExperienceEntry } from '../../types/experience';
+
+interface Props {
+  entries: readonly ExperienceEntry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<ol class="timeline relative border-l border-border">
+  {entries.map((entry, index) => (
+    <li class="relative pb-10 pl-6 last:pb-0 sm:pl-8" data-reveal="left" style={`--reveal-delay:${index * 140}ms`}>
+      <span
+        class:list={[
+          'absolute top-1.5 -left-[5px] size-[9px] rounded-full border',
+          entry.current ? 'border-success bg-success shadow-[0_0_14px_var(--color-success)]' : 'border-accent bg-bg',
+        ]}
+        aria-hidden="true"
+      ></span>
+      <p class:list={['label', entry.current ? 'text-success' : 'text-fg-subtle']}>{entry.period}</p>
+      <h4 class="mt-2 text-xl font-semibold text-fg">
+        {entry.title}
+        {entry.organization && <span class="font-normal text-fg-muted"> · {entry.organization}</span>}
+      </h4>
+      <p class="mt-1.5 leading-relaxed text-fg-muted">{entry.description}</p>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(var(--color-success), var(--color-accent), transparent);
+    transform-origin: top;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .timeline::before {
+        animation: line-grow linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 55%;
+      }
+    }
+  }
+</style>

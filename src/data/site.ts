@@ -27,7 +27,6 @@ export const navigation: readonly NavItem[] = [
   { label: 'Perfil', href: '#perfil' },
   { label: 'Proyectos', href: '#proyectos' },
   { label: 'Sistemas', href: '#sistemas' },
-  { label: 'Trayectoria', href: '#trayectoria' },
   { label: 'Stack', href: '#stack' },
   { label: 'Contacto', href: '#contacto' },
 ];

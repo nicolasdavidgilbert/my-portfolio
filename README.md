@@ -2,7 +2,7 @@
 
 Portfolio de Nicolás David Gilbert González — desarrollo de software y administración de sistemas.
 
-Astro + TypeScript + Tailwind CSS v4. Sitio estático; solo se envían dos scripts pequeños al cliente (menú móvil y copiar email).
+Astro + TypeScript + Tailwind CSS v4. Sitio estático; el JavaScript de cliente es vanilla y se limita a la interacción (pila 3D, carrusel, animaciones, menú y copiar email).
 
 ## Comandos
 
@@ -19,13 +19,17 @@ Astro + TypeScript + Tailwind CSS v4. Sitio estático; solo se envían dos scrip
 src/
   components/
     common/    Section (cabecera numerada de sección)
+    hero/      HeroVisual, InfraStack (pila 3D interactiva)
     layout/    SiteHeader, SiteFooter
-    projects/  ProjectEntry, ProjectMetadata, ProjectVisual
-    sections/  Hero, About, Projects, Systems, Experience, Stack, Contact
-    systems/   SystemStatus, TerminalWindow, TerminalCommand, ArchitectureDiagram, CaseStudy, CapabilityMap
-    ui/        ButtonLink, Icon, TechBadge, StatusDot
+    profile/   Timeline (trayectoria dentro de Perfil)
+    projects/  ProjectCarousel, ProjectSlide, ProjectMetadata, ProjectVisual, TuiVisual
+    sections/  Hero, About, Projects, Systems, Stack, Contact
+    systems/   SystemStatus, TerminalWindow, TerminalCommand, ArchitectureDiagram, CapabilityMap
+    ui/        ButtonLink, Icon, TechBadge, TechChip, TechMarquee, StatusDot
   data/        site, socialLinks, projects, capabilities, experience, skills, seo
+  scripts/     motion (reveals, tilt, parallax, sección activa)
   types/       project, architecture, experience, technology, site
+  utils/       color (acentos legibles con contraste AA)
   styles/      global.css (tokens de diseño en @theme)
 ```
 

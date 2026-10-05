@@ -12,6 +12,8 @@ Astro + TypeScript + Tailwind CSS v4. Sitio estático; el JavaScript de cliente 
 | `pnpm dev`     | Servidor local en `localhost:4321` |
 | `pnpm build`   | Genera el sitio en `./dist/`       |
 | `pnpm check`   | Typecheck de `.astro` y `.ts`      |
+| `pnpm lint`    | ESLint (TS + Astro)                |
+| `pnpm format`  | Prettier (Astro + orden Tailwind)  |
 
 ## Estructura
 

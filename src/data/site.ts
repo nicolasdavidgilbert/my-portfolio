@@ -18,6 +18,15 @@ export const SITE_DESCRIPTION =
   'Portfolio de Nicolás David Gilbert González. Desarrollo aplicaciones full stack y administro la infraestructura que las ejecuta: Linux, redes, Docker, automatización e integraciones de IA.';
 export const SOCIAL_IMAGE = '/social-preview.png';
 
+/**
+ * Theme colours needed outside CSS (meta theme-color, contrast maths).
+ * Keep in sync with the @theme tokens in styles/global.css.
+ */
+export const themeColors = {
+  bg: '#0e1013',
+  accent: '#f2b45c',
+} as const;
+
 export const sourceRepo = 'https://github.com/nicolasdavidgilbert/my-portfolio';
 
 /** No CV is published yet; set a URL (e.g. '/cv.pdf') to show it in the header and hero. */
@@ -33,4 +42,11 @@ export const navigation: readonly NavItem[] = [
 
 export function absoluteUrl(path = '/'): string {
   return new URL(path, `${SITE_URL}/`).toString();
+}
+
+/** Two-digit section number, derived from the section's position in the main navigation. */
+export function sectionIndex(id: string): string {
+  const position = navigation.findIndex((item) => item.href === `#${id}`);
+  if (position < 0) throw new Error(`Section "${id}" is missing from the navigation`);
+  return String(position + 1).padStart(2, '0');
 }

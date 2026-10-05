@@ -1,32 +1,57 @@
 ---
+import { sectionIndex } from '../../data/site';
+
 interface Props {
   id: string;
-  index: string;
   label: string;
-  title: string;
+  /** Plain heading text; use the `title` slot instead for rich markup. */
+  title?: string;
+  /** `display` is the large closing-headline size used by Contacto. */
+  size?: 'default' | 'display';
+  /** `split` puts the header and content on the left and the `aside` slot on the right. */
+  layout?: 'stacked' | 'split';
   class?: string;
 }
 
-const { id, index, label, title, class: className } = Astro.props;
+const { id, label, title, size = 'default', layout = 'stacked', class: className } = Astro.props;
 const headingId = `${id}-title`;
+const index = sectionIndex(id);
+const isSplit = layout === 'split';
 ---
 
 <section id={id} aria-labelledby={headingId} class:list={['relative overflow-clip border-t border-border py-section', className]}>
+  <slot name="background" />
   <span
     class="pointer-events-none absolute -top-6 right-2 font-mono text-[9rem] leading-none font-bold text-transparent select-none [-webkit-text-stroke:1px_var(--color-border)] sm:right-8 sm:text-[13rem]"
     data-parallax="-0.12"
     aria-hidden="true">{index}</span
   >
-  <div class="relative mx-auto w-full max-w-page px-gutter sm:px-6 lg:px-8">
-    <header class="mb-6 max-w-prose sm:mb-10" data-reveal>
-      <p class="label flex items-center gap-3 text-accent">
-        <span class="h-px w-8 bg-accent" aria-hidden="true"></span>
-        <span><span class="text-fg-subtle">{index} /</span> {label}</span>
-      </p>
-      <h2 id={headingId} class="mt-4 text-3xl font-semibold tracking-tight text-fg sm:text-5xl">{title}</h2>
-      <slot name="intro" />
-    </header>
-    <slot />
+  <div
+    class:list={[
+      'relative mx-auto w-full max-w-page px-gutter sm:px-6 lg:px-8',
+      isSplit && 'grid items-center gap-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-12',
+    ]}
+  >
+    <div data-reveal={isSplit ? '' : undefined}>
+      <header class:list={[!isSplit && 'mb-6 max-w-prose sm:mb-10']} data-reveal={isSplit ? undefined : ''}>
+        <p class="label flex items-center gap-3 text-accent">
+          <span class="h-px w-8 bg-accent" aria-hidden="true"></span>
+          <span><span class="text-fg-subtle">{index} /</span> {label}</span>
+        </p>
+        <h2
+          id={headingId}
+          class:list={[
+            'font-semibold tracking-tight text-fg',
+            size === 'display' ? 'mt-5 text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.02]' : 'mt-4 text-3xl sm:text-5xl',
+          ]}
+        >
+          {Astro.slots.has('title') ? <slot name="title" /> : title}
+        </h2>
+        <slot name="intro" />
+      </header>
+      <slot />
+    </div>
+    {isSplit && <slot name="aside" />}
   </div>
   <slot name="bleed" />
 </section>

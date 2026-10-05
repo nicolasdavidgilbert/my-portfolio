@@ -11,6 +11,8 @@ export const techCategories: readonly { readonly id: TechCategory; readonly labe
 ];
 
 /**
+ * Only core technologies are rendered as cards (icon, colour and projects);
+ * the rest appear by name in the grouped list but keep the same data.
  * `projects` only lists project cards whose code actually uses the technology;
  * technologies without a project card here simply have none.
  * Core technologies come first because they define the profile.

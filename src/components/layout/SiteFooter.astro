@@ -1,4 +1,5 @@
 ---
+import ExternalLink from '../ui/ExternalLink.astro';
 import { person, sourceRepo } from '../../data/site';
 
 const year = new Date().getFullYear();
@@ -9,9 +10,9 @@ const year = new Date().getFullYear();
     <p>© {year} {person.fullName}</p>
     <p class="font-mono text-xs" lang="en">
       Built with Astro + TypeScript + Tailwind <span aria-hidden="true">·</span>{' '}
-      <a href={sourceRepo} target="_blank" rel="noopener noreferrer" class="text-fg-muted underline-offset-4 hover:text-fg hover:underline">
-        Source code <span aria-hidden="true">→</span><span class="sr-only" lang="es">(se abre en una pestaña nueva)</span>
-      </a>
+      <ExternalLink href={sourceRepo} class="text-fg-muted underline-offset-4 hover:text-fg hover:underline">
+        Source code <span aria-hidden="true">→</span>
+      </ExternalLink>
     </p>
   </div>
 </footer>

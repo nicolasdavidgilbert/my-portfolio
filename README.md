@@ -18,7 +18,7 @@ Astro + TypeScript + Tailwind CSS v4. Sitio estático; el JavaScript de cliente 
 ```text
 src/
   components/
-    common/    Section (cabecera numerada de sección)
+    common/    Section (cabecera numerada; layout stacked/split, numeración según el menú)
     hero/      HeroVisual, InfraStack (pila 3D interactiva)
     layout/    SiteHeader, SiteFooter
     profile/   Timeline (trayectoria dentro de Perfil)
@@ -26,10 +26,11 @@ src/
     sections/  Hero, About, Projects, Systems, Stack, Contact
     stack/     CoreTechCard (tecnologías principales)
     systems/   SystemStatus, TerminalWindow, TerminalCommand, ArchitectureDiagram, CapabilityMap
-    ui/        ButtonLink, Icon, TechBadge, StatusDot
+    ui/        ButtonLink, ExternalLink, Icon, TechBadge, StatusDot
   data/        site, socialLinks, projects, capabilities, experience, skills, seo
-  scripts/     motion (reveals, tilt, parallax, sección activa)
-  types/       project, architecture, experience, technology, site
+  scripts/     controladores de interacción: motion, infra-stack, hero-visual,
+               project-carousel, project-links, events (eventos tipados)
+  types/       project, architecture, experience, technology, site, events
   utils/       color (acentos legibles con contraste AA)
   styles/      global.css (tokens de diseño en @theme)
 ```

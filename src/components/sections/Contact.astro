@@ -1,4 +1,6 @@
 ---
+import Section from '../common/Section.astro';
+import ExternalLink from '../ui/ExternalLink.astro';
 import Icon from '../ui/Icon.astro';
 import StatusDot from '../ui/StatusDot.astro';
 import { SITE_HOST, person } from '../../data/site';
@@ -10,120 +12,98 @@ const linkedin = getSocialLink('linkedin');
 const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
 ---
 
-<section id="contacto" aria-labelledby="contacto-title" class="relative overflow-clip border-t border-border">
-  <div class="grid-floor opacity-30" aria-hidden="true"></div>
-  <div
-    class="pointer-events-none absolute -bottom-40 left-1/2 h-[34rem] w-[64rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--color-accent)_7%,transparent),transparent)] blur-2xl"
-    aria-hidden="true"
-  ></div>
-  <span
-    class="pointer-events-none absolute -top-6 right-2 font-mono text-[9rem] leading-none font-bold text-transparent select-none [-webkit-text-stroke:1px_var(--color-border)] sm:right-8 sm:text-[13rem]"
-    data-parallax="-0.12"
-    aria-hidden="true">05</span
-  >
+<Section id="contacto" label="Contacto" size="display" layout="split" class="pb-10 lg:pt-28 lg:pb-10">
+  <Fragment slot="background">
+    <div class="grid-floor opacity-30" aria-hidden="true"></div>
+    <div
+      class="pointer-events-none absolute -bottom-40 left-1/2 h-[34rem] w-[64rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--color-accent)_7%,transparent),transparent)] blur-2xl"
+      aria-hidden="true"
+    ></div>
+  </Fragment>
 
-  <div class="relative mx-auto grid w-full max-w-page items-center gap-14 px-gutter py-section sm:px-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-12 lg:px-8 lg:pt-28 lg:pb-36">
-    <div data-reveal>
-      <p class="label flex items-center gap-3 text-accent">
-        <span class="h-px w-8 bg-accent" aria-hidden="true"></span>
-        <span><span class="text-fg-subtle">05 /</span> Contacto</span>
-      </p>
+  <Fragment slot="title">Construyamos <span class="text-gradient">algo útil.</span></Fragment>
 
-      <h2 id="contacto-title" class="mt-5 text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.02] font-semibold tracking-tight text-fg">
-        Construyamos <span class="contact-gradient">algo útil.</span>
-      </h2>
+  <p slot="intro" class="mt-6 max-w-prose text-lg leading-relaxed text-fg-muted">
+    Disponible para oportunidades de desarrollo, sistemas y automatización. Respondo directamente.
+  </p>
 
-      <p class="mt-6 max-w-prose text-lg leading-relaxed text-fg-muted">
-        Disponible para oportunidades de desarrollo, sistemas y automatización. Respondo directamente.
-      </p>
+  <div class="mt-6 flex flex-wrap items-center gap-2">
+    {person.available && (
+      <span class="label inline-flex items-center gap-2 rounded-full border border-success/30 bg-success/10 px-3 py-1.5 text-fg">
+        <StatusDot pulse /> Disponible
+      </span>
+    )}
+    <span class="label rounded-full border border-border px-3 py-1.5 text-fg-muted">{person.location}</span>
+    {areas.map((area) => <span class="label rounded-full border border-border px-3 py-1.5 text-fg-muted">{area}</span>)}
+  </div>
 
-      <div class="mt-6 flex flex-wrap items-center gap-2">
-        {person.available && (
-          <span class="label inline-flex items-center gap-2 rounded-full border border-success/30 bg-success/10 px-3 py-1.5 text-fg">
-            <StatusDot pulse /> Disponible
-          </span>
-        )}
-        <span class="label rounded-full border border-border px-3 py-1.5 text-fg-muted">{person.location}</span>
-        {areas.map((area) => <span class="label rounded-full border border-border px-3 py-1.5 text-fg-muted">{area}</span>)}
-      </div>
+  <div class="mt-9 flex flex-wrap items-center gap-3">
+    <a
+      href={email.href}
+      class="group inline-flex min-h-12 items-center gap-2.5 rounded-md bg-accent px-5 text-base font-medium text-accent-contrast transition-colors duration-200 hover:bg-accent/90"
+    >
+      <Icon name="email" class="size-[1.125rem]" />
+      Escríbeme
+      <Icon name="arrow-up-right" class="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+    </a>
+    <button type="button" class="copy-btn" data-copy-email={person.email} hidden>
+      <span class="copy-idle inline-flex items-center gap-2"><Icon name="copy" /> Copiar email</span>
+      <span class="copy-done inline-flex items-center gap-2"><Icon name="check" /> Copiado</span>
+    </button>
+    <span class="sr-only" role="status" data-copy-status></span>
+  </div>
 
-      <div class="mt-9 flex flex-wrap items-center gap-3">
-        <a
-          href={email.href}
-          class="group inline-flex min-h-12 items-center gap-2.5 rounded-md bg-accent px-5 text-base font-medium text-accent-contrast transition-colors duration-200 hover:bg-accent/90"
-        >
-          <Icon name="email" class="size-[1.125rem]" />
-          Escríbeme
-          <Icon name="arrow-up-right" class="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </a>
-        <button type="button" class="copy-btn" data-copy-email={person.email} hidden>
-          <span class="copy-idle inline-flex items-center gap-2"><Icon name="copy" /> Copiar email</span>
-          <span class="copy-done inline-flex items-center gap-2"><Icon name="check" /> Copiado</span>
-        </button>
-        <span class="sr-only" role="status" data-copy-status></span>
-      </div>
-    </div>
+  <div slot="aside" data-reveal style="--reveal-delay:120ms">
+    <div class="tilt" data-tilt="0.15">
+      <div class="contact-terminal">
+        <div class="flex items-center justify-between gap-3 border-b border-border px-5 py-3 font-mono text-xs text-fg-subtle">
+          <span>nico@{SITE_HOST}:~</span>
+          <span class="flex gap-1.5" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
 
-    <div data-reveal style="--reveal-delay:120ms">
-      <div class="tilt" data-tilt="0.15">
-        <div class="contact-terminal">
-          <div class="flex items-center justify-between gap-3 border-b border-border px-5 py-3 font-mono text-xs text-fg-subtle">
-            <span>nico@{SITE_HOST}:~</span>
-            <span class="flex gap-1.5" aria-hidden="true"><i></i><i></i><i></i></span>
-          </div>
+        <div class="p-5 sm:p-6">
+          <p class="font-mono text-sm text-fg-muted">
+            <span class="text-success">$</span> <span class="text-fg">contact --list</span>
+          </p>
 
-          <div class="p-5 sm:p-6">
-            <p class="font-mono text-sm text-fg-muted">
-              <span class="text-success">$</span> <span class="text-fg">contact --list</span>
-            </p>
-
-            <ul class="mt-4 grid gap-1.5">
+          <ul class="mt-4 grid gap-1.5">
+            <li>
+              <a href={email.href} class="contact-row">
+                <span class="contact-key">email</span>
+                <span class="contact-value">{person.email}</span>
+                <Icon name="email" class="contact-icon" />
+              </a>
+            </li>
+            {[github, linkedin].map((link) => (
               <li>
-                <a href={email.href} class="contact-row">
-                  <span class="contact-key">email</span>
-                  <span class="contact-value">{person.email}</span>
-                  <Icon name="email" class="contact-icon" />
-                </a>
+                <ExternalLink href={link.href} class="contact-row">
+                  <span class="contact-key">{link.id}</span>
+                  <span class="contact-value">{link.display}</span>
+                  <Icon name="arrow-up-right" class="contact-icon" />
+                </ExternalLink>
               </li>
-              {[github, linkedin].map((link) => (
-                <li>
-                  <a href={link.href} target="_blank" rel="noopener noreferrer" class="contact-row">
-                    <span class="contact-key">{link.id}</span>
-                    <span class="contact-value">{link.display}</span>
-                    <Icon name="arrow-up-right" class="contact-icon" />
-                    <span class="sr-only">(se abre en una pestaña nueva)</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+            ))}
+          </ul>
 
-            <p class="mt-5 border-t border-border pt-4 font-mono text-sm" aria-hidden="true">
-              <span class="text-success">$</span> <span class="prompt-cursor"></span>
-            </p>
-          </div>
+          <p class="mt-5 border-t border-border pt-4 font-mono text-sm" aria-hidden="true">
+            <span class="text-success">$</span> <span class="prompt-cursor"></span>
+          </p>
         </div>
       </div>
     </div>
   </div>
 
   <a
+    slot="bleed"
     href="#top"
-    class="group relative mx-auto mb-10 flex w-fit items-center gap-2 rounded-full border border-border px-4 py-2 font-mono text-xs text-fg-subtle transition-colors hover:border-border-strong hover:text-fg"
+    class="group relative mx-auto mt-section flex w-fit items-center gap-2 rounded-full border border-border px-4 py-2 font-mono text-xs text-fg-subtle transition-colors hover:border-border-strong hover:text-fg lg:mt-36"
   >
     <Icon name="arrow-up" class="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5" />
     volver arriba
   </a>
-</section>
+</Section>
 
 <style>
-  .contact-gradient {
-    background: linear-gradient(100deg, var(--color-accent) 0%, #ff8a5c 50%, var(--color-accent) 100%);
-    background-size: 160% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
   .copy-btn {
     display: inline-grid;
     min-height: 3rem;
@@ -192,7 +172,7 @@ const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
     background: var(--color-border-strong);
   }
 
-  .contact-row {
+  .contact-terminal :global(.contact-row) {
     display: grid;
     grid-template-columns: 5.5rem minmax(0, 1fr) auto;
     align-items: center;
@@ -208,42 +188,42 @@ const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
       transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .contact-row:hover {
+  .contact-terminal :global(.contact-row:hover) {
     background: color-mix(in srgb, var(--color-accent) 5%, transparent);
   }
 
-  .contact-key {
+  .contact-terminal :global(.contact-key) {
     color: var(--color-fg-subtle);
   }
 
-  .contact-row:hover .contact-key {
+  .contact-terminal :global(.contact-row:hover .contact-key) {
     color: var(--color-accent);
   }
 
-  .contact-value {
+  .contact-terminal :global(.contact-value) {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     color: var(--color-fg);
   }
 
-  .contact-row :global(.contact-icon) {
+  .contact-terminal :global(.contact-row .contact-icon) {
     width: 1rem;
     height: 1rem;
     color: var(--color-fg-subtle);
     transition: color 0.2s;
   }
 
-  .contact-row:hover :global(.contact-icon) {
+  .contact-terminal :global(.contact-row:hover .contact-icon) {
     color: var(--color-accent);
   }
 
   @media (max-width: 30rem) {
-    .contact-row {
+    .contact-terminal :global(.contact-row) {
       grid-template-columns: minmax(0, 1fr) auto;
     }
 
-    .contact-key {
+    .contact-terminal :global(.contact-key) {
       grid-column: 1 / -1;
       font-size: 0.7rem;
     }

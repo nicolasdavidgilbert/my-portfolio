@@ -31,7 +31,7 @@ const accentText = readableAccent(project.accent);
   <div class="slide-card glow-border" data-slide-card>
     <div class="slide-visual">
       <span class="slide-number" aria-hidden="true">{number}</span>
-      <span class="slide-kind" aria-hidden="true">{project.kind === 'software' ? 'software' : 'systems'}</span>
+      <span class="slide-kind" aria-hidden="true">{project.kind}</span>
       <div class="slide-stage" data-tilt="0.6">
         <div class="tilt">
           <ProjectVisual visual={project.visual} host={demoHost} />

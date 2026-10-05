@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import SiteFooter from '../components/layout/SiteFooter.astro';
 import SiteHeader from '../components/layout/SiteHeader.astro';
-import { SITE_DESCRIPTION, SITE_TITLE, SOCIAL_IMAGE, absoluteUrl, person } from '../data/site';
+import { SITE_DESCRIPTION, SITE_TITLE, SOCIAL_IMAGE, absoluteUrl, person, themeColors } from '../data/site';
 import { structuredData } from '../data/seo';
 import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 
@@ -27,7 +27,7 @@ const imageUrl = absoluteUrl(SOCIAL_IMAGE);
     <meta name="author" content={person.fullName} />
     <link rel="canonical" href={canonicalUrl} />
     <meta name="robots" content="index, follow, max-image-preview:large" />
-    <meta name="theme-color" content="#0e1013" />
+    <meta name="theme-color" content={themeColors.bg} />
     <meta name="color-scheme" content="dark" />
 
     <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />

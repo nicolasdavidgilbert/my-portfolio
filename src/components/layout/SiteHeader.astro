@@ -1,4 +1,5 @@
 ---
+import ExternalLink from '../ui/ExternalLink.astro';
 import Icon from '../ui/Icon.astro';
 import { cvUrl, navigation, person } from '../../data/site';
 import { getSocialLink } from '../../data/socialLinks';
@@ -8,7 +9,7 @@ const profileLinks = [getSocialLink('github'), getSocialLink('linkedin')];
 
 <header class="sticky top-0 z-40 border-b border-border bg-bg/80 backdrop-blur-md">
   <span
-    class="absolute inset-x-0 bottom-[-1px] h-px origin-left scale-x-0 bg-linear-to-r from-accent to-[#ff8a5c]"
+    class="absolute inset-x-0 bottom-[-1px] h-px origin-left scale-x-0 bg-linear-to-r from-accent to-accent-warm"
     data-scroll-progress
     aria-hidden="true"
   ></span>
@@ -36,15 +37,13 @@ const profileLinks = [getSocialLink('github'), getSocialLink('linkedin')];
 
     <div class="hidden items-center gap-1 lg:flex">
       {profileLinks.map((link) => (
-        <a
+        <ExternalLink
           href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
           class="grid size-10 place-items-center rounded-md text-fg-muted transition-colors hover:bg-surface hover:text-fg"
         >
           <Icon name={link.id} class="size-[1.125rem]" />
-          <span class="sr-only">{link.label} (se abre en una pestaña nueva)</span>
-        </a>
+          <span class="sr-only">{link.label}</span>
+        </ExternalLink>
       ))}
       {cvUrl && (
         <a href={cvUrl} class="ml-2 rounded-md border border-border-strong px-3 py-1.5 font-mono text-xs text-fg hover:border-fg-subtle">
@@ -72,16 +71,13 @@ const profileLinks = [getSocialLink('github'), getSocialLink('linkedin')];
         <ul class="mt-4 flex flex-wrap gap-2">
           {profileLinks.map((link) => (
             <li>
-              <a
+              <ExternalLink
                 href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 class="inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-3 text-sm text-fg-muted hover:text-fg"
               >
                 <Icon name={link.id} />
                 {link.label}
-                <span class="sr-only">(se abre en una pestaña nueva)</span>
-              </a>
+              </ExternalLink>
             </li>
           ))}
           {cvUrl && (

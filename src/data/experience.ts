@@ -2,7 +2,6 @@ import type { ExperienceEntry } from '../types/experience';
 
 export const experience: readonly ExperienceEntry[] = [
   {
-    kind: 'education',
     period: 'En curso',
     title: 'Administración de Sistemas Informáticos en Red',
     organization: 'ASIR',
@@ -10,14 +9,12 @@ export const experience: readonly ExperienceEntry[] = [
     current: true,
   },
   {
-    kind: 'international',
     period: 'Experiencia internacional',
     title: 'Erasmus+ en Bulgaria',
     organization: 'Liderazgo técnico con IA',
     description: 'Lideré la implementación de un agente de IA para prospección comercial.',
   },
   {
-    kind: 'education',
     period: 'Titulación',
     title: 'Desarrollo de Aplicaciones Multiplataforma',
     organization: 'DAM',

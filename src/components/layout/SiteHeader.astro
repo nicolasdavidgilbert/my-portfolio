@@ -15,7 +15,9 @@ const profileLinks = [getSocialLink('github'), getSocialLink('linkedin')];
   ></span>
   <div class="mx-auto flex h-16 w-full max-w-page items-center justify-between gap-6 px-gutter sm:px-6 lg:px-8">
     <a href="#top" class="flex min-h-11 items-center gap-2 text-sm font-semibold text-fg">
-      <span class="font-mono text-accent" aria-hidden="true">~$</span>
+      <span class="font-mono text-accent" aria-hidden="true">
+        ~$
+      </span>
       {person.shortName}
     </a>
 
@@ -46,7 +48,10 @@ const profileLinks = [getSocialLink('github'), getSocialLink('linkedin')];
         </ExternalLink>
       ))}
       {cvUrl && (
-        <a href={cvUrl} class="ml-2 rounded-md border border-border-strong px-3 py-1.5 font-mono text-xs text-fg hover:border-fg-subtle">
+        <a
+          href={cvUrl}
+          class="ml-2 rounded-md border border-border-strong px-3 py-1.5 font-mono text-xs text-fg hover:border-fg-subtle"
+        >
           CV
         </a>
       )}
@@ -63,7 +68,9 @@ const profileLinks = [getSocialLink('github'), getSocialLink('linkedin')];
           <ul class="divide-y divide-border">
             {navigation.map((item) => (
               <li>
-                <a href={item.href} class="flex min-h-12 items-center text-base text-fg">{item.label}</a>
+                <a href={item.href} class="flex min-h-12 items-center text-base text-fg">
+                  {item.label}
+                </a>
               </li>
             ))}
           </ul>
@@ -82,7 +89,10 @@ const profileLinks = [getSocialLink('github'), getSocialLink('linkedin')];
           ))}
           {cvUrl && (
             <li>
-              <a href={cvUrl} class="inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-3 text-sm text-fg-muted hover:text-fg">
+              <a
+                href={cvUrl}
+                class="inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-3 text-sm text-fg-muted hover:text-fg"
+              >
                 <Icon name="file" />
                 CV
               </a>

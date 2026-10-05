@@ -15,7 +15,14 @@ const personStructuredData = {
   email: `mailto:${person.email}`,
   address: { '@type': 'PostalAddress', addressRegion: 'Canarias', addressCountry: 'ES' },
   sameAs: profileUrls,
-  knowsAbout: ['Desarrollo full stack', 'Administración de sistemas Linux', 'Redes', 'Docker', 'Automatización', 'Integración de IA'],
+  knowsAbout: [
+    'Desarrollo full stack',
+    'Administración de sistemas Linux',
+    'Redes',
+    'Docker',
+    'Automatización',
+    'Integración de IA',
+  ],
 };
 
 const works = projects.map((project) => ({

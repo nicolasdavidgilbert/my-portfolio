@@ -21,7 +21,9 @@ const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
     ></div>
   </Fragment>
 
-  <Fragment slot="title">Construyamos <span class="text-gradient">algo útil.</span></Fragment>
+  <Fragment slot="title">
+    Construyamos <span class="text-gradient">algo útil.</span>
+  </Fragment>
 
   <p slot="intro" class="mt-6 max-w-prose text-lg leading-relaxed text-fg-muted">
     Disponible para oportunidades de desarrollo, sistemas y automatización. Respondo directamente.
@@ -34,7 +36,9 @@ const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
       </span>
     )}
     <span class="label rounded-full border border-border px-3 py-1.5 text-fg-muted">{person.location}</span>
-    {areas.map((area) => <span class="label rounded-full border border-border px-3 py-1.5 text-fg-muted">{area}</span>)}
+    {areas.map((area) => (
+      <span class="label rounded-full border border-border px-3 py-1.5 text-fg-muted">{area}</span>
+    ))}
   </div>
 
   <div class="mt-9 flex flex-wrap items-center gap-3">
@@ -44,11 +48,18 @@ const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
     >
       <Icon name="email" class="size-[1.125rem]" />
       Escríbeme
-      <Icon name="arrow-up-right" class="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      <Icon
+        name="arrow-up-right"
+        class="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+      />
     </a>
     <button type="button" class="copy-btn" data-copy-email={person.email} hidden>
-      <span class="copy-idle inline-flex items-center gap-2"><Icon name="copy" /> Copiar email</span>
-      <span class="copy-done inline-flex items-center gap-2"><Icon name="check" /> Copiado</span>
+      <span class="copy-idle inline-flex items-center gap-2">
+        <Icon name="copy" /> Copiar email
+      </span>
+      <span class="copy-done inline-flex items-center gap-2">
+        <Icon name="check" /> Copiado
+      </span>
     </button>
     <span class="sr-only" role="status" data-copy-status></span>
   </div>
@@ -58,7 +69,11 @@ const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
       <div class="contact-terminal">
         <div class="flex items-center justify-between gap-3 border-b border-border px-5 py-3 font-mono text-xs text-fg-subtle">
           <span>nico@{SITE_HOST}:~</span>
-          <span class="flex gap-1.5" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="flex gap-1.5" aria-hidden="true">
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
         </div>
 
         <div class="p-5 sm:p-6">
@@ -241,7 +256,6 @@ const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
     .prompt-cursor {
       animation: cursor-blink 1.1s steps(1) infinite;
     }
-
   }
 </style>
 

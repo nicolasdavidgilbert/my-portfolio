@@ -1,9 +1,9 @@
-@import "tailwindcss";
-@import "@fontsource-variable/inter";
-@import "@fontsource-variable/jetbrains-mono";
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
 
 /* Keep Tailwind from scanning the committed repomix dump (old markup). */
-@source not "../../repomix-output.xml";
+@source not '../../repomix-output.xml';
 
 /*
  * Design tokens. Dark is the primary (and only) theme.
@@ -29,8 +29,8 @@
   --color-transparent: transparent;
   --color-current: currentColor;
 
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", monospace;
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SFMono-Regular', monospace;
 
   --container-page: 80rem;
   --container-prose: 40rem;
@@ -72,7 +72,7 @@
     background-color: var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-sans);
-    font-feature-settings: "cv11", "ss01";
+    font-feature-settings: 'cv11', 'ss01';
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -116,13 +116,13 @@
 /* ------------------------------------------------------------------ */
 
 @property --carousel-accent {
-  syntax: "<color>";
+  syntax: '<color>';
   initial-value: #f2b45c;
   inherits: true;
 }
 
 @property --angle {
-  syntax: "<angle>";
+  syntax: '<angle>';
   initial-value: 0deg;
   inherits: false;
 }
@@ -204,16 +204,16 @@
       transition-delay: var(--reveal-delay, 0ms);
     }
 
-    .js [data-reveal="tilt"] {
+    .js [data-reveal='tilt'] {
       transform: perspective(1200px) rotateX(10deg) translate3d(0, 36px, 0);
       transform-origin: 50% 100%;
     }
 
-    .js [data-reveal="left"] {
+    .js [data-reveal='left'] {
       transform: translate3d(-40px, 0, 0);
     }
 
-    .js [data-reveal="zoom"] {
+    .js [data-reveal='zoom'] {
       transform: scale(0.92);
     }
 
@@ -242,7 +242,7 @@
   }
 
   .spotlight::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
@@ -267,7 +267,7 @@
   }
 
   .glow-border::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
@@ -311,7 +311,7 @@
   }
 
   .grid-floor::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     transform: rotateX(68deg);
@@ -330,12 +330,7 @@
 
   /* Amber → warm → amber headline gradient (hero and contact titles). */
   .text-gradient {
-    background: linear-gradient(
-      100deg,
-      var(--color-accent) 0%,
-      var(--color-accent-warm) 50%,
-      var(--color-accent) 100%
-    );
+    background: linear-gradient(100deg, var(--color-accent) 0%, var(--color-accent-warm) 50%, var(--color-accent) 100%);
     background-size: 160% 100%;
     -webkit-background-clip: text;
     background-clip: text;

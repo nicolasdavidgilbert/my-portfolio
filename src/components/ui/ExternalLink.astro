@@ -7,5 +7,8 @@ const { href, ...attributes } = Astro.props;
 ---
 
 <a href={href} target="_blank" rel="noopener noreferrer" {...attributes}>
-  <slot /><span class="sr-only" lang="es">(se abre en una pestaña nueva)</span>
+  <slot />
+  <span class="sr-only" lang="es">
+    (se abre en una pestaña nueva)
+  </span>
 </a>

@@ -148,7 +148,14 @@ if (scene && stack) {
     scene.addEventListener('pointerdown', (event) => {
       if (event.button !== 0) return;
       suppressClick = false;
-      drag = { x: event.clientX, y: event.clientY, lastX: event.clientX, lastT: performance.now(), moved: false, id: event.pointerId };
+      drag = {
+        x: event.clientX,
+        y: event.clientY,
+        lastX: event.clientX,
+        lastT: performance.now(),
+        moved: false,
+        id: event.pointerId,
+      };
       spinVelocity = 0;
     });
 

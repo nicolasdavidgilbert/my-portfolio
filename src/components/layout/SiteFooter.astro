@@ -7,7 +7,9 @@ const year = new Date().getFullYear();
 
 <footer class="border-t border-border">
   <div class="mx-auto flex w-full max-w-page flex-col gap-3 px-gutter py-8 text-sm text-fg-subtle sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-    <p>© {year} {person.fullName}</p>
+    <p>
+      © {year} {person.fullName}
+    </p>
     <p class="font-mono text-xs" lang="en">
       Built with Astro + TypeScript + Tailwind <span aria-hidden="true">·</span>{' '}
       <ExternalLink href={sourceRepo} class="text-fg-muted underline-offset-4 hover:text-fg hover:underline">

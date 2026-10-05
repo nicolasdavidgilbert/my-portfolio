@@ -7,18 +7,34 @@ import { SITE_HOST } from '../../data/site';
 /** Floating tags around the stack; each one links to the project that backs it. */
 const tags = [
   { label: 'Linux', href: '#linux-backup-tui', project: 'Linux Backup TUI', position: 'tag--linux', depth: 14 },
-  { label: 'Docker', href: '#sistema-llamadas', project: 'Sistema de llamadas (docker-compose)', position: 'tag--docker', depth: 22 },
-  { label: 'TypeScript', href: '#cesta-plus-plus', project: 'Cesta++ (Next.js + TypeScript)', position: 'tag--ts', depth: 30 },
+  {
+    label: 'Docker',
+    href: '#sistema-llamadas',
+    project: 'Sistema de llamadas (docker-compose)',
+    position: 'tag--docker',
+    depth: 22,
+  },
+  {
+    label: 'TypeScript',
+    href: '#cesta-plus-plus',
+    project: 'Cesta++ (Next.js + TypeScript)',
+    position: 'tag--ts',
+    depth: 30,
+  },
 ] as const;
 
 const focusWords = ['aplicaciones', 'infraestructura', 'automatización', 'redes'] as const;
 ---
 
 <div class="hero-visual" data-hero-visual>
-  <span class="visual-label" aria-hidden="true">software <span>&lt;-&gt;</span> systems</span>
+  <span class="visual-label" aria-hidden="true">
+    software <span>&lt;-&gt;</span> systems
+  </span>
 
   <div class="orbit" aria-hidden="true">
-    <span class="orbit-ring"><i></i></span>
+    <span class="orbit-ring">
+      <i></i>
+    </span>
     <span class="orbit-node"></span>
   </div>
 
@@ -40,21 +56,30 @@ const focusWords = ['aplicaciones', 'infraestructura', 'automatización', 'redes
 
   <div class="hero-terminal" style="--depth:10">
     <p class="font-mono text-[0.8125rem]">
-      <span class="text-success">nico@{SITE_HOST}</span><span class="text-fg-subtle">:~$</span>{' '}
-      <span class="text-fg">whoami</span>
+      <span class="text-success">nico@{SITE_HOST}</span>
+      <span class="text-fg-subtle">:~$</span> <span class="text-fg">whoami</span>
     </p>
     <p class="mt-3 border-b border-border pb-3 font-mono text-[0.95rem] text-fg">developer / systems administrator</p>
     <div class="terminal-swap mt-3 font-mono text-[0.8125rem]" data-terminal-swap>
       <p class="swap-default flex flex-wrap items-baseline gap-x-2 text-fg-muted">
-        <span><span class="text-accent">$</span> build --focus</span>
+        <span>
+          <span class="text-accent">$</span> build --focus
+        </span>
         <span class="word-cycle" aria-hidden="true">
-          {focusWords.map((word, index) => <span style={`--w:${index}`}>{word}</span>)}
+          {focusWords.map((word, index) => (
+            <span style={`--w:${index}`}>{word}</span>
+          ))}
         </span>
         <span class="sr-only">{focusWords.join(', ')}</span>
       </p>
       <div class="swap-inspect" aria-hidden="true">
-        <p class="text-fg-muted"><span class="text-accent">$</span> inspect --layer <span class="text-fg" data-inspect-id></span></p>
-        <p class="truncate text-fg-subtle"><span data-inspect-detail></span> <span class="text-accent">→</span> <span class="text-fg" data-inspect-project></span></p>
+        <p class="text-fg-muted">
+          <span class="text-accent">$</span> inspect --layer <span class="text-fg" data-inspect-id></span>
+        </p>
+        <p class="truncate text-fg-subtle">
+          <span data-inspect-detail></span> <span class="text-accent">→</span>{' '}
+          <span class="text-fg" data-inspect-project></span>
+        </p>
       </div>
     </div>
     <p class="mt-2 flex items-center gap-2 font-mono text-xs text-fg-subtle">
@@ -105,7 +130,11 @@ const focusWords = ['aplicaciones', 'infraestructura', 'automatización', 'redes
     inset: 0;
     border-radius: 999px;
     border: 1px solid color-mix(in srgb, var(--color-success) 22%, transparent);
-    background: radial-gradient(closest-side, color-mix(in srgb, var(--color-success) 9%, transparent), transparent 75%);
+    background: radial-gradient(
+      closest-side,
+      color-mix(in srgb, var(--color-success) 9%, transparent),
+      transparent 75%
+    );
   }
 
   .orbit-ring i {
@@ -151,9 +180,18 @@ const focusWords = ['aplicaciones', 'infraestructura', 'automatización', 'redes
     transition: translate 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .tag--linux { top: 12%; left: 0; }
-  .tag--docker { top: 40%; right: -0.5rem; }
-  .tag--ts { top: 55%; left: -0.5rem; }
+  .tag--linux {
+    top: 12%;
+    left: 0;
+  }
+  .tag--docker {
+    top: 40%;
+    right: -0.5rem;
+  }
+  .tag--ts {
+    top: 55%;
+    left: -0.5rem;
+  }
 
   .tag-link {
     display: inline-flex;

@@ -11,10 +11,38 @@
  * - a specular highlight follows the cursor across the planes
  */
 const layers = [
-  { id: 'apps', name: 'Apps', detail: 'React · Next.js · Astro', tone: 'accent', href: '#cesta-plus-plus', project: 'Cesta++' },
-  { id: 'services', name: 'Servicios', detail: 'Docker · Flask · Node.js', tone: 'warm', href: '#sistema-llamadas', project: 'Sistema de llamadas' },
-  { id: 'network', name: 'Red', detail: 'Nginx · LAN · arping', tone: 'cool', href: '#recordatorios-bot', project: 'RecordatoriosBot' },
-  { id: 'linux', name: 'Linux', detail: 'Bash · tar · find', tone: 'base', href: '#linux-backup-tui', project: 'Linux Backup TUI' },
+  {
+    id: 'apps',
+    name: 'Apps',
+    detail: 'React · Next.js · Astro',
+    tone: 'accent',
+    href: '#cesta-plus-plus',
+    project: 'Cesta++',
+  },
+  {
+    id: 'services',
+    name: 'Servicios',
+    detail: 'Docker · Flask · Node.js',
+    tone: 'warm',
+    href: '#sistema-llamadas',
+    project: 'Sistema de llamadas',
+  },
+  {
+    id: 'network',
+    name: 'Red',
+    detail: 'Nginx · LAN · arping',
+    tone: 'cool',
+    href: '#recordatorios-bot',
+    project: 'RecordatoriosBot',
+  },
+  {
+    id: 'linux',
+    name: 'Linux',
+    detail: 'Bash · tar · find',
+    tone: 'base',
+    href: '#linux-backup-tui',
+    project: 'Linux Backup TUI',
+  },
 ] as const;
 ---
 
@@ -36,20 +64,32 @@ const layers = [
           <span class="infra-plane">
             <span class="infra-shine" aria-hidden="true"></span>
             <span class="infra-scan" aria-hidden="true"></span>
-            <span class="infra-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="infra-dots" aria-hidden="true">
+              <i></i>
+              <i></i>
+              <i></i>
+            </span>
             <span class="infra-label">
               <strong>{layer.name}</strong>
               <small>{layer.detail}</small>
             </span>
-            <span class="infra-go" aria-hidden="true">→ {layer.project}</span>
+            <span class="infra-go" aria-hidden="true">
+              → {layer.project}
+            </span>
             <span class="sr-only">: ver {layer.project}</span>
           </span>
         </span>
       </a>
     ))}
-    <span class="infra-beam" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="infra-beam" aria-hidden="true">
+      <i></i>
+      <i></i>
+      <i></i>
+    </span>
   </nav>
-  <p class="infra-hint" aria-hidden="true">arrastra para girar · pasa por una capa</p>
+  <p class="infra-hint" aria-hidden="true">
+    arrastra para girar · pasa por una capa
+  </p>
 </div>
 
 <style>
@@ -147,10 +187,18 @@ const layers = [
     opacity: calc(1 - var(--dim) * 0.45);
   }
 
-  .infra-layer--accent { --tone: var(--color-accent); }
-  .infra-layer--warm { --tone: var(--color-accent-warm); }
-  .infra-layer--cool { --tone: var(--color-info); }
-  .infra-layer--base { --tone: var(--color-success); }
+  .infra-layer--accent {
+    --tone: var(--color-accent);
+  }
+  .infra-layer--warm {
+    --tone: var(--color-accent-warm);
+  }
+  .infra-layer--cool {
+    --tone: var(--color-info);
+  }
+  .infra-layer--base {
+    --tone: var(--color-success);
+  }
 
   .infra-layer:focus-visible .infra-plane {
     outline: 2px solid var(--tone);

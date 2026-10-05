@@ -12,12 +12,7 @@ const rows = [
 ---
 
 <TerminalWindow title={`nico@${SITE_HOST}:~`}>
-  <TerminalCommand
-    prompt="$"
-    lines={[
-      { kind: 'command', text: 'profile --status' },
-    ]}
-  />
+  <TerminalCommand prompt="$" lines={[{ kind: 'command', text: 'profile --status' }]} />
   <dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 border-t border-border p-4 font-mono text-[0.8125rem] sm:p-5">
     <dt class="text-fg-subtle uppercase">status</dt>
     <dd class="flex items-center gap-2 text-fg">

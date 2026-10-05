@@ -31,7 +31,11 @@ const others = techCategories
   <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {core.map((tech, index) => (
       <li data-reveal style={`--reveal-delay:${index * 70}ms`}>
-        <CoreTechCard tech={tech} categoryLabel={categoryLabel.get(tech.category) ?? ''} projects={projectsFor(tech.projects)} />
+        <CoreTechCard
+          tech={tech}
+          categoryLabel={categoryLabel.get(tech.category) ?? ''}
+          projects={projectsFor(tech.projects)}
+        />
       </li>
     ))}
   </ul>
@@ -47,7 +51,11 @@ const others = techCategories
               {group.items.map((item, index) => (
                 <li>
                   {item}
-                  {index < group.items.length - 1 && <span class="ml-2 text-fg-subtle" aria-hidden="true">·</span>}
+                  {index < group.items.length - 1 && (
+                    <span class="ml-2 text-fg-subtle" aria-hidden="true">
+                      ·
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>

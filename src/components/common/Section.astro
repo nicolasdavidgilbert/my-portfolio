@@ -19,13 +19,19 @@ const index = sectionIndex(id);
 const isSplit = layout === 'split';
 ---
 
-<section id={id} aria-labelledby={headingId} class:list={['relative overflow-clip border-t border-border py-section', className]}>
+<section
+  id={id}
+  aria-labelledby={headingId}
+  class:list={['relative overflow-clip border-t border-border py-section', className]}
+>
   <slot name="background" />
   <span
     class="pointer-events-none absolute -top-6 right-2 font-mono text-[9rem] leading-none font-bold text-transparent select-none [-webkit-text-stroke:1px_var(--color-border)] sm:right-8 sm:text-[13rem]"
     data-parallax="-0.12"
-    aria-hidden="true">{index}</span
+    aria-hidden="true"
   >
+    {index}
+  </span>
   <div
     class:list={[
       'relative mx-auto w-full max-w-page px-gutter sm:px-6 lg:px-8',
@@ -36,7 +42,9 @@ const isSplit = layout === 'split';
       <header class:list={[!isSplit && 'mb-6 max-w-prose sm:mb-10']} data-reveal={isSplit ? undefined : ''}>
         <p class="label flex items-center gap-3 text-accent">
           <span class="h-px w-8 bg-accent" aria-hidden="true"></span>
-          <span><span class="text-fg-subtle">{index} /</span> {label}</span>
+          <span>
+            <span class="text-fg-subtle">{index} /</span> {label}
+          </span>
         </p>
         <h2
           id={headingId}

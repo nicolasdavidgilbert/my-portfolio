@@ -4,7 +4,8 @@ import type { Capability } from '../types/technology';
 export const capabilities: readonly Capability[] = [
   {
     area: 'Linux & shell',
-    practice: 'Backups completos, incrementales y diferenciales con tar y snapshots .snar: primero en Bash y después como TUI en Python con detección de discos vía lsblk.',
+    practice:
+      'Backups completos, incrementales y diferenciales con tar y snapshots .snar: primero en Bash y después como TUI en Python con detección de discos vía lsblk.',
     evidence: { label: 'Linux Backup TUI', href: '#linux-backup-tui' },
   },
   {

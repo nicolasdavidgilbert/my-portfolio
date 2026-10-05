@@ -23,7 +23,11 @@ function contrast(a: string, b: string): number {
 
 function mixWithWhite(hex: string, amount: number): string {
   return `#${channels(hex)
-    .map((c) => Math.round(c + (255 - c) * amount).toString(16).padStart(2, '0'))
+    .map((c) =>
+      Math.round(c + (255 - c) * amount)
+        .toString(16)
+        .padStart(2, '0'),
+    )
     .join('')}`;
 }
 
@@ -35,7 +39,8 @@ function mixWithWhite(hex: string, amount: number): string {
 export function readableAccent(hex: string): string {
   for (let amount = 0; amount <= 1; amount += 0.05) {
     const candidate = amount === 0 ? hex : mixWithWhite(hex, amount);
-    if (contrast(candidate, SURFACE) >= MIN_CONTRAST && contrast(candidate, ON_ACCENT) >= MIN_CONTRAST) return candidate;
+    if (contrast(candidate, SURFACE) >= MIN_CONTRAST && contrast(candidate, ON_ACCENT) >= MIN_CONTRAST)
+      return candidate;
   }
   return '#ffffff';
 }

@@ -32,20 +32,28 @@ const firstAccentText = readableAccent(firstAccent);
     aria-label="Proyectos seleccionados"
     tabindex="0"
   >
-    {projects.map((project, index) => <ProjectSlide project={project} index={index} total={projects.length} />)}
+    {projects.map((project, index) => (
+      <ProjectSlide project={project} index={index} total={projects.length} />
+    ))}
   </div>
 
   <div class="relative mx-auto mt-4 grid w-full max-w-page grid-cols-[minmax(0,1fr)] gap-5 px-gutter sm:px-6 lg:px-8">
     <div class="flex items-end justify-between gap-4">
       <p class="flex items-baseline gap-2 font-mono text-fg-subtle" aria-hidden="true">
-        <span class="counter text-4xl font-bold text-fg sm:text-5xl" data-counter>01</span>
+        <span class="counter text-4xl font-bold text-fg sm:text-5xl" data-counter>
+          01
+        </span>
         <span class="text-sm">/ {pad(projects.length)}</span>
       </p>
 
       <div class="flex items-center gap-2">
         <button type="button" class="carousel-btn" data-toggle aria-label="Pausar el pase automático" hidden>
-          <span class="icon-pause" aria-hidden="true">❚❚</span>
-          <span class="icon-play" aria-hidden="true">▶</span>
+          <span class="icon-pause" aria-hidden="true">
+            ❚❚
+          </span>
+          <span class="icon-play" aria-hidden="true">
+            ▶
+          </span>
         </button>
         <button type="button" class="carousel-btn" data-prev aria-label="Proyecto anterior">
           <span aria-hidden="true">←</span>
@@ -72,7 +80,9 @@ const firstAccentText = readableAccent(firstAccent);
                 {pad(index + 1)} · {project.kind}
               </span>
               <span class="tab-name">{project.name}</span>
-              <span class="tab-bar" aria-hidden="true"><span data-bar></span></span>
+              <span class="tab-bar" aria-hidden="true">
+                <span data-bar></span>
+              </span>
             </a>
           </li>
         ))}

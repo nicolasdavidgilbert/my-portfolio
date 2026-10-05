@@ -17,6 +17,6 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [tailwindPlugin]
-  }
+    plugins: [tailwindPlugin],
+  },
 });

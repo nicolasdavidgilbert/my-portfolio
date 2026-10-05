@@ -19,7 +19,11 @@ const { lines, prompt = '$' } = Astro.props;
         line.kind === 'comment' && 'text-fg-subtle',
       ]}
     >
-      {line.kind === 'command' && <span class="mr-2 text-accent select-none" aria-hidden="true">{prompt}</span>}
+      {line.kind === 'command' && (
+        <span class="mr-2 text-accent select-none" aria-hidden="true">
+          {prompt}
+        </span>
+      )}
       {line.text}
     </p>
   ))}

@@ -54,9 +54,18 @@ if (root && track) {
     });
   }
 
-  root.addEventListener('mouseenter', () => { pause.hover = true; syncPaused(); });
-  root.addEventListener('mouseleave', () => { pause.hover = false; syncPaused(); });
-  root.addEventListener('focusin', () => { pause.focus = true; syncPaused(); });
+  root.addEventListener('mouseenter', () => {
+    pause.hover = true;
+    syncPaused();
+  });
+  root.addEventListener('mouseleave', () => {
+    pause.hover = false;
+    syncPaused();
+  });
+  root.addEventListener('focusin', () => {
+    pause.focus = true;
+    syncPaused();
+  });
   root.addEventListener('focusout', (event) => {
     if (!root.contains(event.relatedTarget as Node | null)) {
       pause.focus = false;
@@ -64,10 +73,13 @@ if (root && track) {
     }
   });
   document.addEventListener('visibilitychange', syncPaused);
-  new IntersectionObserver(([entry]) => {
-    pause.offscreen = !(entry?.isIntersecting ?? false);
-    syncPaused();
-  }, { threshold: 0.35 }).observe(track);
+  new IntersectionObserver(
+    ([entry]) => {
+      pause.offscreen = !(entry?.isIntersecting ?? false);
+      syncPaused();
+    },
+    { threshold: 0.35 },
+  ).observe(track);
 
   /* ---------- active slide + coverflow ---------- */
   const setActive = (index: number) => {

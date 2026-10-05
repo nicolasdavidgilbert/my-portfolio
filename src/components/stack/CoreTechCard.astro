@@ -14,7 +14,15 @@ const { tech, categoryLabel, projects } = Astro.props;
   <div class="flex items-center gap-4">
     <span class="core-icon" aria-hidden="true">
       {tech.icon ? (
-        <img src={tech.icon} alt="" width="32" height="32" loading="lazy" decoding="async" class:list={[tech.invert && 'icon-invert']} />
+        <img
+          src={tech.icon}
+          alt=""
+          width="32"
+          height="32"
+          loading="lazy"
+          decoding="async"
+          class:list={[tech.invert && 'icon-invert']}
+        />
       ) : (
         <span class="font-mono font-bold text-[var(--brand)]">{tech.label.slice(0, 2)}</span>
       )}

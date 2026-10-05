@@ -25,7 +25,11 @@ const { diagram, class: className } = Astro.props;
             </li>
           ))}
         </ul>
-        {index < diagram.stages.length - 1 && <span class="link" aria-hidden="true"><i></i></span>}
+        {index < diagram.stages.length - 1 && (
+          <span class="link" aria-hidden="true">
+            <i></i>
+          </span>
+        )}
       </li>
     ))}
   </ol>

@@ -40,6 +40,16 @@ export const icons = {
     viewBox: '0 0 24 24',
     body: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
   },
+  check: {
+    filled: false,
+    viewBox: '0 0 24 24',
+    body: '<path d="M20 6 9 17l-5-5"/>',
+  },
+  'arrow-up': {
+    filled: false,
+    viewBox: '0 0 24 24',
+    body: '<path d="m5 12 7-7 7 7"/><path d="M12 19V5"/>',
+  },
   copy: {
     filled: false,
     viewBox: '0 0 24 24',

@@ -44,13 +44,19 @@ const focusWords = ['aplicaciones', 'infraestructura', 'automatización', 'redes
       <span class="text-fg">whoami</span>
     </p>
     <p class="mt-3 border-b border-border pb-3 font-mono text-[0.95rem] text-fg">developer / systems administrator</p>
-    <p class="mt-3 flex flex-wrap items-baseline gap-x-2 font-mono text-[0.8125rem] text-fg-muted">
-      <span><span class="text-accent">$</span> build --focus</span>
-      <span class="word-cycle" aria-hidden="true">
-        {focusWords.map((word, index) => <span style={`--w:${index}`}>{word}</span>)}
-      </span>
-      <span class="sr-only">{focusWords.join(', ')}</span>
-    </p>
+    <div class="terminal-swap mt-3 font-mono text-[0.8125rem]" data-terminal-swap>
+      <p class="swap-default flex flex-wrap items-baseline gap-x-2 text-fg-muted">
+        <span><span class="text-accent">$</span> build --focus</span>
+        <span class="word-cycle" aria-hidden="true">
+          {focusWords.map((word, index) => <span style={`--w:${index}`}>{word}</span>)}
+        </span>
+        <span class="sr-only">{focusWords.join(', ')}</span>
+      </p>
+      <div class="swap-inspect" aria-hidden="true">
+        <p class="text-fg-muted"><span class="text-accent">$</span> inspect --layer <span class="text-fg" data-inspect-id></span></p>
+        <p class="truncate text-fg-subtle"><span data-inspect-detail></span> <span class="text-accent">→</span> <span class="text-fg" data-inspect-project></span></p>
+      </div>
+    </div>
     <p class="mt-2 flex items-center gap-2 font-mono text-xs text-fg-subtle">
       <StatusDot pulse /> development <span class="text-accent">&lt;-&gt;</span> operations
     </p>
@@ -194,6 +200,34 @@ const focusWords = ['aplicaciones', 'infraestructura', 'automatización', 'redes
     transition: translate 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
+  /* The terminal shows the layer being inspected in the 3D stack. */
+  .terminal-swap {
+    display: grid;
+  }
+
+  .swap-default,
+  .swap-inspect {
+    grid-area: 1 / 1;
+    transition:
+      opacity 0.3s,
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .swap-inspect {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  .terminal-swap.is-inspecting .swap-default {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  .terminal-swap.is-inspecting .swap-inspect {
+    opacity: 1;
+    transform: none;
+  }
+
   .word-cycle {
     position: relative;
     display: inline-grid;
@@ -268,6 +302,28 @@ const focusWords = ['aplicaciones', 'infraestructura', 'automatización', 'redes
 </style>
 
 <script>
+  interface LayerDetail {
+    id?: string;
+    detail?: string;
+    project?: string;
+  }
+
+  const swap = document.querySelector<HTMLElement>('[data-terminal-swap]');
+  const inspectId = swap?.querySelector<HTMLElement>('[data-inspect-id]');
+  const inspectDetail = swap?.querySelector<HTMLElement>('[data-inspect-detail]');
+  const inspectProject = swap?.querySelector<HTMLElement>('[data-inspect-project]');
+
+  document.addEventListener('infra:layer', (event) => {
+    if (!swap) return;
+    const layer = (event as CustomEvent<LayerDetail | null>).detail;
+    if (layer) {
+      if (inspectId) inspectId.textContent = layer.id ?? '';
+      if (inspectDetail) inspectDetail.textContent = layer.detail ?? '';
+      if (inspectProject) inspectProject.textContent = layer.project ?? '';
+    }
+    swap.classList.toggle('is-inspecting', Boolean(layer));
+  });
+
   const visual = document.querySelector<HTMLElement>('[data-hero-visual]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

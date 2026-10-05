@@ -1,0 +1,35 @@
+---
+import StatusDot from '../ui/StatusDot.astro';
+import TerminalCommand from './TerminalCommand.astro';
+import TerminalWindow from './TerminalWindow.astro';
+import { SITE_HOST, person } from '../../data/site';
+
+const rows = [
+  { key: 'location', value: person.location },
+  { key: 'focus', value: 'dev · systems · automation' },
+  { key: 'host', value: SITE_HOST },
+] as const;
+---
+
+<TerminalWindow title={`nico@${SITE_HOST}:~`}>
+  <TerminalCommand
+    prompt="$"
+    lines={[
+      { kind: 'command', text: 'whoami' },
+      { kind: 'output', text: 'software developer / systems administrator' },
+    ]}
+  />
+  <dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 border-t border-border p-4 font-mono text-[0.8125rem] sm:p-5">
+    <dt class="text-fg-subtle uppercase">status</dt>
+    <dd class="flex items-center gap-2 text-fg">
+      <StatusDot pulse={person.available} />
+      {person.available ? 'disponible' : 'no disponible'}
+    </dd>
+    {rows.map((row) => (
+      <>
+        <dt class="text-fg-subtle uppercase">{row.key}</dt>
+        <dd class="text-fg-muted">{row.value}</dd>
+      </>
+    ))}
+  </dl>
+</TerminalWindow>

@@ -1,0 +1,519 @@
+---
+import type { Project } from '../../types/project';
+import ProjectSlide from './ProjectSlide.astro';
+import { readableAccent } from '../../utils/color';
+
+interface Props {
+  projects: readonly Project[];
+}
+
+const { projects } = Astro.props;
+const pad = (value: number) => String(value).padStart(2, '0');
+const AUTOPLAY_MS = 7000;
+const firstAccent = projects[0]?.accent ?? '#f2b45c';
+const firstAccentText = readableAccent(firstAccent);
+---
+
+<div
+  class="carousel relative"
+  style={`--carousel-accent:${firstAccent};--carousel-accent-text:${firstAccentText};--autoplay:${AUTOPLAY_MS}ms`}
+  data-carousel
+  data-paused
+>
+  <div class="carousel-ambient" aria-hidden="true"></div>
+  <div class="grid-floor opacity-50" aria-hidden="true"></div>
+
+  <div
+    class="track"
+    data-track
+    role="region"
+    aria-roledescription="carrusel"
+    aria-label="Proyectos seleccionados"
+    tabindex="0"
+  >
+    {projects.map((project, index) => <ProjectSlide project={project} index={index} total={projects.length} />)}
+  </div>
+
+  <div class="relative mx-auto mt-4 grid w-full max-w-page grid-cols-[minmax(0,1fr)] gap-5 px-gutter sm:px-6 lg:px-8">
+    <div class="flex items-end justify-between gap-4">
+      <p class="flex items-baseline gap-2 font-mono text-fg-subtle" aria-hidden="true">
+        <span class="counter text-4xl font-bold text-fg sm:text-5xl" data-counter>01</span>
+        <span class="text-sm">/ {pad(projects.length)}</span>
+      </p>
+
+      <div class="flex items-center gap-2">
+        <button type="button" class="carousel-btn" data-toggle aria-label="Pausar el pase automático" hidden>
+          <span class="icon-pause" aria-hidden="true">❚❚</span>
+          <span class="icon-play" aria-hidden="true">▶</span>
+        </button>
+        <button type="button" class="carousel-btn" data-prev aria-label="Proyecto anterior">
+          <span aria-hidden="true">←</span>
+        </button>
+        <button type="button" class="carousel-btn carousel-btn--primary" data-next aria-label="Proyecto siguiente">
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </div>
+
+    <nav aria-label="Ir a un proyecto">
+      <ul class="tabs">
+        {projects.map((project, index) => (
+          <li>
+            <a
+              href={`#${project.id}`}
+              class="tab"
+              style={`--accent:${project.accent};--accent-text:${readableAccent(project.accent)}`}
+              data-tab={index}
+              aria-current={index === 0 ? 'true' : undefined}
+            >
+              <span class="tab-meta">
+                <i aria-hidden="true"></i>
+                {pad(index + 1)} · {project.kind}
+              </span>
+              <span class="tab-name">{project.name}</span>
+              <span class="tab-bar" aria-hidden="true"><span data-bar></span></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<style>
+  .carousel {
+    transition: --carousel-accent 0.9s ease;
+  }
+
+  .carousel-ambient {
+    position: absolute;
+    inset: -10% 0 20%;
+    pointer-events: none;
+    background:
+      radial-gradient(40% 50% at 50% 45%, color-mix(in srgb, var(--carousel-accent) 22%, transparent), transparent 70%),
+      radial-gradient(30% 40% at 15% 60%, color-mix(in srgb, var(--carousel-accent) 10%, transparent), transparent 70%),
+      radial-gradient(30% 40% at 85% 60%, color-mix(in srgb, var(--carousel-accent) 10%, transparent), transparent 70%);
+    filter: blur(20px);
+  }
+
+  .track {
+    --slide-w: min(86vw, 68rem);
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    padding-block: 2.5rem 3.5rem;
+    padding-inline: calc(50% - var(--slide-w) / 2);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    outline: none;
+    cursor: grab;
+  }
+
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .track:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: -2px;
+  }
+
+  .track.is-dragging {
+    scroll-snap-type: none;
+    cursor: grabbing;
+    user-select: none;
+  }
+
+  .counter {
+    color: var(--carousel-accent-text);
+    transition: color 0.6s;
+  }
+
+  .carousel-btn {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border-strong);
+    background: color-mix(in srgb, var(--color-surface) 80%, transparent);
+    color: var(--color-fg);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    transition:
+      background-color 0.25s,
+      border-color 0.25s,
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .carousel-btn:hover {
+    border-color: var(--carousel-accent);
+    transform: scale(1.08);
+  }
+
+  .carousel-btn--primary {
+    border-color: transparent;
+    background: var(--carousel-accent-text);
+    color: var(--color-accent-contrast);
+  }
+
+  .carousel-btn[data-toggle] {
+    font-size: 0.7rem;
+  }
+
+  .icon-play,
+  [data-paused-by-user] .icon-pause {
+    display: none;
+  }
+
+  [data-paused-by-user] .icon-play {
+    display: inline;
+  }
+
+  .tabs {
+    position: relative;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(11rem, 1fr);
+    gap: 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tabs > li {
+    scroll-snap-align: start;
+  }
+
+  .tab {
+    position: relative;
+    display: grid;
+    gap: 0.2rem;
+    min-height: 4rem;
+    padding: 0.7rem 0.85rem 0.9rem;
+    overflow: hidden;
+    border-radius: 0.6rem;
+    border: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-surface) 70%, transparent);
+    transition:
+      border-color 0.3s,
+      background-color 0.3s,
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .tab:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-border-strong);
+  }
+
+  .tab[aria-current] {
+    border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+    background: color-mix(in srgb, var(--accent) 9%, var(--color-surface));
+  }
+
+  .tab-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-fg-subtle);
+  }
+
+  .tab-meta i {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+
+  .tab[aria-current] .tab-meta {
+    color: var(--accent-text);
+  }
+
+  .tab[aria-current] .tab-meta i {
+    opacity: 1;
+    box-shadow: 0 0 10px var(--accent);
+  }
+
+  .tab-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-fg-muted);
+  }
+
+  .tab[aria-current] .tab-name {
+    color: var(--color-fg);
+  }
+
+  .tab-bar {
+    position: absolute;
+    inset: auto 0 0;
+    height: 2px;
+    background: transparent;
+  }
+
+  .tab-bar > span {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .tab[aria-current] .tab-bar > span {
+    transform: scaleX(1);
+  }
+
+  /* Autoplay: the active tab's bar fills over --autoplay and its end advances the carousel. */
+  .tab-bar > span.is-running {
+    transform: scaleX(0);
+    animation: tab-fill var(--autoplay) linear forwards;
+  }
+
+  [data-paused] .tab-bar > span.is-running {
+    animation-play-state: paused;
+  }
+
+  @keyframes tab-fill {
+    to {
+      transform: scaleX(1);
+    }
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-carousel]');
+  const track = root?.querySelector<HTMLElement>('[data-track]');
+
+  if (root && track) {
+    const slides = [...track.querySelectorAll<HTMLElement>('[data-slide]')];
+    const cards = slides.map((slide) => slide.querySelector<HTMLElement>('[data-slide-card]'));
+    const tabs = [...root.querySelectorAll<HTMLAnchorElement>('[data-tab]')];
+    const bars = tabs.map((tab) => tab.querySelector<HTMLElement>('[data-bar]'));
+    const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-next]');
+    const toggle = root.querySelector<HTMLButtonElement>('[data-toggle]');
+    const counter = root.querySelector<HTMLElement>('[data-counter]');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let active = -1;
+    let ticking = false;
+
+    const goTo = (index: number) => {
+      const wrapped = (index + slides.length) % slides.length;
+      const target = slides[wrapped];
+      if (!target) return;
+      track.scrollTo({
+        left: target.offsetLeft + target.offsetWidth / 2 - track.clientWidth / 2,
+        behavior: reduceMotion ? 'auto' : 'smooth',
+      });
+    };
+
+    /* ---------- autoplay ---------- */
+    const pause = { user: reduceMotion, hover: false, focus: false, offscreen: true };
+
+    const syncPaused = () => {
+      const paused = pause.user || pause.hover || pause.focus || pause.offscreen || document.hidden;
+      root.toggleAttribute('data-paused', paused);
+    };
+
+    const restartBar = () => {
+      bars.forEach((bar) => bar?.classList.remove('is-running'));
+      const bar = bars[active];
+      if (!bar || reduceMotion) return;
+      void bar.offsetWidth; // restart the CSS animation
+      bar.classList.add('is-running');
+    };
+
+    bars.forEach((bar) => bar?.addEventListener('animationend', () => goTo(active + 1)));
+
+    if (toggle && !reduceMotion) {
+      toggle.hidden = false;
+      toggle.addEventListener('click', () => {
+        pause.user = !pause.user;
+        root.toggleAttribute('data-paused-by-user', pause.user);
+        toggle.setAttribute('aria-label', pause.user ? 'Reanudar el pase automático' : 'Pausar el pase automático');
+        syncPaused();
+      });
+    }
+
+    root.addEventListener('mouseenter', () => { pause.hover = true; syncPaused(); });
+    root.addEventListener('mouseleave', () => { pause.hover = false; syncPaused(); });
+    root.addEventListener('focusin', () => { pause.focus = true; syncPaused(); });
+    root.addEventListener('focusout', (event) => {
+      if (!root.contains(event.relatedTarget as Node | null)) {
+        pause.focus = false;
+        syncPaused();
+      }
+    });
+    document.addEventListener('visibilitychange', syncPaused);
+    new IntersectionObserver(([entry]) => {
+      pause.offscreen = !(entry?.isIntersecting ?? false);
+      syncPaused();
+    }, { threshold: 0.35 }).observe(track);
+
+    /* ---------- active slide + coverflow ---------- */
+    const setActive = (index: number) => {
+      if (index === active) return;
+      active = index;
+      slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+      tabs.forEach((tab, i) => {
+        if (i === index) {
+          tab.setAttribute('aria-current', 'true');
+          // Only scroll the tab strip horizontally; never move the page.
+          const strip = tab.closest('ul');
+          const item = tab.parentElement;
+          if (strip && item && strip.scrollWidth > strip.clientWidth) {
+            strip.scrollTo({ left: item.offsetLeft - strip.clientWidth / 2 + item.offsetWidth / 2, behavior: 'smooth' });
+          }
+        } else {
+          tab.removeAttribute('aria-current');
+        }
+      });
+      const slideStyle = slides[index]?.style;
+      const accent = slideStyle?.getPropertyValue('--accent');
+      const accentText = slideStyle?.getPropertyValue('--accent-text');
+      if (accent) root.style.setProperty('--carousel-accent', accent);
+      if (accentText) root.style.setProperty('--carousel-accent-text', accentText);
+      if (counter) counter.textContent = String(index + 1).padStart(2, '0');
+      restartBar();
+    };
+
+    const render = () => {
+      ticking = false;
+      const center = track.scrollLeft + track.clientWidth / 2;
+      let closest = 0;
+      let closestDistance = Infinity;
+
+      slides.forEach((slide, i) => {
+        const offset = (slide.offsetLeft + slide.offsetWidth / 2 - center) / slide.offsetWidth;
+        const distance = Math.abs(offset);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closest = i;
+        }
+
+        const card = cards[i];
+        if (!card || reduceMotion) return;
+        const clamped = Math.max(-1.3, Math.min(1.3, offset));
+        const amount = Math.min(Math.abs(clamped), 1);
+        card.style.setProperty('--turn', `${(-clamped * 38).toFixed(2)}deg`);
+        card.style.setProperty('--z', `${(-amount * 260).toFixed(1)}px`);
+        card.style.setProperty('--scale', (1 - amount * 0.1).toFixed(3));
+        card.style.setProperty('--dim', (amount * 0.6).toFixed(3));
+      });
+
+      setActive(closest);
+    };
+
+    const schedule = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(render);
+    };
+
+    track.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    prev?.addEventListener('click', () => goTo(active - 1));
+    next?.addEventListener('click', () => goTo(active + 1));
+
+    tabs.forEach((tab, i) =>
+      tab.addEventListener('click', (event) => {
+        event.preventDefault();
+        goTo(i);
+      }),
+    );
+
+    track.addEventListener('keydown', (event) => {
+      if (event.target !== track) return;
+      if (event.key === 'ArrowRight') goTo(active + 1);
+      else if (event.key === 'ArrowLeft') goTo(active - 1);
+      else return;
+      event.preventDefault();
+    });
+
+    // Keyboard users tabbing into a side slide bring it to the centre.
+    track.addEventListener('focusin', (event) => {
+      const slide = (event.target as Element).closest<HTMLElement>('[data-slide]');
+      const index = slide ? slides.indexOf(slide) : -1;
+      if (index >= 0 && index !== active) goTo(index);
+    });
+
+    /* ---------- mouse drag ---------- */
+    let suppressClick = false;
+    let drag: { x: number; scroll: number; from: number; moved: boolean } | null = null;
+
+    track.addEventListener('pointerdown', (event) => {
+      suppressClick = false;
+      if (event.pointerType !== 'mouse' || event.button !== 0) return;
+      if ((event.target as Element).closest('a, button')) return;
+      drag = { x: event.clientX, scroll: track.scrollLeft, from: active, moved: false };
+    });
+
+    track.addEventListener('pointermove', (event) => {
+      if (!drag) return;
+      const dx = event.clientX - drag.x;
+      if (!drag.moved && Math.abs(dx) > 4) {
+        // Capture only once it is a real drag, so plain clicks still reach the card.
+        drag.moved = true;
+        track.setPointerCapture(event.pointerId);
+        track.classList.add('is-dragging');
+      }
+      if (drag.moved) track.scrollLeft = drag.scroll - dx;
+    });
+
+    const endDrag = (event: PointerEvent) => {
+      if (!drag) return;
+      const { moved, x, from } = drag;
+      drag = null;
+      track.classList.remove('is-dragging');
+      if (!moved) return;
+
+      // The click that follows a drag must not select or open anything.
+      suppressClick = true;
+      // A short flick still moves one slide; a long drag settles on the closest one.
+      const dx = event.clientX - x;
+      if (active === from && Math.abs(dx) > 60) goTo(from + (dx < 0 ? 1 : -1));
+      else goTo(active);
+    };
+
+    // Clicking or tapping a side card (even on one of its links) brings it to the centre first.
+    track.addEventListener(
+      'click',
+      (event) => {
+        if (suppressClick) {
+          suppressClick = false;
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+        const slide = (event.target as Element).closest<HTMLElement>('[data-slide]');
+        const index = slide ? slides.indexOf(slide) : -1;
+        if (index < 0 || index === active) return;
+        event.preventDefault();
+        event.stopPropagation();
+        goTo(index);
+      },
+      true,
+    );
+
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+
+    render();
+    syncPaused();
+  }
+</script>

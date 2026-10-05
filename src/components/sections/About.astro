@@ -1,0 +1,51 @@
+---
+import Section from '../common/Section.astro';
+import SystemStatus from '../systems/SystemStatus.astro';
+
+const pillars = [
+  {
+    label: 'Development',
+    glyph: '</>',
+    text: 'Construyo aplicaciones frontend y backend y productos completos, desde la interfaz hasta la base de datos.',
+  },
+  {
+    label: 'Systems',
+    glyph: '>_',
+    text: 'Administro Linux, servicios, redes, contenedores e infraestructura.',
+  },
+  {
+    label: 'Automation',
+    glyph: '⟳',
+    text: 'Automatizo despliegues, tareas repetitivas, servicios e integraciones, incluidas las de IA.',
+  },
+] as const;
+---
+
+<Section id="perfil" index="01" label="Perfil" title="Del código a la infraestructura que lo ejecuta.">
+  <p slot="intro" class="mt-5 text-lg leading-relaxed text-fg-muted">
+    Mi perfil conecta desarrollo de producto y operaciones. Puedo trabajar desde la interfaz y el backend
+    hasta el despliegue, la red y la automatización que hacen que una solución sea realmente utilizable.
+  </p>
+
+  <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-start">
+    <ul class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+      {pillars.map((pillar, index) => (
+        <li data-reveal="tilt" style={`--reveal-delay:${index * 110}ms`}>
+          <div class="tilt spotlight group h-full rounded-lg border border-border bg-surface p-6 transition-colors hover:border-accent/50" data-tilt>
+            <span class="grid size-11 place-items-center rounded-md border border-accent/30 bg-accent/10 font-mono text-accent transition-transform duration-500 [transform:translateZ(30px)] group-hover:scale-110" aria-hidden="true">
+              {pillar.glyph}
+            </span>
+            <h3 class="label mt-5 text-fg [transform:translateZ(20px)]" lang="en">{pillar.label}</h3>
+            <p class="mt-2 leading-relaxed text-fg-muted">{pillar.text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div data-reveal="zoom" style="--reveal-delay:200ms">
+      <div class="tilt" data-tilt="0.6">
+        <SystemStatus />
+      </div>
+    </div>
+  </div>
+</Section>

@@ -1,0 +1,15 @@
+---
+interface Props {
+  pulse?: boolean;
+}
+
+const { pulse = false } = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-block size-2 shrink-0 rounded-full bg-success',
+    pulse && 'motion-safe:animate-[status-pulse_2.4s_ease-in-out_infinite]',
+  ]}
+  aria-hidden="true"
+></span>

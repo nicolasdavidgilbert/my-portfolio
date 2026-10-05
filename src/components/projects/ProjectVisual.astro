@@ -1,0 +1,41 @@
+---
+import type { ProjectVisual } from '../../types/project';
+import ArchitectureDiagram from '../systems/ArchitectureDiagram.astro';
+import TerminalCommand from '../systems/TerminalCommand.astro';
+import TerminalWindow from '../systems/TerminalWindow.astro';
+
+interface Props {
+  visual: ProjectVisual;
+  /** Host shown in the screenshot frame. */
+  host?: string;
+}
+
+const { visual, host } = Astro.props;
+---
+
+{visual.type === 'screenshot' && (
+  <figure class="overflow-hidden rounded-lg border border-border bg-surface">
+    {host && (
+      <figcaption class="border-b border-border px-4 py-2.5 font-mono text-xs text-fg-subtle">
+        <span aria-hidden="true">https://</span>{host}
+      </figcaption>
+    )}
+    <img
+      src={visual.src}
+      alt={visual.alt}
+      width={visual.width}
+      height={visual.height}
+      loading="lazy"
+      decoding="async"
+      class="block h-auto w-full"
+    />
+  </figure>
+)}
+
+{visual.type === 'terminal' && (
+  <TerminalWindow title={visual.title} meta="bash">
+    <TerminalCommand lines={visual.lines} />
+  </TerminalWindow>
+)}
+
+{visual.type === 'diagram' && <ArchitectureDiagram diagram={visual.diagram} />}

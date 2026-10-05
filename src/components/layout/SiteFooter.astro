@@ -1,0 +1,17 @@
+---
+import { person, sourceRepo } from '../../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-border">
+  <div class="mx-auto flex w-full max-w-page flex-col gap-3 px-gutter py-8 text-sm text-fg-subtle sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <p>© {year} {person.fullName}</p>
+    <p class="font-mono text-xs" lang="en">
+      Built with Astro + TypeScript + Tailwind <span aria-hidden="true">·</span>{' '}
+      <a href={sourceRepo} target="_blank" rel="noopener noreferrer" class="text-fg-muted underline-offset-4 hover:text-fg hover:underline">
+        Source code <span aria-hidden="true">→</span><span class="sr-only" lang="es">(se abre en una pestaña nueva)</span>
+      </a>
+    </p>
+  </div>
+</footer>

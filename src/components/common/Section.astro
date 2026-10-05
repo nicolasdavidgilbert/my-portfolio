@@ -1,0 +1,32 @@
+---
+interface Props {
+  id: string;
+  index: string;
+  label: string;
+  title: string;
+  class?: string;
+}
+
+const { id, index, label, title, class: className } = Astro.props;
+const headingId = `${id}-title`;
+---
+
+<section id={id} aria-labelledby={headingId} class:list={['relative overflow-clip border-t border-border py-section', className]}>
+  <span
+    class="pointer-events-none absolute -top-6 right-2 font-mono text-[9rem] leading-none font-bold text-transparent select-none [-webkit-text-stroke:1px_var(--color-border)] sm:right-8 sm:text-[13rem]"
+    data-parallax="-0.12"
+    aria-hidden="true">{index}</span
+  >
+  <div class="relative mx-auto w-full max-w-page px-gutter sm:px-6 lg:px-8">
+    <header class="mb-6 max-w-prose sm:mb-10" data-reveal>
+      <p class="label flex items-center gap-3 text-accent">
+        <span class="h-px w-8 bg-accent" aria-hidden="true"></span>
+        <span><span class="text-fg-subtle">{index} /</span> {label}</span>
+      </p>
+      <h2 id={headingId} class="mt-4 text-3xl font-semibold tracking-tight text-fg sm:text-5xl">{title}</h2>
+      <slot name="intro" />
+    </header>
+    <slot />
+  </div>
+  <slot name="bleed" />
+</section>

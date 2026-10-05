@@ -1,0 +1,66 @@
+---
+import type { TechItem } from '../../types/technology';
+
+interface Props {
+  item: TechItem;
+}
+
+const { item } = Astro.props;
+---
+
+<span class="tech-chip" style={`--brand:${item.color}`}>
+  <span class="tech-chip-icon" aria-hidden="true">
+    {item.icon ? (
+      <img src={item.icon} alt="" width="22" height="22" loading="lazy" decoding="async" class:list={[item.invert && 'icon-invert']} />
+    ) : (
+      <span class="font-mono text-xs font-bold text-[var(--brand)]">{item.label.slice(0, 2)}</span>
+    )}
+  </span>
+  {item.label}
+</span>
+
+<style>
+  .tech-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1.15rem 0.6rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-fg);
+    font-size: 0.95rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.25s,
+      box-shadow 0.35s;
+  }
+
+  .tech-chip:hover {
+    transform: translateY(-4px) scale(1.04);
+    border-color: color-mix(in srgb, var(--brand) 70%, transparent);
+    box-shadow: 0 12px 30px -12px color-mix(in srgb, var(--brand) 60%, transparent);
+  }
+
+  .tech-chip-icon {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--brand) 12%, var(--color-bg));
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .tech-chip:hover .tech-chip-icon {
+    transform: rotate(-12deg) scale(1.1);
+  }
+
+  .tech-chip-icon img {
+    width: 1.3rem;
+    height: 1.3rem;
+    object-fit: contain;
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+
+type Variant = 'primary' | 'secondary' | 'text';
+
+interface Props {
+  href: string;
+  variant?: Variant;
+  icon?: IconName;
+  /** Opens in a new tab and shows an outbound arrow. */
+  external?: boolean;
+  class?: string;
+}
+
+const { href, variant = 'secondary', icon, external = false, class: className } = Astro.props;
+
+const variants: Record<Variant, string> = {
+  primary: 'min-h-11 px-4 rounded-md bg-accent text-accent-contrast hover:bg-accent/90',
+  secondary: 'min-h-11 px-4 rounded-md border border-border-strong text-fg hover:border-fg-subtle hover:bg-surface',
+  text: 'min-h-11 text-fg-muted underline decoration-border-strong underline-offset-4 hover:text-fg hover:decoration-accent',
+};
+---
+
+<a
+  href={href}
+  class:list={[
+    'inline-flex items-center gap-2 text-sm font-medium transition-colors duration-150',
+    variants[variant],
+    className,
+  ]}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+>
+  {icon && <Icon name={icon} />}
+  <slot />
+  {external && (
+    <>
+      <Icon name="arrow-up-right" class="size-3.5 opacity-70" />
+      <span class="sr-only">(se abre en una pestaña nueva)</span>
+    </>
+  )}
+</a>

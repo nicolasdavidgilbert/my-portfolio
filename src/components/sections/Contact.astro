@@ -1,0 +1,78 @@
+---
+import Section from '../common/Section.astro';
+import Icon from '../ui/Icon.astro';
+import { person } from '../../data/site';
+import { getSocialLink } from '../../data/socialLinks';
+
+const email = getSocialLink('email');
+const profiles = [getSocialLink('github'), getSocialLink('linkedin')];
+---
+
+<Section id="contacto" index="06" label="Contacto" title="Construyamos algo útil." class="pb-32">
+  <p slot="intro" class="mt-4 text-lg leading-relaxed text-fg-muted">
+    Disponible para oportunidades de desarrollo, sistemas y automatización. Respondo directamente.
+  </p>
+
+  <div class="spotlight glow-border grid gap-10 rounded-2xl border border-border bg-surface/70 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start" data-reveal="tilt">
+    <div>
+      <p class="label text-fg-subtle">Email</p>
+      <a href={email.href} class="mt-2 inline-block text-xl font-medium break-all text-fg underline decoration-border-strong underline-offset-[6px] hover:decoration-accent sm:text-2xl">
+        {person.email}
+      </a>
+      <div class="mt-4 flex items-center gap-3">
+        <button
+          type="button"
+          hidden
+          data-copy-email={person.email}
+          class="inline-flex min-h-11 items-center gap-2 rounded-md border border-border-strong px-4 text-sm text-fg transition-colors hover:border-fg-subtle hover:bg-surface"
+        >
+          <Icon name="copy" />
+          Copiar email
+        </button>
+        <span class="font-mono text-xs text-success" role="status" data-copy-status></span>
+      </div>
+    </div>
+
+    <ul class="divide-y divide-border border-y border-border">
+      {profiles.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex min-h-16 items-center gap-4 py-3 text-fg transition-transform duration-300 hover:translate-x-1"
+          >
+            <Icon name={link.id} class="size-5 text-fg-muted group-hover:text-fg" />
+            <span class="grid min-w-0">
+              <span class="font-medium">{link.label}</span>
+              <span class="truncate font-mono text-xs text-fg-subtle">{link.display}</span>
+            </span>
+            <Icon name="arrow-up-right" class="ml-auto size-4 text-fg-subtle transition-[color,transform] duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />
+            <span class="sr-only">(se abre en una pestaña nueva)</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-copy-email]');
+  const status = document.querySelector<HTMLElement>('[data-copy-status]');
+
+  if (button && status && navigator.clipboard) {
+    button.hidden = false;
+    let resetTimer: number | undefined;
+
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copyEmail ?? '');
+        status.textContent = 'Copiado';
+      } catch {
+        status.textContent = 'No se pudo copiar';
+      }
+      window.clearTimeout(resetTimer);
+      resetTimer = window.setTimeout(() => (status.textContent = ''), 2000);
+    });
+  }
+</script>

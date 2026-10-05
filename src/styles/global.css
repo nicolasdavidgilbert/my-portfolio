@@ -1,198 +1,374 @@
-/* src/styles/global.css */
 @import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
 
+/* Keep Tailwind from scanning the committed repomix dump (old markup). */
+@source not "../../repomix-output.xml";
+
+/*
+ * Design tokens. Dark is the primary (and only) theme.
+ * Text colours meet WCAG AA on bg and surface; fg and fg-muted reach AAA.
+ */
 @theme {
-  --color-bg: #070c18;
-  --color-elev: #0f172a;
-  --color-text: #e6f0ff;
-  --color-muted: #9fb3d8;
-  --color-border: #1e2a4a;
-  --color-accent: #3b82f6;
-  --color-accent2: #60a5fa;
-  --color-accent-warm: #14b8a6;
-  --color-accent-warm2: #2dd4bf;
-  --color-code: #0c1530;
-  --color-ok: #22c55e;
-  --color-warn: #f59e0b;
-  --color-err: #ef4444;
+  --color-*: initial;
+  --color-bg: #0e1013;
+  --color-surface: #15181d;
+  --color-surface-raised: #1b1f25;
+  --color-border: #262b33;
+  --color-border-strong: #3a414c;
+  --color-fg: #e9ebee;
+  --color-fg-muted: #a6adb8;
+  --color-fg-subtle: #858d99;
+  --color-accent: #f2b45c;
+  --color-accent-contrast: #1c1307;
+  --color-success: #5fd38d;
+  --color-transparent: transparent;
+  --color-current: currentColor;
 
-  --shadow-card: 0 12px 30px rgba(0,0,0,.40);
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", monospace;
+
+  --container-page: 80rem;
+  --container-prose: 40rem;
+
+  --spacing-gutter: 1rem;
+  --spacing-section: 5rem;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.625rem;
+
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.4;
+
+  --animate-enter: enter 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-:root {
-  color-scheme: dark;
-}
-
-a:focus-visible,
-button:focus-visible,
-summary:focus-visible {
-  @apply outline-2 outline-offset-2 outline-accent2;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: scroll()) {
-    .site-header,
-    .site-header::before,
-    .site-header-inner,
-    .site-brand-icon,
-    .site-brand-copy,
-    .site-brand-title,
-    .site-brand-kicker,
-    .site-nav {
-      animation-duration: auto;
-      animation-timing-function: linear;
-      animation-fill-mode: both;
-      animation-timeline: scroll();
-      animation-range: 0 150px;
-    }
-
-    .site-header {
-      animation-name: header-add-shadow;
-    }
-
-    .site-header::before {
-      animation-name: header-collapse-gradient;
-    }
-
-    .site-header-inner {
-      animation-name: header-shrink-inner;
-    }
-
-    .site-brand-icon {
-      animation-name: header-shrink-icon;
-    }
-
-    .site-brand-copy {
-      animation-name: header-tighten-brand;
-    }
-
-    .site-brand-title {
-      animation-name: header-shrink-title;
-    }
-
-    .site-brand-kicker {
-      animation-name: header-fade-kicker;
-    }
-
-    .site-nav {
-      animation-name: header-move-nav;
-    }
-  }
-}
-
-@keyframes header-add-shadow {
-  to {
-    border-bottom-color: rgba(255, 255, 255, 0.08);
-    background-color: rgba(2, 6, 23, 0.88);
-    box-shadow: 0 10px 26px -18px rgba(0, 0, 0, 0.9), 0 1px 0 rgba(255, 255, 255, 0.06);
-  }
-}
-
-@keyframes header-collapse-gradient {
-  to {
-    bottom: 0;
-    opacity: 0;
-    transform: translateY(-0.75rem) scaleY(0.45);
-  }
-}
-
-@keyframes header-shrink-inner {
-  to {
-    padding-top: 0.55rem;
-    padding-bottom: 0.55rem;
-    gap: 0.75rem;
-  }
-}
-
-@keyframes header-shrink-icon {
-  to {
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 0.85rem;
-    box-shadow: inset 0 0 16px rgba(59, 130, 246, 0.16);
-  }
-}
-
-@keyframes header-tighten-brand {
-  to {
-    gap: 0;
-    translate: 0 -0.05rem;
-  }
-}
-
-@keyframes header-shrink-title {
-  to {
-    font-size: 0.78rem;
-  }
-}
-
-@keyframes header-fade-kicker {
-  to {
-    opacity: 0;
-    transform: translateY(-0.25rem);
-  }
-}
-
-@keyframes header-move-nav {
-  to {
-    translate: 0 0.05rem;
-    scale: 0.94;
-    transform-origin: right center;
-  }
-}
-
-@keyframes fade-in-up {
+@keyframes enter {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(6px);
+  }
+}
+
+@keyframes status-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
   }
 
+  html {
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    color: var(--color-fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer utilities {
+  /* Monospace metadata label used across sections. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    line-height: var(--text-label--line-height);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion system. Everything below is opt-in via prefers-reduced-motion */
+/* and only hides content when JS is running (html.js).                 */
+/* ------------------------------------------------------------------ */
+
+@property --carousel-accent {
+  syntax: "<color>";
+  initial-value: #f2b45c;
+  inherits: true;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-angle {
   to {
-    opacity: 1;
-    transform: translateY(0);
+    --angle: 360deg;
   }
 }
 
-/* Custom animation keyframes used by Tailwind arbitrary animation utilities */
-@keyframes story-scroll-next {
-  from { opacity: 0; transform: translateY(2.5rem); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes float {
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
 }
 
-@keyframes story-scroll-prev {
-  from { opacity: 0; transform: translateY(-2.5rem); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes cursor-blink {
-  50% { opacity: 0; }
-}
-
-@keyframes data-flow {
-  from { left: -5px; }
-  to { left: 100%; }
-}
-
-@keyframes network-pulse {
-  from { opacity: 0.8; transform: scale(0.4); }
-  to { opacity: 0; transform: scale(1.8); }
-}
-
-@keyframes call-pulse {
-  50% { box-shadow: 0 0 0 0.8rem rgba(251, 113, 133, 0); }
+@keyframes grid-flow {
+  to {
+    background-position: 0 64px;
+  }
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+  to {
+    transform: translateX(calc(-100% - var(--marquee-gap)));
+  }
 }
 
-.external-link-icon {
-  display: inline-block;
-  width: 0.9rem;
-  height: 0.9rem;
-  flex: 0 0 auto;
-  background-color: currentColor;
-  -webkit-mask: url('/icons/arrow-up-right.svg') center / contain no-repeat;
-  mask: url('/icons/arrow-up-right.svg') center / contain no-repeat;
+@keyframes packet-x {
+  from {
+    left: 0;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes packet-y {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100%;
+  }
+}
+
+@keyframes word-cycle {
+  0%,
+  4% {
+    opacity: 0;
+    transform: rotateX(-90deg) translateY(0.4em);
+  }
+  8%,
+  22% {
+    opacity: 1;
+    transform: rotateX(0) translateY(0);
+  }
+  26%,
+  100% {
+    opacity: 0;
+    transform: rotateX(90deg) translateY(-0.4em);
+  }
+}
+
+@keyframes scan {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes line-grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@layer components {
+  /* Scroll reveal */
+  @media (prefers-reduced-motion: no-preference) {
+    .js [data-reveal] {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0);
+      transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .js [data-reveal="tilt"] {
+      transform: perspective(1200px) rotateX(10deg) translate3d(0, 36px, 0);
+      transform-origin: 50% 100%;
+    }
+
+    .js [data-reveal="left"] {
+      transform: translate3d(-40px, 0, 0);
+    }
+
+    .js [data-reveal="zoom"] {
+      transform: scale(0.92);
+    }
+
+    .js [data-reveal].is-in {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Pointer-driven 3D tilt; JS sets --rx / --ry in degrees. */
+  .tilt {
+    transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .tilt.is-tilting {
+    transition-duration: 0.08s;
+  }
+
+  /* Cursor spotlight; JS sets --mx / --my in px. */
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 0%),
+      color-mix(in srgb, var(--color-accent) 14%, transparent),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .spotlight:hover::before {
+    opacity: 1;
+  }
+
+  /* Rotating conic border for highlighted surfaces. */
+  .glow-border {
+    position: relative;
+  }
+
+  .glow-border::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: var(--glow-width, 1px);
+    background: conic-gradient(
+      from var(--angle),
+      transparent 0deg,
+      var(--glow-color, var(--color-accent)) 50deg,
+      #fff8 70deg,
+      var(--glow-color, var(--color-accent)) 90deg,
+      transparent 160deg,
+      transparent 360deg
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: var(--glow-opacity, 0.9);
+    transition: opacity 0.6s;
+    pointer-events: none;
+    animation: spin-angle 5s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glow-border::after {
+      animation: none;
+      --angle: 200deg;
+    }
+  }
+
+  /* Perspective grid floor used behind hero and carousel. */
+  .grid-floor {
+    position: absolute;
+    inset-inline: -50%;
+    bottom: 0;
+    height: 60%;
+    perspective: 420px;
+    pointer-events: none;
+    mask-image: linear-gradient(to top, #000 10%, transparent 90%);
+  }
+
+  .grid-floor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: rotateX(68deg);
+    transform-origin: 50% 100%;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--color-accent) 22%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--color-accent) 16%, transparent) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .grid-floor::before {
+      animation: grid-flow 2.4s linear infinite;
+    }
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    background: linear-gradient(100deg, var(--color-fg) 20%, var(--color-accent) 55%, #ff8a5c 80%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .text-gradient {
+      animation: gradient-pan 8s ease-in-out infinite alternate;
+    }
+  }
+
+  /* Icons that ship as black glyphs. */
+  .icon-invert {
+    filter: invert(1) brightness(0.9);
+  }
+}
+
+@keyframes gradient-pan {
+  to {
+    background-position: 100% 0;
+  }
 }

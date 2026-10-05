@@ -1,190 +1,73 @@
 ---
 import '../styles/global.css';
-import {
-  SOCIAL_IMAGE,
-  SITE_DESCRIPTION,
-  SITE_KEYWORDS,
-  SITE_NAME,
-  SITE_TITLE,
-  absoluteUrl,
-  personStructuredData,
-  portfolioStructuredData,
-  websiteStructuredData,
-} from '../data/seo';
+import SiteFooter from '../components/layout/SiteFooter.astro';
+import SiteHeader from '../components/layout/SiteHeader.astro';
+import { SITE_DESCRIPTION, SITE_TITLE, SOCIAL_IMAGE, absoluteUrl, person } from '../data/site';
+import { structuredData } from '../data/seo';
+import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 
-const {
-  title = SITE_TITLE,
-  description = SITE_DESCRIPTION,
-  image = SOCIAL_IMAGE,
-  type = 'profile',
-  structuredData = [websiteStructuredData, personStructuredData, portfolioStructuredData],
-} = Astro.props;
+interface Props {
+  title?: string;
+  description?: string;
+}
 
+const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
 const canonicalUrl = absoluteUrl(Astro.url.pathname);
-const imageUrl = absoluteUrl(image);
-const jsonLd = JSON.stringify(structuredData);
+const imageUrl = absoluteUrl(SOCIAL_IMAGE);
 ---
 
 <!doctype html>
-<html lang="es" class="dark scroll-smooth">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content="Nicolás David Gilbert González" />
-    <meta name="creator" content="Nicolás David Gilbert González" />
-    <meta name="publisher" content="Nicolás David Gilbert González" />
-    <meta name="keywords" content={SITE_KEYWORDS.join(', ')} />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="theme-color" content="#070c18" />
+    <meta name="author" content={person.fullName} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#0e1013" />
     <meta name="color-scheme" content="dark" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content={SITE_NAME} />
-    <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
 
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="profile" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:type" content={type} />
-    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:site_name" content={person.fullName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={imageUrl} />
-    <meta property="og:image:secure_url" content={imageUrl} />
-    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Portfolio de Nicolás David Gilbert González" />
+    <meta property="og:image:alt" content={`Portfolio de ${person.fullName}`} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
-    <meta name="twitter:image:alt" content="Portfolio de Nicolás David Gilbert González" />
 
-    <title>{title}</title>
-    <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" href={canonicalUrl} hreflang="es" />
-    <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="shortcut icon" href="/favicon.svg" />
-    <link rel="mask-icon" href="/favicon.svg" color="#60a5fa" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <script is:inline type="application/ld+json" set:html={jsonLd}></script>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(structuredData)} />
   </head>
-  <body class="relative min-h-screen overflow-x-hidden bg-bg bg-[linear-gradient(180deg,rgba(2,6,23,0.08)_0%,rgba(7,12,24,0)_32rem,rgba(2,6,23,0.22)_100%)] font-sans leading-7 text-text antialiased">
-    <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
-      <div class="absolute inset-x-0 top-0 h-[34rem] bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.11),transparent_62%)]"></div>
-      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.026)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.026)_1px,transparent_1px)] bg-[size:56px_56px] opacity-35"></div>
-    </div>
-
-    <div class="relative flex min-h-screen flex-col">
-      <a
-        href="#content"
-        class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:border focus:border-border focus:bg-elev focus:px-4 focus:py-2"
-      >
-        Saltar al contenido
-      </a>
-
-      <header class="site-header sticky top-0 z-40 isolate border-b border-transparent bg-transparent shadow-none backdrop-blur-xl before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:-bottom-9 before:-z-10 before:bg-[linear-gradient(180deg,rgba(7,12,24,0.92)_0%,rgba(7,12,24,0.62)_54%,rgba(7,12,24,0)_100%)]">
-        <div class="site-header-inner relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-          <a href="#top" class="group inline-flex items-center gap-3">
-            <span class="site-brand-icon grid h-11 w-11 place-items-center rounded-lg border border-white/10 bg-slate-950/80 shadow-[inset_0_0_24px_rgba(59,130,246,0.18)] transition-transform duration-300 group-hover:-translate-y-0.5">
-              <img src="/favicon.svg" alt="Nico" class="h-6 w-6" />
-            </span>
-            <span class="site-brand-copy hidden flex-col leading-none sm:flex">
-              <span class="site-brand-kicker text-[11px] uppercase tracking-[0.28em] text-muted">Portfolio</span>
-              <span class="site-brand-title text-sm font-semibold text-white/90">Nicolás David</span>
-            </span>
-          </a>
-
-          <nav class="site-nav hidden items-center gap-1 md:flex" aria-label="Navegación principal">
-            <a class="site-nav-link relative inline-flex min-h-10 items-center rounded-md px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[rgba(230,240,255,0.66)] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-accent2 after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#about" data-nav-link>Perfil</a>
-            <a class="site-nav-link relative inline-flex min-h-10 items-center rounded-md px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[rgba(230,240,255,0.66)] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-accent2 after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#proyectos" data-nav-link>Proyectos</a>
-            <a class="site-nav-link relative inline-flex min-h-10 items-center rounded-md px-3 py-[0.45rem] text-[0.72rem] font-semibold text-[rgba(230,240,255,0.66)] transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-accent2 after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#skills" data-nav-link>Skills</a>
-            <a class="site-nav-link site-nav-contact relative ml-1 inline-flex min-h-10 items-center rounded-md border border-accent2/35 px-3 py-[0.45rem] text-[0.72rem] font-semibold text-accent2 transition-[color,background-color] duration-200 after:absolute after:inset-x-3 after:bottom-[0.28rem] after:h-px after:origin-left after:scale-x-0 after:bg-accent2 after:transition-transform after:duration-[220ms] hover:bg-white/[0.045] hover:text-white [&.is-active]:bg-white/[0.045] [&.is-active]:text-white [&.is-active]:after:scale-x-100" href="#contacto" data-nav-link>Contacto</a>
-          </nav>
-
-          <details class="group relative md:hidden" data-site-menu>
-            <summary class="site-menu-toggle grid h-[2.65rem] w-[2.65rem] cursor-pointer list-none place-items-center rounded-md border border-[rgba(255,255,255,0.12)] bg-[rgba(8,14,27,0.86)] text-[rgba(255,255,255,0.86)] transition-[border-color,background-color] duration-200 hover:border-accent2/50 hover:bg-[#101827] [&::-webkit-details-marker]:hidden">
-              <span class="sr-only">Abrir navegación</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-open:rotate-90" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </summary>
-
-            <nav class="site-mobile-nav absolute right-0 top-[calc(100%+0.6rem)] grid w-[min(17rem,calc(100vw-2rem))] overflow-hidden rounded-lg border border-[rgba(255,255,255,0.12)] bg-[rgba(7,12,24,0.97)] shadow-[0_1.25rem_3rem_rgba(0,0,0,0.32)] backdrop-blur-[18px]" aria-label="Navegación móvil">
-              <a class="flex min-h-[3.25rem] items-center justify-between border-b border-white/[0.07] px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(96,165,250,0.07)] hover:text-white [&.is-active]:bg-[rgba(96,165,250,0.07)] [&.is-active]:text-white" href="#about" data-nav-link>Perfil <span class="font-mono text-[0.58rem] text-accent2" aria-hidden="true">01</span></a>
-              <a class="flex min-h-[3.25rem] items-center justify-between border-b border-white/[0.07] px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(96,165,250,0.07)] hover:text-white [&.is-active]:bg-[rgba(96,165,250,0.07)] [&.is-active]:text-white" href="#proyectos" data-nav-link>Proyectos <span class="font-mono text-[0.58rem] text-accent2" aria-hidden="true">02</span></a>
-              <a class="flex min-h-[3.25rem] items-center justify-between border-b border-white/[0.07] px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(96,165,250,0.07)] hover:text-white [&.is-active]:bg-[rgba(96,165,250,0.07)] [&.is-active]:text-white" href="#skills" data-nav-link>Skills <span class="font-mono text-[0.58rem] text-accent2" aria-hidden="true">03</span></a>
-              <a class="flex min-h-[3.25rem] items-center justify-between px-[0.9rem] py-3 text-[0.82rem] font-semibold text-[rgba(230,240,255,0.78)] hover:bg-[rgba(96,165,250,0.07)] hover:text-white [&.is-active]:bg-[rgba(96,165,250,0.07)] [&.is-active]:text-white" href="#contacto" data-nav-link>Contacto <span class="font-mono text-[0.58rem] text-accent2" aria-hidden="true">04</span></a>
-            </nav>
-          </details>
-        </div>
-      </header>
-
-      <main id="content" class="relative z-10 flex-1">
-        <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-          <slot />
-        </div>
-      </main>
-
-      <footer class="relative z-10 border-t border-white/[0.06] bg-transparent">
-        <div class="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-5 text-sm text-muted sm:px-6 lg:px-8 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Nicolás David Gilbert González</p>
-          <p class="font-mono text-[11px] uppercase tracking-[0.24em] text-muted/80">Astro + Tailwind CSS</p>
-        </div>
-      </footer>
-    </div>
+  <body class="min-h-screen overflow-x-clip">
+    <a
+      href="#content"
+      class="sr-only rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-contrast focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50"
+    >
+      Saltar al contenido
+    </a>
+    <div id="top"></div>
+    <SiteHeader />
+    <main id="content" tabindex="-1" class="outline-none">
+      <slot />
+    </main>
+    <SiteFooter />
     <script>
-      const initSiteNavigation = () => {
-        const menu = document.querySelector<HTMLDetailsElement>("[data-site-menu]");
-        const links = [...document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]")];
-        const sections = ["about", "proyectos", "skills", "contacto"]
-          .map((id) => document.getElementById(id))
-          .filter((section): section is HTMLElement => Boolean(section));
-
-        links.forEach((link) => {
-          if (link.dataset.bound === "true") return;
-          link.dataset.bound = "true";
-          link.addEventListener("click", () => menu?.removeAttribute("open"));
-        });
-
-        if (document.documentElement.dataset.navSpyReady === "true") return;
-        document.documentElement.dataset.navSpyReady = "true";
-
-        const setActive = (id: string) => {
-          links.forEach((link) => {
-            const active = link.getAttribute("href") === "#" + id;
-            link.classList.toggle("is-active", active);
-            if (active) link.setAttribute("aria-current", "true");
-            else link.removeAttribute("aria-current");
-          });
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-          const visible = entries
-            .filter((entry) => entry.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-          if (visible?.target.id) setActive(visible.target.id);
-        }, { rootMargin: "-30% 0px -55%", threshold: [0, 0.15, 0.35, 0.6] });
-
-        sections.forEach((section) => observer.observe(section));
-      };
-
-      initSiteNavigation();
-      document.addEventListener("astro:page-load", initSiteNavigation);
+      import '../scripts/motion';
     </script>
   </body>
 </html>

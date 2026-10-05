@@ -1,0 +1,96 @@
+---
+import type { ArchitectureDiagram } from '../../types/architecture';
+
+interface Props {
+  diagram: ArchitectureDiagram;
+  class?: string;
+}
+
+const { diagram, class: className } = Astro.props;
+---
+
+<figure class:list={['diagram @container rounded-lg border border-border bg-surface/80 p-4 sm:p-5', className]}>
+  <figcaption class="label mb-4 flex items-center gap-2 text-fg-subtle">
+    <span class="size-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+    {diagram.title}
+  </figcaption>
+  <ol class="flex flex-col gap-0 @xl:flex-row @xl:items-stretch">
+    {diagram.stages.map((stage, index) => (
+      <li class="flex flex-col @xl:flex-1 @xl:flex-row @xl:items-center" style={`--stage:${index}`}>
+        <ul class="flex flex-1 flex-col gap-2">
+          {stage.map((node) => (
+            <li class="node rounded-md border border-border-strong bg-bg px-3 py-2.5">
+              <span class="block text-sm font-medium text-fg">{node.label}</span>
+              {node.detail && <span class="mt-0.5 block font-mono text-xs text-fg-subtle">{node.detail}</span>}
+            </li>
+          ))}
+        </ul>
+        {index < diagram.stages.length - 1 && <span class="link" aria-hidden="true"><i></i></span>}
+      </li>
+    ))}
+  </ol>
+</figure>
+
+<style>
+  .node {
+    position: relative;
+    transition:
+      border-color 0.25s,
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s;
+  }
+
+  .node:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--color-accent) 70%, transparent);
+  }
+
+  /* Connector with a travelling packet; vertical by default. */
+  .link {
+    position: relative;
+    align-self: center;
+    width: 2px;
+    height: 1.75rem;
+    background: linear-gradient(var(--color-border-strong), var(--color-accent));
+  }
+
+  .link i {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 999px;
+    background: var(--color-accent);
+    box-shadow: 0 0 10px var(--color-accent);
+  }
+
+  @container (min-width: 36rem) {
+    .link {
+      width: 2.25rem;
+      height: 2px;
+      margin-inline: 0.5rem;
+      background: linear-gradient(90deg, var(--color-border-strong), var(--color-accent));
+    }
+
+    .link i {
+      top: 50%;
+      left: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .link i {
+      animation: packet-y 1.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+      animation-delay: calc(var(--stage) * 0.4s);
+    }
+
+    @container (min-width: 36rem) {
+      .link i {
+        animation-name: packet-x;
+      }
+    }
+  }
+</style>

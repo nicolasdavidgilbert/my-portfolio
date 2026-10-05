@@ -1,0 +1,18 @@
+---
+interface Props {
+  title: string;
+  /** Short label on the right side of the title bar, e.g. "bash". */
+  meta?: string;
+  class?: string;
+}
+
+const { title, meta, class: className } = Astro.props;
+---
+
+<div class:list={['overflow-hidden rounded-lg border border-border bg-surface', className]}>
+  <div class="flex items-center justify-between gap-3 border-b border-border px-4 py-2.5 font-mono text-xs text-fg-subtle">
+    <span class="truncate">{title}</span>
+    {meta && <span class="shrink-0">{meta}</span>}
+  </div>
+  <slot />
+</div>

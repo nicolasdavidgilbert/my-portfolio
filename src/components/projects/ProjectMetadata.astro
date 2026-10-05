@@ -1,0 +1,15 @@
+---
+interface Props {
+  index: number;
+  category: string;
+  date: string;
+}
+
+const { index, category, date } = Astro.props;
+const number = String(index + 1).padStart(2, '0');
+---
+
+<p class="label flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+  <span class="text-[var(--accent,var(--color-accent))]"><span class="text-fg-subtle">{number} /</span> {category}</span>
+  <time datetime={date} class="text-fg-subtle">{date}</time>
+</p>

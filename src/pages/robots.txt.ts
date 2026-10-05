@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { absoluteUrl } from '../data/seo';
+import { absoluteUrl } from '../data/site';
 
 export const GET: APIRoute = () =>
   new Response(

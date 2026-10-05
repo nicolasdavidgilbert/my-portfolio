@@ -1,0 +1,156 @@
+---
+import ButtonLink from '../ui/ButtonLink.astro';
+import StatusDot from '../ui/StatusDot.astro';
+import InfraStack from '../hero/InfraStack.astro';
+import { cvUrl, person } from '../../data/site';
+import { getSocialLink } from '../../data/socialLinks';
+
+const github = getSocialLink('github');
+const linkedin = getSocialLink('linkedin');
+const focusWords = ['aplicaciones', 'infraestructura', 'automatización', 'redes'] as const;
+---
+
+<section aria-labelledby="hero-title" class="spotlight relative overflow-clip">
+  <div class="grid-floor" aria-hidden="true"></div>
+  <div
+    class="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[60rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--color-accent)_16%,transparent),transparent)] blur-2xl"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative mx-auto grid w-full max-w-page items-center gap-10 px-gutter pt-14 pb-section sm:px-6 sm:pt-20 lg:grid-cols-[minmax(0,1fr)_26rem] lg:gap-8 lg:px-8 lg:pt-24 lg:pb-32">
+    <div>
+      <p class="hero-in label flex flex-wrap items-center gap-x-3 gap-y-1 text-fg-muted" style="--d:0ms">
+        {person.available && (
+          <span class="inline-flex items-center gap-2 rounded-full border border-success/30 bg-success/10 px-3 py-1 text-fg">
+            <StatusDot pulse /> Disponible para oportunidades
+          </span>
+        )}
+        <span>{person.location}</span>
+      </p>
+
+      <h1 id="hero-title" class="hero-in mt-6 text-[2.6rem] leading-[1.02] font-semibold tracking-tight sm:text-6xl lg:text-7xl" style="--d:90ms">
+        <span class="text-gradient">{person.fullName}</span>
+      </h1>
+
+      <p class="hero-in mt-6 text-xl font-medium text-fg sm:text-2xl" style="--d:180ms">
+        Desarrollo de software <span class="text-accent">&amp;</span> administración de sistemas
+      </p>
+
+      <p class="hero-in mt-3 flex flex-wrap items-baseline gap-x-2 font-mono text-sm text-fg-muted sm:text-base" style="--d:240ms">
+        <span><span class="text-accent">$</span> build --focus</span>
+        <span class="word-cycle" aria-hidden="true">
+          {focusWords.map((word, index) => <span style={`--w:${index}`}>{word}</span>)}
+        </span>
+        <span class="sr-only">{focusWords.join(', ')}</span>
+      </p>
+
+      <p class="hero-in mt-6 max-w-prose text-lg leading-relaxed text-fg-muted" style="--d:300ms">
+        Construyo aplicaciones completas y administro la infraestructura que las mantiene en marcha.
+        Combino desarrollo, Linux, redes e integración de IA con una visión práctica de producto.
+      </p>
+
+      <div class="hero-in mt-8 flex flex-wrap items-center gap-3" style="--d:380ms">
+        <ButtonLink href="#proyectos" variant="primary">
+          Ver proyectos
+        </ButtonLink>
+        <ButtonLink href={github.href} icon="github" external>
+          {github.label}
+        </ButtonLink>
+        <ButtonLink href={linkedin.href} variant="text" external class="ml-1">
+          {linkedin.label}
+        </ButtonLink>
+        {cvUrl && (
+          <ButtonLink href={cvUrl} variant="text" class="ml-1">
+            CV
+          </ButtonLink>
+        )}
+      </div>
+    </div>
+
+    <div class="hero-in" style="--d:200ms">
+      <InfraStack />
+    </div>
+  </div>
+
+  <a
+    href="#perfil"
+    class="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 font-mono text-xs text-fg-subtle transition-colors hover:text-fg lg:flex"
+  >
+    scroll
+    <span class="scroll-cue" aria-hidden="true"></span>
+  </a>
+</section>
+
+<style>
+  .word-cycle {
+    position: relative;
+    display: inline-grid;
+    perspective: 400px;
+    color: var(--color-accent);
+  }
+
+  .word-cycle > span {
+    grid-area: 1 / 1;
+    transform-origin: 50% 50% -0.5em;
+    backface-visibility: hidden;
+  }
+
+  .word-cycle > span:not(:first-child) {
+    visibility: hidden;
+  }
+
+  .scroll-cue {
+    width: 1.25rem;
+    height: 2rem;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 999px;
+    position: relative;
+  }
+
+  .scroll-cue::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0.4rem;
+    width: 3px;
+    height: 6px;
+    margin-left: -1.5px;
+    border-radius: 2px;
+    background: var(--color-accent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-in {
+      animation: hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: var(--d, 0ms);
+    }
+
+    .word-cycle > span {
+      opacity: 0;
+      animation: word-cycle 10s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+      animation-delay: calc(var(--w) * 2.5s - 0.4s);
+    }
+
+    .word-cycle > span:not(:first-child) {
+      visibility: visible;
+    }
+
+    .scroll-cue::after {
+      animation: cue 1.8s ease-in-out infinite;
+    }
+  }
+
+  @keyframes hero-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 24px, 0);
+      filter: blur(6px);
+    }
+  }
+
+  @keyframes cue {
+    0% { transform: translateY(0); opacity: 1; }
+    70% { transform: translateY(12px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 0; }
+  }
+</style>

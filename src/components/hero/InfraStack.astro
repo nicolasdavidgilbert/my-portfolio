@@ -1,0 +1,243 @@
+---
+/**
+ * Isometric 3D stack showing the layers the profile covers, from the
+ * Linux base up to the applications. Purely decorative: the same
+ * information is in the hero text and the Perfil section.
+ */
+const layers = [
+  { name: 'Apps', detail: 'React · Next.js · Astro', tone: 'accent' },
+  { name: 'Servicios', detail: 'Docker · Flask · Node.js', tone: 'warm' },
+  { name: 'Red', detail: 'Nginx · LAN · arping', tone: 'cool' },
+  { name: 'Linux', detail: 'Bash · tar · find', tone: 'base' },
+] as const;
+---
+
+<div class="infra-scene" data-infra aria-hidden="true">
+  <div class="infra-stack" data-infra-stack>
+    {layers.map((layer, index) => (
+      <div class:list={['infra-layer', `infra-layer--${layer.tone}`]} style={`--i:${layers.length - 1 - index}`}>
+        <div class="infra-float">
+          <div class="infra-plane">
+            <span class="infra-scan"></span>
+            <span class="infra-dots"><i></i><i></i><i></i></span>
+            <span class="infra-label">
+              <strong>{layer.name}</strong>
+              <small>{layer.detail}</small>
+            </span>
+          </div>
+        </div>
+      </div>
+    ))}
+    <span class="infra-beam"></span>
+  </div>
+</div>
+
+<style>
+  .infra-scene {
+    --size: min(21rem, 68vw);
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: calc(var(--size) * 1.55);
+    padding-top: calc(var(--size) * 0.12);
+    perspective: 1400px;
+    touch-action: pan-y;
+  }
+
+  /* --rx / --rz / --spread are eased every frame by the script below. */
+  .infra-stack {
+    --rx: 0deg;
+    --rz: 0deg;
+    --spread: 0;
+    position: relative;
+    width: var(--size);
+    height: var(--size);
+    transform-style: preserve-3d;
+    transform: rotateX(calc(58deg + var(--rx))) rotateZ(calc(-40deg + var(--rz)));
+  }
+
+  .infra-layer {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    transform: translateZ(calc(var(--i) * var(--size) * (0.19 + var(--spread) * 0.07)));
+  }
+
+  .infra-float {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+  }
+
+  .infra-plane {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: 1.1rem;
+    border: 1px solid color-mix(in srgb, var(--tone) 55%, transparent);
+    background:
+      linear-gradient(color-mix(in srgb, var(--tone) 10%, transparent) 1px, transparent 1px) 0 0 / 22px 22px,
+      linear-gradient(90deg, color-mix(in srgb, var(--tone) 10%, transparent) 1px, transparent 1px) 0 0 / 22px 22px,
+      color-mix(in srgb, var(--tone) 9%, var(--color-surface));
+    box-shadow:
+      0 0 0 1px rgb(0 0 0 / 0.3),
+      0 30px 60px -20px color-mix(in srgb, var(--tone) 45%, transparent),
+      inset 0 0 40px color-mix(in srgb, var(--tone) calc(12% + var(--spread) * 10%), transparent);
+  }
+
+  .infra-layer--accent { --tone: var(--color-accent); }
+  .infra-layer--warm { --tone: #ff8a5c; }
+  .infra-layer--cool { --tone: #6fb7ff; }
+  .infra-layer--base { --tone: var(--color-success); }
+
+  .infra-label {
+    position: absolute;
+    left: 1rem;
+    bottom: 0.9rem;
+    display: grid;
+    gap: 0.15rem;
+    font-family: var(--font-mono);
+  }
+
+  .infra-label strong {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-fg);
+  }
+
+  .infra-label small {
+    font-size: 0.66rem;
+    color: color-mix(in srgb, var(--tone) 75%, var(--color-fg));
+  }
+
+  .infra-dots {
+    position: absolute;
+    top: 0.9rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .infra-dots i {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 999px;
+    background: var(--tone);
+    opacity: 0.35;
+  }
+
+  .infra-dots i:first-child {
+    opacity: 1;
+    box-shadow: 0 0 10px var(--tone);
+  }
+
+  .infra-scan {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--tone) 22%, transparent), transparent);
+    transform: translateX(-100%);
+  }
+
+  .infra-beam {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2px;
+    height: calc(var(--size) * (0.59 + var(--spread) * 0.21));
+    background: linear-gradient(to top, transparent, var(--color-accent), transparent);
+    transform-origin: 50% 0;
+    transform: rotateX(-90deg);
+    opacity: calc(0.5 + var(--spread) * 0.5);
+    filter: drop-shadow(0 0 6px var(--color-accent));
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .infra-float {
+      animation: layer-float 7s ease-in-out infinite;
+      animation-delay: calc(var(--i) * -0.9s);
+    }
+
+    .infra-scan {
+      animation: scan 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+      animation-delay: calc(var(--i) * 0.8s);
+    }
+  }
+
+  @keyframes layer-float {
+    50% {
+      transform: translateZ(9px);
+    }
+  }
+</style>
+
+<script>
+  const scene = document.querySelector<HTMLElement>('[data-infra]');
+  const stack = scene?.querySelector<HTMLElement>('[data-infra-stack]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (scene && stack && !reduceMotion) {
+    // Pointer anywhere in the hero steers the stack; hovering the stack itself spreads the layers.
+    const area = scene.closest('section') ?? scene;
+    const current = { rx: 0, rz: 0, spread: 0 };
+    const target = { rx: 0, rz: 0, spread: 0 };
+    let pointerActive = false;
+    let visible = true;
+    let frame = 0;
+    let last = performance.now();
+
+    const step = (now: number) => {
+      const dt = Math.min(64, now - last);
+      last = now;
+
+      if (!pointerActive) {
+        // Gentle idle sway so the stack never looks frozen.
+        target.rx = Math.sin(now / 3100) * 3;
+        target.rz = Math.sin(now / 2300) * 7;
+      }
+
+      // Frame-rate independent exponential easing.
+      const ease = 1 - Math.exp(-dt / 160);
+      current.rx += (target.rx - current.rx) * ease;
+      current.rz += (target.rz - current.rz) * ease;
+      current.spread += (target.spread - current.spread) * (1 - Math.exp(-dt / 220));
+
+      stack.style.setProperty('--rx', `${current.rx.toFixed(3)}deg`);
+      stack.style.setProperty('--rz', `${current.rz.toFixed(3)}deg`);
+      stack.style.setProperty('--spread', current.spread.toFixed(4));
+
+      frame = visible ? requestAnimationFrame(step) : 0;
+    };
+
+    const start = () => {
+      if (frame) return;
+      last = performance.now();
+      frame = requestAnimationFrame(step);
+    };
+
+    area.addEventListener('pointermove', (event) => {
+      if (event.pointerType !== 'mouse') return;
+      const rect = scene.getBoundingClientRect();
+      const x = (event.clientX - (rect.left + rect.width / 2)) / window.innerWidth;
+      const y = (event.clientY - (rect.top + rect.height / 2)) / window.innerHeight;
+      pointerActive = true;
+      target.rz = Math.max(-1, Math.min(1, x * 2)) * 16;
+      target.rx = Math.max(-1, Math.min(1, -y * 2)) * 9;
+    });
+
+    area.addEventListener('pointerleave', () => {
+      pointerActive = false;
+      target.spread = 0;
+    });
+
+    scene.addEventListener('pointerenter', () => (target.spread = 1));
+    scene.addEventListener('pointerleave', () => (target.spread = 0));
+
+    new IntersectionObserver(([entry]) => {
+      visible = entry?.isIntersecting ?? true;
+      if (visible) start();
+    }).observe(scene);
+
+    start();
+  }
+</script>

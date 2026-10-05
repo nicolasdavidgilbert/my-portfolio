@@ -1,74 +1,76 @@
 ---
 import ButtonLink from '../ui/ButtonLink.astro';
+import Icon from '../ui/Icon.astro';
 import StatusDot from '../ui/StatusDot.astro';
-import InfraStack from '../hero/InfraStack.astro';
+import HeroVisual from '../hero/HeroVisual.astro';
 import { cvUrl, person } from '../../data/site';
 import { getSocialLink } from '../../data/socialLinks';
 
 const github = getSocialLink('github');
 const linkedin = getSocialLink('linkedin');
-const focusWords = ['aplicaciones', 'infraestructura', 'automatización', 'redes'] as const;
 ---
 
 <section aria-labelledby="hero-title" class="spotlight relative overflow-clip">
   <div class="grid-floor" aria-hidden="true"></div>
   <div
-    class="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[60rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--color-accent)_16%,transparent),transparent)] blur-2xl"
+    class="pointer-events-none absolute -top-40 left-[20%] h-[36rem] w-[50rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--color-accent)_14%,transparent),transparent)] blur-2xl"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="pointer-events-none absolute top-10 right-[-10%] h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--color-success)_10%,transparent),transparent)] blur-2xl"
     aria-hidden="true"
   ></div>
 
-  <div class="relative mx-auto grid w-full max-w-page items-center gap-10 px-gutter pt-14 pb-section sm:px-6 sm:pt-20 lg:grid-cols-[minmax(0,1fr)_26rem] lg:gap-8 lg:px-8 lg:pt-24 lg:pb-32">
-    <div>
-      <p class="hero-in label flex flex-wrap items-center gap-x-3 gap-y-1 text-fg-muted" style="--d:0ms">
-        {person.available && (
-          <span class="inline-flex items-center gap-2 rounded-full border border-success/30 bg-success/10 px-3 py-1 text-fg">
-            <StatusDot pulse /> Disponible para oportunidades
-          </span>
-        )}
-        <span>{person.location}</span>
-      </p>
-
-      <h1 id="hero-title" class="hero-in mt-6 text-[2.6rem] leading-[1.02] font-semibold tracking-tight sm:text-6xl lg:text-7xl" style="--d:90ms">
-        <span class="text-gradient">{person.fullName}</span>
-      </h1>
-
-      <p class="hero-in mt-6 text-xl font-medium text-fg sm:text-2xl" style="--d:180ms">
-        Desarrollo de software <span class="text-accent">&amp;</span> administración de sistemas
-      </p>
-
-      <p class="hero-in mt-3 flex flex-wrap items-baseline gap-x-2 font-mono text-sm text-fg-muted sm:text-base" style="--d:240ms">
-        <span><span class="text-accent">$</span> build --focus</span>
-        <span class="word-cycle" aria-hidden="true">
-          {focusWords.map((word, index) => <span style={`--w:${index}`}>{word}</span>)}
+  <div class="relative mx-auto w-full max-w-page px-gutter pt-8 pb-section sm:px-6 lg:px-8 lg:pb-32">
+    <div class="hero-in label flex flex-wrap items-center justify-between gap-3 text-fg-muted" style="--d:0ms">
+      {person.available && (
+        <span class="inline-flex items-center gap-2 rounded-full border border-success/30 bg-success/10 px-3 py-1 text-fg">
+          <StatusDot pulse /> Disponible para oportunidades
         </span>
-        <span class="sr-only">{focusWords.join(', ')}</span>
-      </p>
-
-      <p class="hero-in mt-6 max-w-prose text-lg leading-relaxed text-fg-muted" style="--d:300ms">
-        Construyo aplicaciones completas y administro la infraestructura que las mantiene en marcha.
-        Combino desarrollo, Linux, redes e integración de IA con una visión práctica de producto.
-      </p>
-
-      <div class="hero-in mt-8 flex flex-wrap items-center gap-3" style="--d:380ms">
-        <ButtonLink href="#proyectos" variant="primary">
-          Ver proyectos
-        </ButtonLink>
-        <ButtonLink href={github.href} icon="github" external>
-          {github.label}
-        </ButtonLink>
-        <ButtonLink href={linkedin.href} variant="text" external class="ml-1">
-          {linkedin.label}
-        </ButtonLink>
-        {cvUrl && (
-          <ButtonLink href={cvUrl} variant="text" class="ml-1">
-            CV
-          </ButtonLink>
-        )}
-      </div>
+      )}
+      <span>{person.location}</span>
     </div>
 
-    <div class="hero-in" style="--d:200ms">
-      <InfraStack />
+    <div class="mt-12 grid items-center gap-12 lg:mt-16 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-10">
+      <div>
+        <h1 id="hero-title">
+          <span class="hero-in block text-base font-medium text-fg-muted sm:text-lg" style="--d:60ms">
+            {person.fullName}
+          </span>
+          <span class="mt-5 block text-[clamp(2.5rem,4.7vw,4.25rem)] leading-[1] font-semibold tracking-tight" lang="en">
+            <span class="hero-in block text-fg" style="--d:130ms">Software Developer</span>
+            <span class="hero-in my-2 block text-[0.5em] font-normal text-fg-subtle" style="--d:190ms">&amp;</span>
+            <span class="hero-in block" style="--d:250ms"><span class="hero-gradient">Systems Administrator.</span></span>
+          </span>
+        </h1>
+
+        <p class="hero-in mt-8 max-w-prose text-lg leading-relaxed text-fg-muted" style="--d:330ms">
+          Construyo aplicaciones completas y administro la infraestructura que las mantiene en marcha.
+          Combino desarrollo, Linux, redes e integración de IA con una visión práctica de producto.
+        </p>
+
+        <div class="hero-in mt-9 flex flex-wrap items-center gap-3" style="--d:410ms">
+          <ButtonLink href="#proyectos" variant="primary" class="group">
+            Ver proyectos
+            <Icon name="arrow-down" class="size-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+          </ButtonLink>
+          <ButtonLink href={github.href} icon="github" external>
+            {github.label}
+          </ButtonLink>
+          <ButtonLink href={linkedin.href} variant="text" external class="ml-1">
+            {linkedin.label}
+          </ButtonLink>
+          {cvUrl && (
+            <ButtonLink href={cvUrl} variant="text" class="ml-1">
+              CV
+            </ButtonLink>
+          )}
+        </div>
+      </div>
+
+      <div class="hero-in" style="--d:220ms">
+        <HeroVisual />
+      </div>
     </div>
   </div>
 
@@ -82,21 +84,12 @@ const focusWords = ['aplicaciones', 'infraestructura', 'automatización', 'redes
 </section>
 
 <style>
-  .word-cycle {
-    position: relative;
-    display: inline-grid;
-    perspective: 400px;
-    color: var(--color-accent);
-  }
-
-  .word-cycle > span {
-    grid-area: 1 / 1;
-    transform-origin: 50% 50% -0.5em;
-    backface-visibility: hidden;
-  }
-
-  .word-cycle > span:not(:first-child) {
-    visibility: hidden;
+  .hero-gradient {
+    background: linear-gradient(100deg, var(--color-accent) 0%, #ff8a5c 50%, var(--color-accent) 100%);
+    background-size: 160% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   .scroll-cue {
@@ -125,14 +118,8 @@ const focusWords = ['aplicaciones', 'infraestructura', 'automatización', 'redes
       animation-delay: var(--d, 0ms);
     }
 
-    .word-cycle > span {
-      opacity: 0;
-      animation: word-cycle 10s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-      animation-delay: calc(var(--w) * 2.5s - 0.4s);
-    }
-
-    .word-cycle > span:not(:first-child) {
-      visibility: visible;
+    .hero-gradient {
+      animation: gradient-pan 7s ease-in-out infinite alternate;
     }
 
     .scroll-cue::after {

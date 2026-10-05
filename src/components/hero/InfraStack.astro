@@ -45,6 +45,13 @@ const layers = [
     touch-action: pan-y;
   }
 
+  /* Next to the hero text the column narrows; scale the stack with the viewport. */
+  @media (min-width: 64rem) {
+    .infra-scene {
+      --size: min(21rem, 29vw);
+    }
+  }
+
   /* --rx / --rz / --spread are eased every frame by the script below. */
   .infra-stack {
     --rx: 0deg;

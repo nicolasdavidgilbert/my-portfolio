@@ -1,0 +1,289 @@
+---
+import Icon from '../ui/Icon.astro';
+import StatusDot from '../ui/StatusDot.astro';
+import InfraStack from './InfraStack.astro';
+import { SITE_HOST } from '../../data/site';
+
+/** Floating tags around the stack; each one links to the project that backs it. */
+const tags = [
+  { label: 'Linux', href: '#linux-backup-tui', project: 'Linux Backup TUI', position: 'tag--linux', depth: 14 },
+  { label: 'Docker', href: '#sistema-llamadas', project: 'Sistema de llamadas (docker-compose)', position: 'tag--docker', depth: 22 },
+  { label: 'TypeScript', href: '#cesta-plus-plus', project: 'Cesta++ (Next.js + TypeScript)', position: 'tag--ts', depth: 30 },
+] as const;
+
+const focusWords = ['aplicaciones', 'infraestructura', 'automatización', 'redes'] as const;
+---
+
+<div class="hero-visual" data-hero-visual>
+  <span class="visual-label" aria-hidden="true">software <span>&lt;-&gt;</span> systems</span>
+
+  <div class="orbit" aria-hidden="true">
+    <span class="orbit-ring"><i></i></span>
+    <span class="orbit-node"></span>
+  </div>
+
+  <div class="stack-slot">
+    <InfraStack />
+  </div>
+
+  <ul class="tags" aria-label="Tecnologías destacadas">
+    {tags.map((tag, index) => (
+      <li class:list={['tag', tag.position]} style={`--depth:${tag.depth};--float-delay:${index * -1.7}s`}>
+        <a href={tag.href} class="tag-link">
+          {tag.label}
+          <Icon name="arrow-up-right" class="size-3.5" />
+          <span class="sr-only">: ver {tag.project}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <div class="hero-terminal" style="--depth:10">
+    <p class="font-mono text-[0.8125rem]">
+      <span class="text-success">nico@{SITE_HOST}</span><span class="text-fg-subtle">:~$</span>{' '}
+      <span class="text-fg">whoami</span>
+    </p>
+    <p class="mt-3 border-b border-border pb-3 font-mono text-[0.95rem] text-fg">developer / systems administrator</p>
+    <p class="mt-3 flex flex-wrap items-baseline gap-x-2 font-mono text-[0.8125rem] text-fg-muted">
+      <span><span class="text-accent">$</span> build --focus</span>
+      <span class="word-cycle" aria-hidden="true">
+        {focusWords.map((word, index) => <span style={`--w:${index}`}>{word}</span>)}
+      </span>
+      <span class="sr-only">{focusWords.join(', ')}</span>
+    </p>
+    <p class="mt-2 flex items-center gap-2 font-mono text-xs text-fg-subtle">
+      <StatusDot pulse /> development <span class="text-accent">&lt;-&gt;</span> operations
+    </p>
+  </div>
+</div>
+
+<style>
+  .hero-visual {
+    --px: 0;
+    --py: 0;
+    position: relative;
+    display: grid;
+    justify-items: center;
+    width: 100%;
+    max-width: 36rem;
+    margin-inline: auto;
+  }
+
+  .visual-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-fg-subtle);
+  }
+
+  .visual-label span {
+    color: var(--color-accent);
+  }
+
+  /* Orbit ring behind the stack, with a packet travelling along it. */
+  .orbit {
+    position: absolute;
+    left: 50%;
+    top: 42%;
+    width: min(30rem, 92vw);
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    pointer-events: none;
+  }
+
+  .orbit-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--color-success) 22%, transparent);
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--color-success) 9%, transparent), transparent 75%);
+  }
+
+  .orbit-ring i {
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    margin-left: -3.5px;
+    border-radius: 999px;
+    background: var(--color-success);
+    box-shadow: 0 0 12px var(--color-success);
+  }
+
+  .orbit-node {
+    position: absolute;
+    top: 3%;
+    left: 50%;
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-success) 70%, var(--color-bg));
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-success) 12%, transparent);
+  }
+
+  .stack-slot {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .tags {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .tag {
+    position: absolute;
+    pointer-events: auto;
+    translate: calc(var(--px) * var(--depth) * 1px) calc(var(--py) * var(--depth) * 1px);
+    transition: translate 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .tag--linux { top: 12%; left: 0; }
+  .tag--docker { top: 40%; right: -0.5rem; }
+  .tag--ts { top: 55%; left: -0.5rem; }
+
+  .tag-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.5rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: 0.5rem;
+    border: 1px solid color-mix(in srgb, var(--color-success) 35%, var(--color-border));
+    background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+    backdrop-filter: blur(6px);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-fg);
+    box-shadow: 0 12px 30px -12px rgb(0 0 0 / 0.7);
+    transition:
+      border-color 0.25s,
+      color 0.25s,
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .tag-link:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    transform: translateY(-3px) scale(1.04);
+  }
+
+  .hero-terminal {
+    position: relative;
+    z-index: 3;
+    width: min(100%, 25rem);
+    margin-top: -4.5rem;
+    justify-self: end;
+    padding: 1.1rem 1.25rem;
+    border-radius: 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--color-success) 25%, var(--color-border));
+    background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+    backdrop-filter: blur(8px);
+    box-shadow:
+      0 30px 60px -25px rgb(0 0 0 / 0.85),
+      0 0 50px -30px color-mix(in srgb, var(--color-success) 60%, transparent);
+    translate: calc(var(--px) * var(--depth) * 1px) calc(var(--py) * var(--depth) * 1px);
+    transform: perspective(900px) rotateX(4deg) rotateY(-6deg);
+    transition: translate 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .word-cycle {
+    position: relative;
+    display: inline-grid;
+    perspective: 400px;
+    color: var(--color-accent);
+  }
+
+  .word-cycle > span {
+    grid-area: 1 / 1;
+    transform-origin: 50% 50% -0.5em;
+    backface-visibility: hidden;
+  }
+
+  .word-cycle > span:not(:first-child) {
+    visibility: hidden;
+  }
+
+  @media (max-width: 40rem) {
+    .tag-link {
+      min-height: 2.25rem;
+      font-size: 0.7rem;
+      padding: 0.35rem 0.6rem;
+    }
+
+    .visual-label {
+      display: none;
+    }
+
+    .hero-terminal {
+      margin-top: -2.5rem;
+      justify-self: stretch;
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .orbit-ring {
+      animation: orbit-spin 18s linear infinite;
+    }
+
+    .tag-link {
+      animation: tag-float 6s ease-in-out infinite;
+      animation-delay: var(--float-delay);
+    }
+
+    .tag-link:hover {
+      animation-play-state: paused;
+    }
+
+    .word-cycle > span {
+      opacity: 0;
+      animation: word-cycle 10s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+      animation-delay: calc(var(--w) * 2.5s);
+    }
+
+    .word-cycle > span:not(:first-child) {
+      visibility: visible;
+    }
+  }
+
+  @keyframes orbit-spin {
+    to {
+      rotate: 360deg;
+    }
+  }
+
+  @keyframes tag-float {
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+</style>
+
+<script>
+  const visual = document.querySelector<HTMLElement>('[data-hero-visual]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (visual && !reduceMotion) {
+    // Tags and terminal drift at different depths with the pointer; CSS transitions do the easing.
+    const area = visual.closest('section') ?? visual;
+    area.addEventListener('pointermove', (event) => {
+      if (event.pointerType !== 'mouse') return;
+      const x = event.clientX / window.innerWidth - 0.5;
+      const y = event.clientY / window.innerHeight - 0.5;
+      visual.style.setProperty('--px', (x * 2).toFixed(3));
+      visual.style.setProperty('--py', (y * 2).toFixed(3));
+    });
+    area.addEventListener('pointerleave', () => {
+      visual.style.setProperty('--px', '0');
+      visual.style.setProperty('--py', '0');
+    });
+  }
+</script>

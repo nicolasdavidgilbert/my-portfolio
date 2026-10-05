@@ -3,6 +3,7 @@ import type { ProjectVisual } from '../../types/project';
 import ArchitectureDiagram from '../systems/ArchitectureDiagram.astro';
 import TerminalCommand from '../systems/TerminalCommand.astro';
 import TerminalWindow from '../systems/TerminalWindow.astro';
+import TuiVisual from './TuiVisual.astro';
 
 interface Props {
   visual: ProjectVisual;
@@ -39,3 +40,5 @@ const { visual, host } = Astro.props;
 )}
 
 {visual.type === 'diagram' && <ArchitectureDiagram diagram={visual.diagram} />}
+
+{visual.type === 'tui' && <TuiVisual visual={visual} />}

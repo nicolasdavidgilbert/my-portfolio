@@ -312,13 +312,13 @@ const firstAccentText = readableAccent(firstAccent);
     let active = -1;
     let ticking = false;
 
-    const goTo = (index: number) => {
+    const goTo = (index: number, smooth = !reduceMotion) => {
       const wrapped = (index + slides.length) % slides.length;
       const target = slides[wrapped];
       if (!target) return;
       track.scrollTo({
         left: target.offsetLeft + target.offsetWidth / 2 - track.clientWidth / 2,
-        behavior: reduceMotion ? 'auto' : 'smooth',
+        behavior: smooth ? 'smooth' : 'auto',
       });
     };
 
@@ -513,7 +513,31 @@ const firstAccentText = readableAccent(firstAccent);
     track.addEventListener('pointerup', endDrag);
     track.addEventListener('pointercancel', endDrag);
 
+    /* ---------- links to a project from anywhere else on the page ---------- */
+    const section = root.closest('section');
+    const indexForHash = (hash: string) => slides.findIndex((slide) => `#${slide.id}` === hash);
+
+    document.addEventListener('click', (event) => {
+      const link = (event.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
+      if (!link || root.contains(link)) return;
+      const index = indexForHash(link.hash);
+      if (index < 0) return;
+      // Bring the projects section into view and centre that card instead of jumping into the track.
+      event.preventDefault();
+      section?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      goTo(index);
+      history.replaceState(null, '', link.hash);
+    });
+
     render();
     syncPaused();
+
+    const initial = indexForHash(window.location.hash);
+    if (initial >= 0) {
+      requestAnimationFrame(() => {
+        section?.scrollIntoView({ block: 'start' });
+        goTo(initial, false);
+      });
+    }
   }
 </script>

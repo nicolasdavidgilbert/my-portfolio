@@ -175,17 +175,16 @@
 }
 
 @keyframes word-cycle {
-  0%,
-  4% {
+  0% {
     opacity: 0;
     transform: rotateX(-90deg) translateY(0.4em);
   }
-  8%,
-  22% {
+  4%,
+  23% {
     opacity: 1;
     transform: rotateX(0) translateY(0);
   }
-  26%,
+  27%,
   100% {
     opacity: 0;
     transform: rotateX(90deg) translateY(-0.4em);

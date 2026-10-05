@@ -22,7 +22,19 @@ export interface DiagramVisual {
   readonly diagram: ArchitectureDiagram;
 }
 
-export type ProjectVisual = ScreenshotVisual | TerminalVisual | DiagramVisual;
+/** A curses-style interface mock built from the strings the app really renders. */
+export interface TuiVisual {
+  readonly type: 'tui';
+  readonly title: string;
+  readonly devicesTitle: string;
+  readonly devices: readonly { readonly label: string; readonly mountpoint: string }[];
+  readonly fields: readonly { readonly label: string; readonly value: string }[];
+  readonly button: string;
+  readonly log: readonly string[];
+  readonly hint: string;
+}
+
+export type ProjectVisual = ScreenshotVisual | TerminalVisual | DiagramVisual | TuiVisual;
 
 export type TerminalLine =
   | { readonly kind: 'command'; readonly text: string }

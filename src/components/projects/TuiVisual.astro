@@ -1,0 +1,218 @@
+---
+import type { TuiVisual } from '../../types/project';
+
+interface Props {
+  visual: TuiVisual;
+}
+
+const { visual } = Astro.props;
+---
+
+<figure class="tui" aria-label={`Interfaz de terminal de ${visual.title}`}>
+  <div class="tui-frame">
+    <p class="tui-title"><span>{visual.title}</span></p>
+
+    <div class="tui-grid">
+      <section class="tui-box">
+        <p class="tui-box-title">{visual.devicesTitle}</p>
+        <ul>
+          {visual.devices.map((device, index) => (
+            <li class:list={['tui-device', index === 0 && 'is-selected']}>
+              <span>{index === 0 ? '>' : ' '} {device.label}</span>
+              <small>{device.mountpoint}</small>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="tui-box">
+        <p class="tui-box-title">Configuración</p>
+        <dl>
+          {visual.fields.map((field, index) => (
+            <div class:list={['tui-field', index === visual.fields.length - 1 && 'is-focused']}>
+              <dt>{field.label}</dt>
+              <dd>{field.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <span class="tui-button">[ {visual.button} ]</span>
+      </section>
+
+      <section class="tui-box tui-log">
+        <p class="tui-box-title">Registro</p>
+        <ol>
+          {visual.log.map((line) => <li>{line}</li>)}
+        </ol>
+      </section>
+    </div>
+
+    <p class="tui-status">
+      <span><span class="tui-spinner" aria-hidden="true"></span> Listo</span>
+      <span class="tui-hint">{visual.hint}</span>
+    </p>
+  </div>
+</figure>
+
+<style>
+  .tui {
+    --tui: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: var(--color-fg-muted);
+  }
+
+  .tui-frame {
+    position: relative;
+    padding: 1.1rem 0.9rem 0.7rem;
+    border: 1px solid color-mix(in srgb, var(--tui) 55%, transparent);
+    border-radius: 0.5rem;
+    background: #0a0c0f;
+    box-shadow: inset 0 0 40px color-mix(in srgb, var(--tui) 6%, transparent);
+  }
+
+  .tui-title {
+    position: absolute;
+    top: -0.65rem;
+    left: 0.9rem;
+    padding-inline: 0.4rem;
+    background: #0a0c0f;
+    color: var(--tui);
+    font-weight: 700;
+  }
+
+  .tui-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 0.6rem;
+  }
+
+  .tui-box {
+    position: relative;
+    min-width: 0;
+    padding: 0.8rem 0.6rem 0.55rem;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 0.25rem;
+  }
+
+  .tui-box-title {
+    position: absolute;
+    top: -0.6rem;
+    left: 0.5rem;
+    padding-inline: 0.3rem;
+    background: #0a0c0f;
+    color: var(--color-fg);
+    font-size: 0.68rem;
+    font-weight: 600;
+  }
+
+  .tui-log {
+    grid-column: 1 / -1;
+  }
+
+  .tui-device {
+    display: grid;
+  }
+
+  .tui-device.is-selected span {
+    background: var(--tui);
+    color: #0a0c0f;
+    padding-inline: 0.25rem;
+  }
+
+  .tui-device small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--color-fg-subtle);
+    font-size: 0.66rem;
+  }
+
+  .tui-field {
+    display: grid;
+    grid-template-columns: 4.6rem minmax(0, 1fr);
+    gap: 0.4rem;
+  }
+
+  .tui-field dt {
+    color: var(--color-fg-subtle);
+  }
+
+  .tui-field dd {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--color-fg);
+  }
+
+  .tui-field.is-focused dd {
+    text-decoration: underline;
+    text-decoration-color: var(--tui);
+    text-underline-offset: 3px;
+  }
+
+  .tui-button {
+    display: inline-block;
+    margin-top: 0.45rem;
+    padding-inline: 0.3rem;
+    background: color-mix(in srgb, var(--tui) 18%, transparent);
+    color: var(--tui);
+    font-weight: 700;
+  }
+
+  .tui-log li::before {
+    content: '› ';
+    color: var(--tui);
+  }
+
+  .tui-log li:last-child {
+    color: var(--color-fg);
+  }
+
+  .tui-status {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.55rem;
+    color: var(--tui);
+  }
+
+  .tui-hint {
+    font-weight: 700;
+  }
+
+  .tui-spinner::before {
+    content: '|';
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tui-spinner::before {
+      animation: tui-spin 0.6s steps(1) infinite;
+    }
+
+    .tui-log li {
+      animation: tui-line 4.5s steps(1) infinite;
+    }
+
+    .tui-log li:nth-child(2) { animation-delay: 0.6s; }
+    .tui-log li:nth-child(3) { animation-delay: 1.2s; }
+  }
+
+  @keyframes tui-spin {
+    0% { content: '|'; }
+    25% { content: '/'; }
+    50% { content: '-'; }
+    75% { content: '\\'; }
+  }
+
+  /* Log lines appear one after another, then the cycle restarts. */
+  @keyframes tui-line {
+    0% { opacity: 0; }
+    15%, 100% { opacity: 1; }
+  }
+
+  @media (max-width: 30rem) {
+    .tui-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

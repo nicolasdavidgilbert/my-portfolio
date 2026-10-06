@@ -47,7 +47,7 @@ export const en = {
   },
   infra: {
     navLabel: 'Stack layers: go to the project behind each one',
-    hint: 'drag to rotate · hover a layer',
+    hint: 'drag to rotate · hover over a layer',
     view: ': view {project}',
     layers: {
       apps: 'Apps',
@@ -142,7 +142,7 @@ export const en = {
       highlights: [
         'External drive detection with lsblk (USB, removable drives and mount points under /media or /mnt).',
         'Full, incremental and differential backups with tar --listed-incremental and .snar snapshots.',
-        'Restore that rebuilds the FULL → DIFF → INC chain up to the chosen backup.',
+        'Restoration that rebuilds the FULL → DIFF → INC chain up to the chosen backup.',
         'Integrity checks, a manifest.json per backup, safe cancellation and system paths blocked as restore targets.',
       ],
     },
@@ -150,9 +150,9 @@ export const en = {
       name: 'Cuestionarios Online',
       shortName: 'Cuestionarios Online',
       category: 'Web + AI',
-      tagline: 'Public app with generation from PDF, validation and moderation.',
+      tagline: 'Public app with quiz generation from PDFs, validation and moderation.',
       problem:
-        'Public educational platform that turns PDFs and text into quizzes ready to practise, share and moderate.',
+        'Public educational platform that turns PDFs and text into quizzes ready for practice, sharing and moderation.',
       highlights: [
         'AI question generation (Groq) from PDF, JSON or pasted text.',
         'Persistence in Neon Postgres with hash-based deduplication.',

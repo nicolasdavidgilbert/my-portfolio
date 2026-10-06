@@ -1,4 +1,5 @@
 ---
+import T from '../i18n/T.astro';
 import type { ExperienceEntry } from '../../types/experience';
 
 interface Props {
@@ -18,12 +19,17 @@ const { entries } = Astro.props;
         ]}
         aria-hidden="true"
       ></span>
-      <p class:list={['label', entry.current ? 'text-success' : 'text-fg-subtle']}>{entry.period}</p>
+      <T as="p" k={entry.period} class:list={['label', entry.current ? 'text-success' : 'text-fg-subtle']} />
       <h4 class="mt-2 text-xl font-semibold text-fg">
-        {entry.title}
-        {entry.organization && <span class="font-normal text-fg-muted"> · {entry.organization}</span>}
+        <T k={entry.title} />
+        {entry.organization && (
+          <span class="font-normal text-fg-muted">
+            {' · '}
+            <T k={entry.organization} />
+          </span>
+        )}
       </h4>
-      <p class="mt-1.5 leading-relaxed text-fg-muted">{entry.description}</p>
+      <T as="p" k={entry.description} class="mt-1.5 leading-relaxed text-fg-muted" />
     </li>
   ))}
 </ol>

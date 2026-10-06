@@ -1,5 +1,6 @@
 ---
 import Section from '../common/Section.astro';
+import T from '../i18n/T.astro';
 import ExternalLink from '../ui/ExternalLink.astro';
 import Icon from '../ui/Icon.astro';
 import StatusDot from '../ui/StatusDot.astro';
@@ -9,10 +10,10 @@ import { getSocialLink } from '../../data/socialLinks';
 const email = getSocialLink('email');
 const github = getSocialLink('github');
 const linkedin = getSocialLink('linkedin');
-const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
+const areas = [0, 1, 2] as const;
 ---
 
-<Section id="contacto" label="Contacto" size="display" layout="split" class="pb-10 lg:pt-28 lg:pb-10">
+<Section id="contact" label="nav.contact" size="display" layout="split" class="pb-10 lg:pt-28 lg:pb-10">
   <Fragment slot="background">
     <div class="grid-floor opacity-30" aria-hidden="true"></div>
     <div
@@ -22,22 +23,20 @@ const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
   </Fragment>
 
   <Fragment slot="title">
-    Construyamos <span class="text-gradient">algo útil.</span>
+    <T k="contact.titleLead" /> <T k="contact.titleAccent" class="text-gradient" />
   </Fragment>
 
-  <p slot="intro" class="mt-6 max-w-prose text-lg leading-relaxed text-fg-muted">
-    Disponible para oportunidades de desarrollo, sistemas y automatización. Respondo directamente.
-  </p>
+  <T slot="intro" as="p" k="contact.intro" class="mt-6 max-w-prose text-lg leading-relaxed text-fg-muted" />
 
   <div class="mt-6 flex flex-wrap items-center gap-2">
     {person.available && (
       <span class="label inline-flex items-center gap-2 rounded-full border border-success/30 bg-success/10 px-3 py-1.5 text-fg">
-        <StatusDot pulse /> Disponible
+        <StatusDot pulse /> <T k="contact.available" />
       </span>
     )}
-    <span class="label rounded-full border border-border px-3 py-1.5 text-fg-muted">{person.location}</span>
+    <T k="person.location" class="label rounded-full border border-border px-3 py-1.5 text-fg-muted" />
     {areas.map((area) => (
-      <span class="label rounded-full border border-border px-3 py-1.5 text-fg-muted">{area}</span>
+      <T k={`contact.areas.${area}`} class="label rounded-full border border-border px-3 py-1.5 text-fg-muted" />
     ))}
   </div>
 
@@ -47,7 +46,7 @@ const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
       class="group inline-flex min-h-12 items-center gap-2.5 rounded-md bg-accent px-5 text-base font-medium text-accent-contrast transition-colors duration-200 hover:bg-accent/90"
     >
       <Icon name="email" class="size-[1.125rem]" />
-      Escríbeme
+      <T k="contact.write" />
       <Icon
         name="arrow-up-right"
         class="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -55,10 +54,10 @@ const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
     </a>
     <button type="button" class="copy-btn" data-copy-email={person.email} hidden>
       <span class="copy-idle inline-flex items-center gap-2">
-        <Icon name="copy" /> Copiar email
+        <Icon name="copy" /> <T k="contact.copy" />
       </span>
       <span class="copy-done inline-flex items-center gap-2">
-        <Icon name="check" /> Copiado
+        <Icon name="check" /> <T k="contact.copied" />
       </span>
     </button>
     <span class="sr-only" role="status" data-copy-status></span>
@@ -114,7 +113,7 @@ const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
     class="group relative mx-auto mt-section flex w-fit items-center gap-2 rounded-full border border-border px-4 py-2 font-mono text-xs text-fg-subtle transition-colors hover:border-border-strong hover:text-fg lg:mt-36"
   >
     <Icon name="arrow-up" class="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5" />
-    volver arriba
+    <T k="contact.backToTop" />
   </a>
 </Section>
 
@@ -260,6 +259,8 @@ const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
 </style>
 
 <script>
+  import { translate } from '../../scripts/i18n';
+
   const button = document.querySelector<HTMLButtonElement>('[data-copy-email]');
   const status = document.querySelector<HTMLElement>('[data-copy-status]');
 
@@ -271,9 +272,9 @@ const areas = ['Desarrollo', 'Sistemas', 'Automatización'] as const;
       try {
         await navigator.clipboard.writeText(button.dataset.copyEmail ?? '');
         button.classList.add('is-copied');
-        status.textContent = 'Email copiado';
+        status.textContent = translate('contact.copiedStatus');
       } catch {
-        status.textContent = 'No se pudo copiar el email';
+        status.textContent = translate('contact.copyFailed');
       }
       window.clearTimeout(resetTimer);
       resetTimer = window.setTimeout(() => {

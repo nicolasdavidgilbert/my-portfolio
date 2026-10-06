@@ -1,4 +1,5 @@
 import { listen } from './events';
+import { translate } from './i18n';
 
 const root = document.querySelector<HTMLElement>('[data-carousel]');
 const track = root?.querySelector<HTMLElement>('[data-track]');
@@ -49,7 +50,10 @@ if (root && track) {
     toggle.addEventListener('click', () => {
       pause.user = !pause.user;
       root.toggleAttribute('data-paused-by-user', pause.user);
-      toggle.setAttribute('aria-label', pause.user ? 'Reanudar el pase automático' : 'Pausar el pase automático');
+      // Keep the i18n marker in sync so a later language switch uses the right label.
+      const labelKey = pause.user ? 'carousel.resume' : 'carousel.pause';
+      toggle.dataset.i18nAttr = `aria-label:${labelKey}`;
+      toggle.setAttribute('aria-label', translate(labelKey));
       syncPaused();
     });
   }

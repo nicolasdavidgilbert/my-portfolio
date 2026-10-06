@@ -5,18 +5,7 @@ export const projects: readonly Project[] = [
   {
     id: 'cesta-plus-plus',
     accent: '#f2b45c',
-    name: 'Cesta++',
     kind: 'software',
-    category: 'Web application',
-    tagline: 'Listas de compra colaborativas en tiempo real.',
-    problem:
-      'Listas de compra compartidas que sincronizan cambios al instante y mantienen productos, precios e invitaciones en un único flujo.',
-    highlights: [
-      'Sincronización Realtime de los cambios en listas compartidas.',
-      'Autenticación por email/OAuth con InsForge.',
-      'Invitaciones mediante enlace con token (/invite/[token]).',
-      'Catálogo de productos con historial de precios.',
-    ],
     stack: ['Next.js', 'TypeScript', 'InsForge', 'Tailwind CSS'],
     date: '2026-06',
     repo: 'https://github.com/nicolasdavidgilbert/cestapp',
@@ -24,7 +13,7 @@ export const projects: readonly Project[] = [
     visual: {
       type: 'screenshot',
       src: '/projects/cestapp.webp',
-      alt: 'Panel de Cesta++ con las listas de compra del usuario',
+      alt: 'projects.cesta-plus-plus.alt',
       width: 1440,
       height: 1000,
     },
@@ -32,18 +21,7 @@ export const projects: readonly Project[] = [
   {
     id: 'linux-backup-tui',
     accent: '#5fd38d',
-    name: 'Linux Backup TUI',
     kind: 'systems',
-    category: 'Systems · Python TUI',
-    tagline: 'Backups completos, incrementales y diferenciales desde la terminal.',
-    problem:
-      'Evolución en Python de Backup Scripts: una interfaz curses que detecta los discos externos, crea copias completas, incrementales o diferenciales con tar y restaura automáticamente la cadena necesaria.',
-    highlights: [
-      'Detección de discos externos con lsblk (USB, extraíbles y puntos de montaje en /media o /mnt).',
-      'Copias completas, incrementales y diferenciales con tar --listed-incremental y snapshots .snar.',
-      'Restauración que reconstruye la cadena FULL → DIFF → INC hasta el backup elegido.',
-      'Verificación de integridad, manifest.json por copia, cancelación segura y bloqueo de rutas del sistema al restaurar.',
-    ],
     stack: ['Python', 'curses', 'tar', 'lsblk'],
     date: '2026-06',
     repo: 'https://github.com/nicolasdavidgilbert/backups/tree/python',
@@ -66,18 +44,7 @@ export const projects: readonly Project[] = [
   {
     id: 'cuestionarios-online',
     accent: '#5145CD',
-    name: 'Cuestionarios Online',
     kind: 'software',
-    category: 'Web + AI',
-    tagline: 'App pública con generación desde PDF, validación y moderación.',
-    problem:
-      'Plataforma educativa pública que transforma PDFs y texto en cuestionarios listos para practicar, compartir y moderar.',
-    highlights: [
-      'Generación de preguntas con IA (Groq) desde PDF, JSON o texto pegado.',
-      'Persistencia en Neon Postgres con deduplicación por hash.',
-      'Reportes, auditoría y soft delete para la moderación.',
-      'CI con tests y build automático.',
-    ],
     stack: ['Astro', 'React', 'Neon Postgres', 'Groq', 'Vercel'],
     date: '2026-06',
     repo: 'https://github.com/nicolasdavidgilbert/cuestionario',
@@ -85,7 +52,7 @@ export const projects: readonly Project[] = [
     visual: {
       type: 'screenshot',
       src: '/projects/cuestionarios.webp',
-      alt: 'Catálogo de Cuestionarios Online organizado por grado, curso y unidad',
+      alt: 'projects.cuestionarios-online.alt',
       width: 1440,
       height: 1000,
     },
@@ -93,18 +60,7 @@ export const projects: readonly Project[] = [
   {
     id: 'backup-scripts',
     accent: '#6fb7ff',
-    name: 'Backup Scripts',
     kind: 'systems',
-    category: 'Systems · Bash',
-    tagline: 'Copias completas e incrementales en Linux (versión Bash, rama main).',
-    problem:
-      'Herramientas Bash para automatizar copias completas e incrementales con snapshots, estructura por fechas y cancelación segura.',
-    highlights: [
-      'Backup completo comprimido en .tar.gz con inicial.sh.',
-      'Incrementales basados en metadatos .snar, detectando el último snapshot.',
-      'Estructura organizada por fechas para copias FULL e INC.',
-      'Limpieza segura al cancelar con Ctrl+C.',
-    ],
     stack: ['Bash', 'tar', 'Linux'],
     date: '2026-03',
     repo: 'https://github.com/nicolasdavidgilbert/backups',
@@ -112,45 +68,54 @@ export const projects: readonly Project[] = [
       type: 'terminal',
       title: 'backups — bash',
       lines: [
-        { kind: 'comment', text: '# copia completa: origen y destino opcional' },
-        { kind: 'command', text: './inicial.sh <origen> [destino]' },
-        { kind: 'comment', text: '# incremental a partir del último snapshot .snar' },
-        { kind: 'command', text: './incremental.sh <origen> [destino]' },
-        { kind: 'command', text: 'tree backups/' },
-        { kind: 'output', text: 'backups/' },
-        { kind: 'output', text: '├── FULL/<fecha>.tar.gz' },
-        { kind: 'output', text: '└── INC/<fecha>.tar.gz' },
-        { kind: 'comment', text: '# requisitos: bash · tar · du · find' },
+        { kind: 'comment', text: 'projects.backup-scripts.terminal.0' },
+        { kind: 'command', text: 'projects.backup-scripts.terminal.1' },
+        { kind: 'comment', text: 'projects.backup-scripts.terminal.2' },
+        { kind: 'command', text: 'projects.backup-scripts.terminal.3' },
+        { kind: 'command', text: 'projects.backup-scripts.terminal.4' },
+        { kind: 'output', text: 'projects.backup-scripts.terminal.5' },
+        { kind: 'output', text: 'projects.backup-scripts.terminal.6' },
+        { kind: 'output', text: 'projects.backup-scripts.terminal.7' },
+        { kind: 'comment', text: 'projects.backup-scripts.terminal.8' },
       ],
     },
   },
   {
     id: 'recordatorios-bot',
     accent: '#38bdf8',
-    name: 'RecordatoriosBot',
     kind: 'systems',
-    category: 'Networking · Automation',
-    tagline: 'Bot de Telegram activado por presencia en la red local.',
-    problem:
-      'Un bot que detecta cuándo alguien vuelve a casa y le entrega sus recordatorios pendientes justo en ese momento.',
-    highlights: [
-      'Detección de dispositivos conectados a la red local con arping.',
-      'Envío automático del recordatorio al detectar la llegada.',
-      'Gestión de recordatorios mediante comandos de Telegram.',
-      'Borrado automático cuando todos los dispositivos lo han recibido.',
-    ],
     stack: ['Python', 'arping', 'Telegram Bot API'],
     date: '2026-02',
     repo: 'https://github.com/nicolasdavidgilbert/RecordatoriosBot',
     visual: {
       type: 'diagram',
       diagram: {
-        title: 'Flujo de RecordatoriosBot',
+        title: 'projects.recordatorios-bot.diagram.title',
         stages: [
-          [{ label: 'Red local', detail: 'dispositivo se conecta' }],
-          [{ label: 'arping', detail: 'presencia detectada' }],
-          [{ label: 'Bot Python', detail: 'recordatorios pendientes' }],
-          [{ label: 'Telegram', detail: 'mensaje entregado' }],
+          [
+            {
+              label: 'projects.recordatorios-bot.diagram.localNetwork',
+              detail: 'projects.recordatorios-bot.diagram.deviceConnects',
+            },
+          ],
+          [
+            {
+              label: 'projects.recordatorios-bot.diagram.arping',
+              detail: 'projects.recordatorios-bot.diagram.presenceDetected',
+            },
+          ],
+          [
+            {
+              label: 'projects.recordatorios-bot.diagram.pythonBot',
+              detail: 'projects.recordatorios-bot.diagram.pendingReminders',
+            },
+          ],
+          [
+            {
+              label: 'projects.recordatorios-bot.diagram.telegram',
+              detail: 'projects.recordatorios-bot.diagram.messageDelivered',
+            },
+          ],
         ],
       },
     },
@@ -158,34 +123,38 @@ export const projects: readonly Project[] = [
   {
     id: 'sistema-llamadas',
     accent: '#fb7185',
-    name: 'Sistema de llamadas Paciente–Enfermero',
-    shortName: 'Sistema de llamadas',
     kind: 'systems',
-    category: 'Full stack + infraestructura',
-    tagline: 'Servidor Flask, panel web y control de relés.',
-    problem:
-      'Sistema completo de llamadas hospitalarias que conecta panel web, notificaciones, persistencia y control físico de relés.',
-    highlights: [
-      'Servidor Flask para llamadas, aceptación y presencia, con flujo pendiente → atendida → presencia.',
-      'Entorno multi-contenedor con docker-compose, Nginx y MariaDB.',
-      'Avisos y aceptación mediante Pushover; registro de llamadas en CSV y PDF.',
-      'Control de relés al aceptar una llamada o registrar presencia.',
-    ],
     stack: ['Flask', 'MariaDB', 'Docker', 'Nginx', 'Pushover'],
     date: '2025-05',
     repo: 'https://github.com/nicolasdavidgilbert/Sistema-de-llamadas-Paciente-Enfermero',
     visual: {
       type: 'diagram',
       diagram: {
-        title: 'Arquitectura del sistema de llamadas',
+        title: 'projects.sistema-llamadas.diagram.title',
         stages: [
-          [{ label: 'Llamada', detail: 'habitación del paciente' }],
-          [{ label: 'Nginx', detail: 'publica la aplicación' }],
-          [{ label: 'Flask', detail: 'llamadas, aceptación y presencia' }],
           [
-            { label: 'MariaDB', detail: 'registro de llamadas' },
-            { label: 'Pushover', detail: 'aviso al personal' },
-            { label: 'Relés', detail: 'señal física' },
+            {
+              label: 'projects.sistema-llamadas.diagram.call',
+              detail: 'projects.sistema-llamadas.diagram.patientRoom',
+            },
+          ],
+          [
+            {
+              label: 'projects.sistema-llamadas.diagram.nginx',
+              detail: 'projects.sistema-llamadas.diagram.publishesApp',
+            },
+          ],
+          [{ label: 'projects.sistema-llamadas.diagram.flask', detail: 'projects.sistema-llamadas.diagram.callsFlow' }],
+          [
+            { label: 'projects.sistema-llamadas.diagram.mariadb', detail: 'projects.sistema-llamadas.diagram.callLog' },
+            {
+              label: 'projects.sistema-llamadas.diagram.pushover',
+              detail: 'projects.sistema-llamadas.diagram.staffAlert',
+            },
+            {
+              label: 'projects.sistema-llamadas.diagram.relays',
+              detail: 'projects.sistema-llamadas.diagram.physicalSignal',
+            },
           ],
         ],
       },

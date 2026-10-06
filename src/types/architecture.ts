@@ -1,12 +1,14 @@
+import type { TranslationKey } from '../i18n/types';
+
 export interface ArchitectureNode {
-  readonly label: string;
-  readonly detail?: string;
+  readonly label: TranslationKey;
+  readonly detail?: TranslationKey;
 }
 
 /** Each stage is a step in the flow; nodes inside a stage run in parallel. */
 export type ArchitectureStage = readonly ArchitectureNode[];
 
 export interface ArchitectureDiagram {
-  readonly title: string;
+  readonly title: TranslationKey;
   readonly stages: readonly ArchitectureStage[];
 }

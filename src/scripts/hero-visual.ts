@@ -5,15 +5,25 @@ const inspectId = swap?.querySelector<HTMLElement>('[data-inspect-id]');
 const inspectDetail = swap?.querySelector<HTMLElement>('[data-inspect-detail]');
 const inspectProject = swap?.querySelector<HTMLElement>('[data-inspect-project]');
 
+let inspectedLayer: string | null = null;
+
 // The 3D stack reports which layer is inspected; the terminal mirrors it.
 listen(document, 'infra:layer', (layer) => {
   if (!swap) return;
+  inspectedLayer = layer?.id ?? null;
   if (layer) {
     if (inspectId) inspectId.textContent = layer.id;
     if (inspectDetail) inspectDetail.textContent = layer.detail;
     if (inspectProject) inspectProject.textContent = layer.project;
   }
   swap.classList.toggle('is-inspecting', Boolean(layer));
+});
+
+// Switching language while a layer is inspected refreshes the (translated) project name.
+listen(document, 'locale:change', () => {
+  if (!inspectedLayer || !inspectProject) return;
+  const layer = document.querySelector<HTMLElement>(`[data-layer="${inspectedLayer}"]`);
+  inspectProject.textContent = layer?.dataset.project ?? '';
 });
 
 const visual = document.querySelector<HTMLElement>('[data-hero-visual]');

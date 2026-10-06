@@ -1,33 +1,33 @@
 ---
 import Section from '../common/Section.astro';
+import T from '../i18n/T.astro';
 import Timeline from '../profile/Timeline.astro';
 import SystemStatus from '../systems/SystemStatus.astro';
 import { experience } from '../../data/experience';
+import { i18nAttrs } from '../../i18n/translate';
+import type { TranslationKey } from '../../i18n/types';
 
 const pillars = [
   {
     label: 'Development',
     glyph: '</>',
-    text: 'Construyo aplicaciones frontend y backend y productos completos, desde la interfaz hasta la base de datos.',
+    text: 'about.pillars.development',
   },
   {
     label: 'Systems',
     glyph: '>_',
-    text: 'Administro Linux, servicios, redes, contenedores e infraestructura.',
+    text: 'about.pillars.systems',
   },
   {
     label: 'Automation',
     glyph: '⟳',
-    text: 'Automatizo despliegues, tareas repetitivas, servicios e integraciones, incluidas las de IA.',
+    text: 'about.pillars.automation',
   },
-] as const;
+] as const satisfies readonly { label: string; glyph: string; text: TranslationKey }[];
 ---
 
-<Section id="perfil" label="Perfil" title="Del código a la infraestructura que lo ejecuta.">
-  <p slot="intro" class="mt-5 text-lg leading-relaxed text-fg-muted">
-    Mi perfil conecta desarrollo de producto y operaciones. Puedo trabajar desde la interfaz y el backend hasta el
-    despliegue, la red y la automatización que hacen que una solución sea realmente utilizable.
-  </p>
+<Section id="about" label="nav.about" title="about.title">
+  <T slot="intro" as="p" k="about.intro" class="mt-5 text-lg leading-relaxed text-fg-muted" />
 
   <ul class="grid gap-4 sm:grid-cols-3">
     {pillars.map((pillar, index) => (
@@ -45,20 +45,20 @@ const pillars = [
           <h3 class="label mt-5 text-fg [transform:translateZ(20px)]" lang="en">
             {pillar.label}
           </h3>
-          <p class="mt-2 leading-relaxed text-fg-muted">{pillar.text}</p>
+          <T as="p" k={pillar.text} class="mt-2 leading-relaxed text-fg-muted" />
         </div>
       </li>
     ))}
   </ul>
 
-  <div id="trayectoria" class="mt-16 grid scroll-mt-24 gap-10 lg:mt-20 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-16">
+  <div id="journey" class="mt-16 grid scroll-mt-24 gap-10 lg:mt-20 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-16">
     <div>
       <header class="mb-8" data-reveal>
         <p class="label flex items-center gap-3 text-fg-subtle">
           <span class="h-px w-6 bg-border-strong" aria-hidden="true"></span>
-          Trayectoria
+          <T k="about.journeyLabel" />
         </p>
-        <h3 class="mt-3 text-2xl font-semibold tracking-tight text-fg sm:text-3xl">Formación y experiencia</h3>
+        <T as="h3" k="about.journeyTitle" class="mt-3 text-2xl font-semibold tracking-tight text-fg sm:text-3xl" />
       </header>
       <Timeline entries={experience} />
     </div>
@@ -67,7 +67,7 @@ const pillars = [
       class="lg:sticky lg:top-24 lg:self-start"
       data-reveal="zoom"
       style="--reveal-delay:200ms"
-      aria-label="Estado actual"
+      {...i18nAttrs({ 'aria-label': 'about.statusLabel' })}
     >
       <div class="tilt" data-tilt="0.6">
         <SystemStatus />

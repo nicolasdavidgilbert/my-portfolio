@@ -1,4 +1,6 @@
 ---
+import T from '../i18n/T.astro';
+import { projectKey } from '../../i18n/project-keys';
 import type { Capability } from '../../types/technology';
 
 interface Props {
@@ -9,7 +11,7 @@ const { capabilities } = Astro.props;
 ---
 
 <div>
-  <h3 class="label text-fg-subtle">Dónde comprobarlo</h3>
+  <T as="h3" k="systems.verify" class="label text-fg-subtle" />
   <dl class="mt-4 divide-y divide-border border-y border-border">
     {capabilities.map((capability, index) => (
       <div
@@ -17,15 +19,15 @@ const { capabilities } = Astro.props;
         data-reveal
         style={`--reveal-delay:${index * 80}ms`}
       >
-        <dt class="font-medium text-fg transition-colors group-hover:text-accent">{capability.area}</dt>
-        <dd class="text-fg-muted">{capability.practice}</dd>
+        <T as="dt" k={capability.area} class="font-medium text-fg transition-colors group-hover:text-accent" />
+        <T as="dd" k={capability.practice} class="text-fg-muted" />
         <dd class="font-mono text-sm">
           <a
-            href={capability.evidence.href}
+            href={`#${capability.evidence}`}
             class="inline-flex min-h-8 items-center text-accent underline-offset-4 hover:underline"
           >
             <span aria-hidden="true">→ </span>
-            {capability.evidence.label}
+            <T k={projectKey(capability.evidence, 'shortName')} />
           </a>
         </dd>
       </div>

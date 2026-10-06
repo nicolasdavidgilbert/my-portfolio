@@ -2,30 +2,40 @@
 import '../styles/global.css';
 import SiteFooter from '../components/layout/SiteFooter.astro';
 import SiteHeader from '../components/layout/SiteHeader.astro';
-import { SITE_DESCRIPTION, SITE_TITLE, SOCIAL_IMAGE, absoluteUrl, person, themeColors } from '../data/site';
+import T from '../components/i18n/T.astro';
+import { SOCIAL_IMAGE, absoluteUrl, person, themeColors } from '../data/site';
+import { defaultLocale, STORAGE_KEY } from '../i18n/config';
+import { i18nAttrs, serializedDictionaries, t } from '../i18n/translate';
 import { structuredData } from '../data/seo';
 import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 
-interface Props {
-  title?: string;
-  description?: string;
-}
-
-const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+const title = t('meta.title');
+const description = t('meta.description');
 const canonicalUrl = absoluteUrl(Astro.url.pathname);
 const imageUrl = absoluteUrl(SOCIAL_IMAGE);
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={defaultLocale}>
   <head>
     <meta charset="utf-8" />
-    <script is:inline>
+    <script is:inline define:vars={{ storageKey: STORAGE_KEY, fallbackLocale: defaultLocale }}>
       document.documentElement.classList.add('js');
+      // A visitor who chose another language gets it before first paint: hide the page
+      // until the i18n runtime has swapped the text (with a safety timeout).
+      try {
+        const saved = localStorage.getItem(storageKey);
+        if (saved && saved !== fallbackLocale) {
+          document.documentElement.classList.add('lang-pending');
+          setTimeout(() => document.documentElement.classList.remove('lang-pending'), 1500);
+        }
+      } catch {
+        /* storage unavailable: stay in the default language */
+      }
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <T as="title" k="meta.title" />
+    <meta name="description" {...i18nAttrs({ content: 'meta.description' })} />
     <meta name="author" content={person.fullName} />
     <link rel="canonical" href={canonicalUrl} />
     <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -38,7 +48,7 @@ const imageUrl = absoluteUrl(SOCIAL_IMAGE);
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <meta property="og:type" content="profile" />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content={person.fullName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -46,7 +56,7 @@ const imageUrl = absoluteUrl(SOCIAL_IMAGE);
     <meta property="og:image" content={imageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`Portfolio de ${person.fullName}`} />
+    <meta property="og:image:alt" content={`Portfolio of ${person.fullName}`} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -60,7 +70,7 @@ const imageUrl = absoluteUrl(SOCIAL_IMAGE);
       href="#content"
       class="sr-only rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-contrast focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50"
     >
-      Saltar al contenido
+      <T k="a11y.skip" />
     </a>
     <div id="top"></div>
     <SiteHeader />
@@ -68,7 +78,9 @@ const imageUrl = absoluteUrl(SOCIAL_IMAGE);
       <slot />
     </main>
     <SiteFooter />
+    <script type="application/json" id="i18n-dictionaries" set:html={serializedDictionaries()} />
     <script>
+      import '../scripts/i18n';
       import '../scripts/motion';
     </script>
   </body>

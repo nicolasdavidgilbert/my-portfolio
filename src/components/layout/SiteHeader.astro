@@ -3,7 +3,7 @@ import LanguageToggle from '../i18n/LanguageToggle.astro';
 import T from '../i18n/T.astro';
 import ExternalLink from '../ui/ExternalLink.astro';
 import Icon from '../ui/Icon.astro';
-import { cvUrl, navigation, person } from '../../data/site';
+import { cvFilename, cvUrl, navigation, person } from '../../data/site';
 import { getSocialLink } from '../../data/socialLinks';
 import { i18nAttrs } from '../../i18n/translate';
 
@@ -56,6 +56,7 @@ const profileLinks = [getSocialLink('github'), getSocialLink('linkedin')];
         {cvUrl && (
           <a
             href={cvUrl}
+            download={cvFilename}
             class="ml-2 rounded-md border border-border-strong px-3 py-1.5 font-mono text-xs text-fg hover:border-fg-subtle"
           >
             CV
@@ -97,6 +98,7 @@ const profileLinks = [getSocialLink('github'), getSocialLink('linkedin')];
               <li>
                 <a
                   href={cvUrl}
+                  download={cvFilename}
                   class="inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-3 text-sm text-fg-muted hover:text-fg"
                 >
                   <Icon name="file" />

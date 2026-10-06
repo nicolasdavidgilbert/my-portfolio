@@ -4,7 +4,7 @@ import ButtonLink from '../ui/ButtonLink.astro';
 import Icon from '../ui/Icon.astro';
 import StatusDot from '../ui/StatusDot.astro';
 import HeroVisual from '../hero/HeroVisual.astro';
-import { cvUrl, person } from '../../data/site';
+import { cvFilename, cvUrl, person } from '../../data/site';
 import { getSocialLink } from '../../data/socialLinks';
 
 const github = getSocialLink('github');
@@ -67,7 +67,7 @@ const linkedin = getSocialLink('linkedin');
             {linkedin.label}
           </ButtonLink>
           {cvUrl && (
-            <ButtonLink href={cvUrl} variant="text" class="ml-1">
+            <ButtonLink href={cvUrl} download={cvFilename} variant="text" class="ml-1">
               CV
             </ButtonLink>
           )}

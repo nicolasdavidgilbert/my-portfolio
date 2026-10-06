@@ -16,8 +16,17 @@ if (root && track) {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let active = -1;
   let ticking = false;
+  let motionFrame = 0;
+
+  // Stops the drag/settle animation (see "mouse drag") so it never fights another navigation.
+  const stopSettle = () => {
+    cancelAnimationFrame(motionFrame);
+    motionFrame = 0;
+    track.classList.remove('is-settling');
+  };
 
   const goTo = (index: number, smooth = !reduceMotion) => {
+    stopSettle();
     const wrapped = (index + slides.length) % slides.length;
     const target = slides[wrapped];
     if (!target) return;
@@ -28,10 +37,11 @@ if (root && track) {
   };
 
   /* ---------- autoplay ---------- */
-  const pause = { user: reduceMotion, hover: false, focus: false, offscreen: true };
+  // Hovering or interacting does not pause: a manual change just restarts the countdown.
+  const pause = { user: reduceMotion, drag: false, offscreen: true };
 
   const syncPaused = () => {
-    const paused = pause.user || pause.hover || pause.focus || pause.offscreen || document.hidden;
+    const paused = pause.user || pause.drag || pause.offscreen || document.hidden;
     root.toggleAttribute('data-paused', paused);
   };
 
@@ -58,24 +68,6 @@ if (root && track) {
     });
   }
 
-  root.addEventListener('mouseenter', () => {
-    pause.hover = true;
-    syncPaused();
-  });
-  root.addEventListener('mouseleave', () => {
-    pause.hover = false;
-    syncPaused();
-  });
-  root.addEventListener('focusin', () => {
-    pause.focus = true;
-    syncPaused();
-  });
-  root.addEventListener('focusout', (event) => {
-    if (!root.contains(event.relatedTarget as Node | null)) {
-      pause.focus = false;
-      syncPaused();
-    }
-  });
   document.addEventListener('visibilitychange', syncPaused);
   new IntersectionObserver(
     ([entry]) => {
@@ -146,6 +138,7 @@ if (root && track) {
   };
 
   track.addEventListener('scroll', schedule, { passive: true });
+  track.addEventListener('wheel', stopSettle, { passive: true });
   window.addEventListener('resize', schedule);
   prev?.addEventListener('click', () => goTo(active - 1));
   next?.addEventListener('click', () => goTo(active + 1));
@@ -173,14 +166,68 @@ if (root && track) {
   });
 
   /* ---------- mouse drag ---------- */
+  // One animation loop drives both phases so position and speed stay continuous:
+  // while dragging the track eases towards the pointer, and on release a critically
+  // damped spring carries the current speed into the chosen slide without a jolt.
+  const FOLLOW_MS = 40; // how quickly the track catches up with the pointer
+  const SPRING = 0.011; // spring stiffness (1/ms): ~0.5s to settle, no overshoot
+  const motion = { pos: 0, vel: 0, goal: 0, dragging: false, last: 0 };
   let suppressClick = false;
   let drag: { x: number; scroll: number; from: number; moved: boolean } | null = null;
+
+  const maxScroll = () => track.scrollWidth - track.clientWidth;
+  const slideLeft = (index: number) => {
+    const slide = slides[index];
+    return slide ? slide.offsetLeft + slide.offsetWidth / 2 - track.clientWidth / 2 : track.scrollLeft;
+  };
+
+  const step = (now: number) => {
+    const dt = Math.min(32, now - motion.last);
+    motion.last = now;
+    if (dt <= 0) {
+      motionFrame = requestAnimationFrame(step);
+      return;
+    }
+
+    if (motion.dragging) {
+      const pos = motion.goal + (motion.pos - motion.goal) * Math.exp(-dt / FOLLOW_MS);
+      motion.vel = motion.vel * 0.5 + ((pos - motion.pos) / dt) * 0.5;
+      motion.pos = pos;
+    } else {
+      // Exact critically damped spring step towards motion.goal.
+      const x = motion.pos - motion.goal;
+      const k = motion.vel + SPRING * x;
+      const decay = Math.exp(-SPRING * dt);
+      motion.pos = motion.goal + (x + k * dt) * decay;
+      motion.vel = (motion.vel - SPRING * k * dt) * decay;
+      if (Math.abs(motion.pos - motion.goal) < 0.5 && Math.abs(motion.vel) < 0.02) {
+        track.scrollLeft = motion.goal;
+        stopSettle();
+        return;
+      }
+    }
+
+    track.scrollLeft = motion.pos;
+    motionFrame = requestAnimationFrame(step);
+  };
+
+  const startMotion = () => {
+    if (motionFrame) return;
+    motion.last = performance.now();
+    motionFrame = requestAnimationFrame(step);
+  };
 
   track.addEventListener('pointerdown', (event) => {
     suppressClick = false;
     if (event.pointerType !== 'mouse' || event.button !== 0) return;
     if ((event.target as Element).closest('a, button')) return;
-    drag = { x: event.clientX, scroll: track.scrollLeft, from: active, moved: false };
+    // Grabbing a card mid-glide keeps its current position and speed.
+    const gliding = motionFrame !== 0;
+    if (!gliding) {
+      motion.pos = track.scrollLeft;
+      motion.vel = 0;
+    }
+    drag = { x: event.clientX, scroll: gliding ? motion.pos : track.scrollLeft, from: active, moved: false };
   });
 
   track.addEventListener('pointermove', (event) => {
@@ -191,23 +238,51 @@ if (root && track) {
       drag.moved = true;
       track.setPointerCapture(event.pointerId);
       track.classList.add('is-dragging');
+      motion.dragging = true;
+      pause.drag = true;
+      syncPaused();
+      startMotion();
     }
-    if (drag.moved) track.scrollLeft = drag.scroll - dx;
+    if (drag.moved) motion.goal = Math.max(0, Math.min(maxScroll(), drag.scroll - dx));
   });
 
   const endDrag = (event: PointerEvent) => {
     if (!drag) return;
     const { moved, x, from } = drag;
     drag = null;
-    track.classList.remove('is-dragging');
     if (!moved) return;
 
     // The click that follows a drag must not select or open anything.
     suppressClick = true;
-    // A short flick still moves one slide; a long drag settles on the closest one.
+
+    // Let the release speed carry forward and settle on the slide closest to where it would land.
+    const vel = Math.max(-4, Math.min(4, motion.vel));
+    const projected = motion.goal + vel * 220 + track.clientWidth / 2;
+    let target = active;
+    let best = Infinity;
+    slides.forEach((slide, i) => {
+      const d = Math.abs(slide.offsetLeft + slide.offsetWidth / 2 - projected);
+      if (d < best) {
+        best = d;
+        target = i;
+      }
+    });
+    // A short flick still moves one slide.
     const dx = event.clientX - x;
-    if (active === from && Math.abs(dx) > 60) goTo(from + (dx < 0 ? 1 : -1));
-    else goTo(active);
+    if (target === from && Math.abs(dx) > 60) target = from + (dx < 0 ? 1 : -1);
+    target = Math.max(0, Math.min(slides.length - 1, target));
+
+    // Snapping stays off until the spring has landed, so the browser never jumps.
+    track.classList.add('is-settling');
+    track.classList.remove('is-dragging');
+    motion.dragging = false;
+    pause.drag = false;
+    syncPaused();
+    motion.goal = slideLeft(target);
+    if (reduceMotion) {
+      track.scrollLeft = motion.goal;
+      stopSettle();
+    } else startMotion();
   };
 
   // Clicking or tapping a side card (even on one of its links) brings it to the centre first.

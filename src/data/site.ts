@@ -24,8 +24,10 @@ export const themeColors = {
 
 export const sourceRepo = 'https://github.com/nicolasdavidgilbert/my-portfolio';
 
-/** No CV is published yet; set a URL (e.g. '/cv.pdf') to show it in the header and hero. */
-export const cvUrl: string | undefined = undefined;
+/** Europass CV (PDF) offered as a download from the header and hero; set to undefined to hide it. */
+export const cvUrl: string | undefined = '/cv/nicolas-gilbert-cv-europass.pdf';
+/** File name the browser saves the CV as. */
+export const cvFilename = 'CV Nicolás David Gilbert González - Europass.pdf';
 
 /** Section anchors are in English (the default locale) and stay the same in every language. */
 export const navigation: readonly NavItem[] = [

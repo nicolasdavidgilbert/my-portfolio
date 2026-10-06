@@ -228,10 +228,14 @@
     }
   }
 
-  /* Pointer-driven 3D tilt; JS sets --rx / --ry in degrees. */
+  /* Pointer-driven 3D tilt; JS sets --rx / --ry in degrees.
+     Colours are listed here too: a transition-* utility on the same element would drop the transform easing. */
   .tilt {
     transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.3s,
+      background-color 0.3s;
     transform-style: preserve-3d;
     will-change: transform;
   }

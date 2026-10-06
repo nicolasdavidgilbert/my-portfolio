@@ -71,6 +71,7 @@ export const es: Dictionary = {
     },
     journeyLabel: 'Trayectoria',
     journeyTitle: 'Formación y experiencia',
+    downloadCv: 'Descargar CV',
     statusLabel: 'Estado actual',
   },
   journey: {

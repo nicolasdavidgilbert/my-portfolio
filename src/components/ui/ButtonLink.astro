@@ -11,10 +11,12 @@ interface Props {
   icon?: IconName;
   /** Opens in a new tab and shows an outbound arrow. */
   external?: boolean;
+  /** Downloads the target instead of navigating, saved under this file name. */
+  download?: string;
   class?: string;
 }
 
-const { href, variant = 'secondary', icon, external = false, class: className } = Astro.props;
+const { href, variant = 'secondary', icon, external = false, download, class: className } = Astro.props;
 
 const variants: Record<Variant, string> = {
   primary: 'min-h-11 px-4 rounded-md bg-accent text-accent-contrast hover:bg-accent/90',
@@ -26,6 +28,7 @@ const Link = external ? ExternalLink : 'a';
 
 <Link
   href={href}
+  download={download}
   class:list={[
     'inline-flex items-center gap-2 text-sm font-medium transition-colors duration-150',
     variants[variant],

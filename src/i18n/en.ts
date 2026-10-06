@@ -72,6 +72,7 @@ export const en = {
     },
     journeyLabel: 'Journey',
     journeyTitle: 'Education and experience',
+    downloadCv: 'Download CV',
     statusLabel: 'Current status',
   },
   journey: {

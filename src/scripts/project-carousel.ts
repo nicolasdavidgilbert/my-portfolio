@@ -37,10 +37,11 @@ if (root && track) {
   };
 
   /* ---------- autoplay ---------- */
-  const pause = { user: reduceMotion, hover: false, focus: false, offscreen: true };
+  // Hovering or interacting does not pause: a manual change just restarts the countdown.
+  const pause = { user: reduceMotion, drag: false, offscreen: true };
 
   const syncPaused = () => {
-    const paused = pause.user || pause.hover || pause.focus || pause.offscreen || document.hidden;
+    const paused = pause.user || pause.drag || pause.offscreen || document.hidden;
     root.toggleAttribute('data-paused', paused);
   };
 
@@ -67,24 +68,6 @@ if (root && track) {
     });
   }
 
-  root.addEventListener('mouseenter', () => {
-    pause.hover = true;
-    syncPaused();
-  });
-  root.addEventListener('mouseleave', () => {
-    pause.hover = false;
-    syncPaused();
-  });
-  root.addEventListener('focusin', () => {
-    pause.focus = true;
-    syncPaused();
-  });
-  root.addEventListener('focusout', (event) => {
-    if (!root.contains(event.relatedTarget as Node | null)) {
-      pause.focus = false;
-      syncPaused();
-    }
-  });
   document.addEventListener('visibilitychange', syncPaused);
   new IntersectionObserver(
     ([entry]) => {
@@ -256,6 +239,8 @@ if (root && track) {
       track.setPointerCapture(event.pointerId);
       track.classList.add('is-dragging');
       motion.dragging = true;
+      pause.drag = true;
+      syncPaused();
       startMotion();
     }
     if (drag.moved) motion.goal = Math.max(0, Math.min(maxScroll(), drag.scroll - dx));
@@ -291,6 +276,8 @@ if (root && track) {
     track.classList.add('is-settling');
     track.classList.remove('is-dragging');
     motion.dragging = false;
+    pause.drag = false;
+    syncPaused();
     motion.goal = slideLeft(target);
     if (reduceMotion) {
       track.scrollLeft = motion.goal;
